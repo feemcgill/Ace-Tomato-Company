@@ -34,7 +34,7 @@ const debounce = function(func){
 }
 
 
-const map = function (the_numb, in_min, in_max, out_min, out_max) {
+const mapRange = function (the_numb, in_min, in_max, out_min, out_max) {
     return (the_numb - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
@@ -94,4 +94,4 @@ const backgroundContain = function(containerW, containerH, imgW, imgH) {
 
 
 
-export {shuffleArray, getWindowSize, debounce, map, boxRatio, backgroundSize, backgroundContain};
+export {shuffleArray, getWindowSize, debounce, mapRange, boxRatio, backgroundSize, backgroundContain};

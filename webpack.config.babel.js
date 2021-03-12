@@ -53,6 +53,7 @@ const build = (env, options) => {
       publicPath: '/',
       historyApiFallback: true
     },
+    devtool: 'eval-source-map',
     plugins: [
       new CleanWebpackPlugin(
         pathsToClean,
