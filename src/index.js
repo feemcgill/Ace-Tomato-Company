@@ -95,6 +95,8 @@ function start_her_up() {
       // coke.rotation += 0.0001;
       // sprite_2.rotation -= 0.003;
       // sprite_3.rotation -= 0.005;
+
+      
       if (appState.audioKicking) {
 
           analyser.getByteFrequencyData(dataArray); 
