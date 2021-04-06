@@ -24,7 +24,7 @@ const initAudio = function(callback){
   dataArray = new Uint8Array(bufferLength);
   analyser.minDecibels = -90;
   analyser.maxDecibels = -10;
-  analyser.smoothingTimeConstant = 0.7999;
+  analyser.smoothingTimeConstant = 0.90;
 
   if (callback) {
     callback();

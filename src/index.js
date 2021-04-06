@@ -22,6 +22,7 @@ import dp_4 from './../assets/dawn_patrol/dp-4.jpg'
 
 import Kaleidoscope from './vibes/kscope.js'
 import PhotoJam from './vibes/photojam.js'
+import VidVibe from './vibes/vidvibe.js'
 const state = {}
 
 
@@ -45,15 +46,58 @@ pixi_app.loader
         .on('touchmove', handleMove)
         .on('click', handleClick);  
   
+
+
+
+    const pj_container = new PIXI.Container();
+    pixi_app.stage.addChild(pj_container)
+
     const pj = new PhotoJam(resources.dp_1.texture, () => {
       console.log('pj callback');
     })
     pj.transitionIn();
 
-    pixi_app.stage.addChild(pj)
+    pj_container.addChild(pj)
     
-    pixi_app.ticker.add(() => {});
+
+    const vv = new VidVibe(vid, () => {
+      console.log('vv callback');
+    })
+    vv.transitionIn();
+    pixi_app.stage.addChild(vv)
+    //vv.blendMode = 1;
+    vv.alpha = 0;
+
+
+    const brt = new PIXI.BaseRenderTexture(pixi_app.renderer.width, pixi_app.renderer.height, PIXI.SCALE_MODES.LINEAR, 1);
+    const rt = new PIXI.RenderTexture(brt);
+    const rsprite = new PIXI.Sprite(rt);
+    rsprite.x = 0;
+    rsprite.y = 0;    
+    pixi_app.stage.addChild(rsprite);
+
+    vv.mask = rsprite
+
+
+    const ks_container = new PIXI.Container();
+    pixi_app.stage.addChild(ks_container)
+    const kscope = new Kaleidoscope(resources.dp_3.texture, ks_container)
+    kscope.draw()
+    ks_container.alpha = 0;
+
+    pixi_app.ticker.add(() => {
+      pixi_app.renderer.render(pj_container, rt);
+    });
   
+
+
+
+    TweenMax.to(vv, 30, {alpha: 1, delay: 60})
+    setTimeout(() => {
+      pj.fadeToWhite(20);
+    }, 62000);
+    TweenMax.to(ks_container, 15, {alpha: 1, delay: 90})
+
     function handleMove(e) {}
   
     function handleClick(e) {}
