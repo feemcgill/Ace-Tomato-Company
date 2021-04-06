@@ -56,10 +56,15 @@ const backgroundSize = function(containerW, containerH, imgW, imgH) {
         // new dims must be contaier heigh
         newDims.h = containerH;
         newDims.w = containerH * imgRatio;
+        //newDims.scale = newDims.h / imgH;
+
     } else {
         // Image is 100% wide and taller than container
+
         newDims.w = containerW;
         newDims.h = containerW / imgRatio;
+        //newDims.scale = newDims.w / imgW;
+
     }
     newDims.scale = newDims.w / imgW;
     return newDims;    

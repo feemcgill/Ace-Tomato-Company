@@ -19,9 +19,13 @@ const initAudio = function(callback){
   }
   analyser = audioContext.createAnalyser();
   analyser.connect(audioContext.destination);
-  analyser.fftSize = 32;
+  analyser.fftSize = 512;
   bufferLength = analyser.frequencyBinCount; 
   dataArray = new Uint8Array(bufferLength);
+  analyser.minDecibels = -90;
+  analyser.maxDecibels = -10;
+  analyser.smoothingTimeConstant = 0.7999;
+
   if (callback) {
     callback();
   }
