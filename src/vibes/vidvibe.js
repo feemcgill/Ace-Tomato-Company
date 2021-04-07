@@ -25,7 +25,7 @@ export default class VidVibe extends PIXI.Sprite {
   }
 
   transitionIn() {
-    const coke_size = backgroundSize(pixi_app.renderer.width, pixi_app.renderer.height, 640, 480)
+    const coke_size = backgroundSize(pixi_app.renderer.width, pixi_app.renderer.height, 480, 360)
     const bg = PIXI.Texture.from(this.vid);
     bg.baseTexture.resource.source.loop = true;
     //const coke = new PIXI.Sprite(bg);

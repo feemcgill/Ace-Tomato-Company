@@ -27,3 +27,12 @@ https://github.com/mouzofabricio/kaleidoscope
     "LUMINOSITY": 16
 }
 ```
+
+
+Loading screen
+Limbo Lobby screen
+Player controls
+- play, next pause
+
+User selects track
+Loads assets - loading screen

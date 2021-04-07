@@ -2,12 +2,12 @@ import * as PIXI from 'pixi.js'
 import pixi_app from '../base/pixi/app'
 import {TweenMax} from "gsap/TweenMax"
 
-export default class Kaleidoscope {
+export default class Kaleidoscope extends PIXI.Container  {
     
-    constructor(tex, container) {
+    constructor(tex, blendMode = 0) {
+        super();
         this.HALF_PI = Math.PI / 2;
         this.TWO_PI = Math.PI * 2;
-        this.container = container;
         this.offsetRotation = 0.0;
         this.offsetScale = 1.0;
         this.offsetX = 0.0;
@@ -26,6 +26,7 @@ export default class Kaleidoscope {
         this.interactiveMode = true;
         this.mouseX = 0;
         this.mouseY = 0;
+        this.blendMode = blendMode;
     }
 
     draw() {
@@ -45,7 +46,7 @@ export default class Kaleidoscope {
             arc.arc(this.posX,this.posY, this.radius * 1.3, -.5 * this.step, .5 * this.step);
             arc.endFill();
             spriteTileArc.mask = arc;
-            spriteTileArc.blendMode = 1;
+            spriteTileArc.blendMode = this.blendMode;
 
             var container = new PIXI.Container();
             container.addChild(arc);
@@ -62,11 +63,10 @@ export default class Kaleidoscope {
         mainContainer.x = this.posX;
         mainContainer.y = this.posY;
         //mainContainer.alpha = 0.5;
-        this.container.addChild(mainContainer);
+        this.addChild(mainContainer);
 
 
          pixi_app.ticker.add(() => {
-
             this.count += this.interactiveMode ? 0.05 : 0.005;
             for(let i = 0;i < this.spriteTiles.length; i++) {   
                 if(this.interactiveMode) {

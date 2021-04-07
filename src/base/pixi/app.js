@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js'
 
+console.log('CREATE PIXI APP')
 //Create the renderer
 const pixi_app = new PIXI.Application({
   width: window.innerWidth,

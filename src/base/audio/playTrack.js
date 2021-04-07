@@ -4,7 +4,7 @@ import {audioContext, analyser} from './audioInit';
 let trackSource;
 let the_buffer;
 
-const playTrack = function(track) {
+const playTrack = function(track, callback) {
   // tackSource.buffer = null;
 
   window.fetch(track)

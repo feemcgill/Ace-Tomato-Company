@@ -6,9 +6,10 @@ import appState from '../base/state.js';
 import {analyser, dataArray } from '../base/audio/audioInit';
 
 export default class PhotoJam extends PIXI.Sprite {
-  constructor(texture, callback) {
+  constructor(texture, blendMode = 0, callback) {
     super();
     this.callback = callback;
+    this.blendMode = blendMode;
     this.tex = texture;
     this.sprite_array = [];
     this.rotation_factor = 0.00005;
@@ -25,10 +26,10 @@ export default class PhotoJam extends PIXI.Sprite {
   }
 
   transitionIn() {
-    //const whitewash = new PIXI.Graphics();
-    this.whitewash.beginFill(0xffffff);
-    this.whitewash.drawRect(0,0,pixi_app.renderer.width, pixi_app.renderer.height)
-    this.whitewash.endFill();
+    const whitewash = new PIXI.Graphics();
+    whitewash.beginFill(0xffffff);
+    whitewash.drawRect(0,0,pixi_app.renderer.width, pixi_app.renderer.height)
+    whitewash.endFill();
     
     const sprite_size = backgroundSize(pixi_app.renderer.width, pixi_app.renderer.height, 796, 1200)
     const sprite = new PIXI.Sprite(this.tex);
@@ -56,7 +57,7 @@ export default class PhotoJam extends PIXI.Sprite {
       sprite.anchor.x = 0.5;
       sprite.anchor.y = 0.5;
       // sprite.alpha = 0.6;
-      sprite.blendMode = 1;
+      sprite.blendMode = this.blendMode;
       // if(index % 2 == 0) {
       //   sprite.scale.y = -sprite_size.scale;
       //   sprite.scale.x = -sprite_size.scale;
@@ -67,8 +68,8 @@ export default class PhotoJam extends PIXI.Sprite {
     }
     
     this.sprite_array[0].blendMode = 0;
-    this.addChild(this.whitewash);
-    this.whitewash.alpha = 0;
+    this.addChild(whitewash);
+    whitewash.alpha = 0;
     pixi_app.ticker.add(() => {  
       if (appState.audioKicking) {
         analyser.getByteFrequencyData(dataArray); 
@@ -90,7 +91,7 @@ export default class PhotoJam extends PIXI.Sprite {
     });    
   }
   fadeToWhite(time) {
-    TweenMax.to(this.whitewash, time, {alpha: 1})
+    TweenMax.to(whitewash, time, {alpha: 1})
   }
   handleMove(e) {
     var rotation_const = 0.0005;
