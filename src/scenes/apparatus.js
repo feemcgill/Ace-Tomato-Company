@@ -27,7 +27,7 @@ export default class Apparatus extends PIXI.Container {
   }
   run() {
  
-    const debug = true;
+    const debug = false;
     const duration = appState.currentTrackSource;
     console.log('TRACK DURATION', duration)
 

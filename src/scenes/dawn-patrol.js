@@ -26,7 +26,7 @@ export default class DawnPatrol extends PIXI.Container {
       });    
   }
   run() {
-    const debug = true;
+    const debug = false;
     console.log('RUN DP');
     const pj_container = new PIXI.Container();
     pixi_app.stage.addChild(pj_container)
