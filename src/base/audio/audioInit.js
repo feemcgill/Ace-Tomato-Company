@@ -4,7 +4,9 @@ let audioContext = null;
 let analyser = null;
 let bufferLength = null;
 let dataArray = null;
+let gainNode = null;
 
+// wtf
 const initAudio = function(callback){
   try {
     if (typeof AudioContext !== 'undefined') {
@@ -17,8 +19,14 @@ const initAudio = function(callback){
   } catch(e) {
       appState.usingWebAudio = false;
   }
+
+  gainNode = audioContext.createGain()
+  gainNode.gain.value = 0.3;
+  gainNode.connect(audioContext.destination)
+
+
   analyser = audioContext.createAnalyser();
-  analyser.connect(audioContext.destination);
+  analyser.connect(gainNode);
   analyser.fftSize = 512;
   bufferLength = analyser.frequencyBinCount; 
   dataArray = new Uint8Array(bufferLength);
@@ -30,5 +38,12 @@ const initAudio = function(callback){
     callback();
   }
 }
+window.changeVolume = function(el) {
+  var fraction = parseInt(el.value) / parseInt(el.max);
+  console.log(fraction * fraction)
+  if (appState.audioInitiated) {
+    gainNode.gain.value = fraction * fraction;  
+  }
+}
 
-export {initAudio, audioContext, analyser, dataArray };
+export {initAudio, audioContext, analyser, dataArray, gainNode };

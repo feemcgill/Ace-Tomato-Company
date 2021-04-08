@@ -6,6 +6,7 @@ const pixi_app = new PIXI.Application({
   width: window.innerWidth,
   height: window.innerHeight,
   backgroundColor : 0xFFFFFF,
+  backgroundAlpha: 0
   // forceCanvas : true
 });
 export default pixi_app;

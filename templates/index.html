@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <!-- <meta name="viewport" content="width=900, user-scalable=no"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <base href="/"/>
     <!-- ICONS / WEBAPP -->
@@ -38,9 +39,10 @@
         width: 100vw;
         min-height: 100vh;
         margin: 0;
-        font-family: 'oz', serif;
+        font-family: 'VT323', monospace;        
         font-size: 30px;
         overflow-y: hidden;
+        background: palegreen;
       }
       * {
         box-sizing: border-box;
@@ -49,7 +51,10 @@
       canvas {
         display: block;
       }
-
+      img {
+        width: 100%;
+        height: auto;
+      }
       #the-box {
         position: fixed;
         top: 0;
@@ -58,11 +63,51 @@
         right: 0;
         z-index: 100;
       }
-      .buttons {
+      #interface {
         position: fixed;
         z-index: 100000000;
-        top: 0;
-        left: 0;
+        bottom: 10px;
+        left: 10px;
+        padding: 20px;
+        border: 2px solid black;
+        /* background: url(/assets/bg.png); */
+        background: white;
+        opacity: 1;
+        transition: all 0.5s ease-in;
+      }
+      #interface.hide {
+        opacity: 0;
+      }
+      #tracklist a{
+        display: block;
+        color: black;
+        text-shadow: 1px 1px 1px white;
+      }
+      #nowplaying {
+        display: none;
+      }
+      #nowplaying.show {
+        display: block;
+      }
+      #nowplaying .label {
+        font-size: 20px;
+        text-shadow: 1px 1px 1px white;
+
+      }
+      #now-playing {
+        font-size: 50px;
+        text-shadow: 1px 1px 1px white;
+      }
+      #button {
+        position: fixed;
+        width: 60px;
+        top: 20px;
+        right: 20px;
+        cursor: pointer;
+        transition: all 0.5s ease-in;
+      }
+      #button:hover {
+        transform: scale(0.87);
       }
  
     </style>
@@ -71,10 +116,17 @@
     <canvas id="canvas" style="position:fixed; top: 0; left: 0; bottom: 0; right: 0; opacity: 1; background: transparent!important;"></canvas>
     <!-- <div id="root"></div>
     <div id="the-box"></div> -->
-    <div class="buttons">
-      <a id="go-button" href="#">Go</a>
-      <a id="ata-button" href="#">ata</a>
-      <a id="dp-button" href="#">dp</a>
+    <div id="button">
+      <img src="assets/smokin_dead_dude.gif" alt="">
+    </div>
+    <div id="interface">
+      <div id="nowplaying">
+        <div class="label">Now Playing:</div>
+        <div id="now-playing"></div>
+      </div>
+      <div><input type="range" min="0" max="100" value="30" oninput="changeVolume(this);"> Volume</div>
+      <div id="tracklist"></div>
+
     </div>
   </body>
 
