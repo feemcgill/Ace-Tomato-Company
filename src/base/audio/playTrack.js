@@ -33,15 +33,11 @@ const playTrack = function(track, callback) {
       appState.audioInitiated = true;      
       appState.audioKicking = true;
       appState.currentTrackSource = trackSource;
-      console.log("UPDATE STATE", appState, trackSource)
-
       trackSource.onended = function() {
-        console.log('song is ended');
         if (callback) {
           callback();
         }
       }
-
     };
   });
 

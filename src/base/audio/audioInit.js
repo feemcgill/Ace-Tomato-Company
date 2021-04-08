@@ -21,7 +21,7 @@ const initAudio = function(callback){
   }
 
   gainNode = audioContext.createGain()
-  gainNode.gain.value = 0.3;
+  gainNode.gain.value = 0.0;
   gainNode.connect(audioContext.destination)
 
 

@@ -29,13 +29,11 @@ export default class Apparatus extends PIXI.Container {
  
     const debug = false;
     const duration = appState.currentTrackSource;
-    console.log('TRACK DURATION', duration)
 
     const pj_container = new PIXI.Container();
     pixi_app.stage.addChild(pj_container)
 
     const pj = new PhotoJam(pixi_app.loader.resources.ata_4.texture, 3, () => {
-      console.log('pj callback');
     })
     pj.transitionIn();
 
@@ -67,7 +65,6 @@ export default class Apparatus extends PIXI.Container {
 
 
     const vv = new VidVibe(pixi_app.loader.resources.ata_vid.url, () => {
-      console.log('vv callback');
     })
     vv.transitionIn();
     pixi_app.stage.addChild(vv)
@@ -80,9 +77,6 @@ export default class Apparatus extends PIXI.Container {
 
     pixi_app.ticker.add(() => {
       pixi_app.renderer.render(pj_container, rt);
-      // if (appState.currentTrackSource) {
-      //   console.log('TRACK DURATION', appState.currentTrackSource.buffer.duration)
-      // }
     });
 
 

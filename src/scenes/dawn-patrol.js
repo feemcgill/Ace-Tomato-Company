@@ -27,12 +27,10 @@ export default class DawnPatrol extends PIXI.Container {
   }
   run() {
     const debug = false;
-    console.log('RUN DP');
     const pj_container = new PIXI.Container();
     pixi_app.stage.addChild(pj_container)
 
     const pj = new PhotoJam(pixi_app.loader.resources.dp_1.texture, 1, () => {
-      console.log('pj callback');
     })
     pj.transitionIn();
 
@@ -40,7 +38,6 @@ export default class DawnPatrol extends PIXI.Container {
     
 
     const vv = new VidVibe(pixi_app.loader.resources.vid.url, () => {
-      console.log('vv callback');
     })
     vv.transitionIn();
     pixi_app.stage.addChild(vv)

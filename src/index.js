@@ -82,7 +82,7 @@ interface_button.addEventListener('click', function (event) {
 });
 
 var tracklist_element = document.getElementById('tracklist');
-
+tracklist_element.innerHTML = "";
 for (let i = 0; i < config.tracks.length; i++) {
   const track = config.tracks[i];
   var a = document.createElement('a');

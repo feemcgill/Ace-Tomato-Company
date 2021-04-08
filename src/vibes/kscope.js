@@ -88,7 +88,6 @@ export default class Kaleidoscope extends PIXI.Container  {
     }
 
     toggleInteractiveMode() {
-        console.log('toggleinteractive', this.interactiveMode);
         this.interactiveMode = !this.interactiveMode;
     }
 }
