@@ -20,13 +20,15 @@ const state = {}
 
   var currentScene = null;
   var currentTrack = null;
-  
+  var interface_timeout = null;
+
   function playScene(track) {
     if (!appState.audioInitiated) {
-      console.log('init audio');
       initAudio();
     }
-    console.log('PLAY', track);
+    if (interface_timeout) {
+      clearTimeout(interface_timeout);
+    }
     pixi_app.stage.removeChildren();
     appState.audioKicking = false;
 
@@ -49,9 +51,10 @@ const state = {}
 
     document.getElementById('now-playing').innerHTML = config.tracks[track].name;
     document.getElementById("nowplaying").classList.add("show");
-    setTimeout(() => {
+    interface_timeout = setTimeout(() => {
       document.getElementById("interface").classList.add("hide");
-    }, 3000);
+      interface_timeout = null;
+    }, 5000);
     currentTrack = track;
   }
 
