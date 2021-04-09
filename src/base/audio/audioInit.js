@@ -6,7 +6,6 @@ let bufferLength = null;
 let dataArray = null;
 let gainNode = null;
 
-// wtf
 const initAudio = function(callback){
   try {
     if (typeof AudioContext !== 'undefined') {
@@ -21,9 +20,8 @@ const initAudio = function(callback){
   }
 
   gainNode = audioContext.createGain()
-  gainNode.gain.value = 0.0;
+  gainNode.gain.value = 0.3;
   gainNode.connect(audioContext.destination)
-
 
   analyser = audioContext.createAnalyser();
   analyser.connect(gainNode);
@@ -38,9 +36,9 @@ const initAudio = function(callback){
     callback();
   }
 }
+
 window.changeVolume = function(el) {
   var fraction = parseInt(el.value) / parseInt(el.max);
-  console.log(fraction * fraction)
   if (appState.audioInitiated) {
     gainNode.gain.value = fraction * fraction;  
   }

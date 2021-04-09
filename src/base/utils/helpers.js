@@ -25,11 +25,11 @@ function getWindowSize(){
     return data;
 }
 
-const debounce = function(func){
+const debounce = function(func, time = 100){
     var timer;
     return function(event){
         if(timer) clearTimeout(timer);
-        timer = setTimeout(func,100,event);
+        timer = setTimeout(func,time,event);
     };
 }
 

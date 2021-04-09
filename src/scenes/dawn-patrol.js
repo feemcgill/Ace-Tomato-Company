@@ -1,8 +1,7 @@
 import * as PIXI from 'pixi.js'
-import {TweenMax} from "gsap/TweenMax";
+import {TweenMax, TimelineLite} from "gsap/TweenMax";
 import pixi_app from '../base/pixi/app'
-
-
+import {getWindowSize, backgroundSize, debounce} from '../base/utils/helpers'
 import Kaleidoscope from '../vibes/kscope.js'
 import PhotoJam from '../vibes/photojam.js'
 import VidVibe from '../vibes/vidvibe.js'
@@ -42,15 +41,15 @@ export default class DawnPatrol extends PIXI.Container {
     vv.transitionIn();
     pixi_app.stage.addChild(vv)
     vv.blendMode = 1;
-    vv.alpha = 0;
+    vv.alpha = 1;
 
 
-    const brt = new PIXI.BaseRenderTexture(pixi_app.renderer.width, pixi_app.renderer.height, PIXI.SCALE_MODES.LINEAR, 1);
-    const rt = new PIXI.RenderTexture(brt);
-    const rsprite = new PIXI.Sprite(rt);
-    rsprite.x = 0;
-    rsprite.y = 0;    
-    pixi_app.stage.addChild(rsprite);
+    let brt = new PIXI.BaseRenderTexture(pixi_app.renderer.width, pixi_app.renderer.height, PIXI.SCALE_MODES.NEAREST, 1);
+    let rt = new PIXI.RenderTexture(brt);
+    let rsprite = new PIXI.Sprite(rt);
+    rsprite.x = 30;
+    rsprite.y = 30;    
+    //pixi_app.stage.addChild(rsprite);
 
     vv.mask = rsprite
 
@@ -73,16 +72,33 @@ export default class DawnPatrol extends PIXI.Container {
       TweenMax.to(vv, 1, {alpha: 1, delay: 1})
       TweenMax.to(ks_container, 1, {alpha: 1, delay: 1})      
     } else {
-      TweenMax.to(vv, 30, {alpha: 1, delay: 60})
-      setTimeout(() => {
-        pj.fadeToWhite(20);
-      }, 90000);
-      TweenMax.to(ks_container, 15, {alpha: 1, delay: 90})
+      this.timeline = new TimelineLite();
+      this.timeline.to(vv, 0, {alpha: 1, delay: 0});
+      this.timeline.to(ks_container, 1, {alpha: 1, delay: 1});
+      //this.timeline.to(pj, 6, {alpha: 0, delay: 6});
     }
 
-
-    pixi_app.ticker.add(() => {      
+    pixi_app.ticker.add(() => {
+      pixi_app.renderer.render(pj_container, rt);
     });
+
+    window.addEventListener("resize",debounce(function(e){
+      vv.mask = null;
+      brt.destroy();
+      rt.destroy();
+      rsprite.destroy();      
+      brt = new PIXI.BaseRenderTexture(pixi_app.renderer.width, pixi_app.renderer.height, PIXI.SCALE_MODES.LINEAR, 1);
+      rt = new PIXI.RenderTexture(brt);
+      rsprite = new PIXI.Sprite(rt);
+      rsprite.x = 0;
+      rsprite.y = 0;
+      vv.mask = rsprite;  
+    }, 500));  
+
+    setTimeout(() => {
+
+
+    }, 4000);
    
   }
   fadeToWhite(time) {

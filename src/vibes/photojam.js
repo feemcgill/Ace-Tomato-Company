@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js'
 import {TweenMax} from "gsap/TweenMax";
 import pixi_app from '../base/pixi/app'
-import {mapRange, backgroundSize} from '../base/utils/helpers'
+import {mapRange, backgroundSize, getWindowSize} from '../base/utils/helpers'
 import appState from '../base/state.js';
 import {analyser, dataArray } from '../base/audio/audioInit';
 
@@ -26,24 +26,15 @@ export default class PhotoJam extends PIXI.Sprite {
   }
 
   transitionIn() {
+    console.log(this.tex.baseTexture.width)
     const whitewash = new PIXI.Graphics();
     whitewash.beginFill(0xffffff);
     whitewash.drawRect(0,0,pixi_app.renderer.width, pixi_app.renderer.height)
     whitewash.endFill();
     
-    const sprite_size = backgroundSize(pixi_app.renderer.width, pixi_app.renderer.height, 796, 1200)
-    const sprite = new PIXI.Sprite(this.tex);
-    
-    sprite.scale.x = sprite_size.scale;
-    sprite.scale.y = sprite_size.scale;
-    
-    sprite.x = pixi_app.renderer.width / 2;
-    sprite.y = pixi_app.renderer.height / 2;
-    //sprite.blendMode = 1;
+    let sprite_size = backgroundSize(pixi_app.renderer.width, pixi_app.renderer.height, this.tex.baseTexture.width, this.tex.baseTexture.height)
+   // const sprite = new PIXI.Sprite(this.tex);
 
-    sprite.anchor.x = 0.5;
-    sprite.anchor.y = 0.5;
-    //this.addChild(sprite);
 
     for (let index = 0; index < 6; index++) {
       const sprite = new PIXI.Sprite(this.tex);
@@ -56,7 +47,7 @@ export default class PhotoJam extends PIXI.Sprite {
       
       sprite.anchor.x = 0.5;
       sprite.anchor.y = 0.5;
-      // sprite.alpha = 0.6;
+      sprite.alpha = 0.6;
       sprite.blendMode = this.blendMode;
       // if(index % 2 == 0) {
       //   sprite.scale.y = -sprite_size.scale;
@@ -68,14 +59,13 @@ export default class PhotoJam extends PIXI.Sprite {
     }
     
     this.sprite_array[0].blendMode = 0;
-    this.addChild(whitewash);
+    //this.addChild(whitewash);
     whitewash.alpha = 0;
     pixi_app.ticker.add(() => {  
       if (appState.audioKicking) {
         analyser.getByteFrequencyData(dataArray); 
         //analyser.getByteTimeDomainData(dataArray); 
 
-        const sprite_size = backgroundSize(pixi_app.renderer.width, pixi_app.renderer.height, 796, 1200)
          
         for (let i = 0; i < this.sprite_array.length; i++) {
 
@@ -88,7 +78,30 @@ export default class PhotoJam extends PIXI.Sprite {
           // } 
         }
       }      
-    });    
+    });
+    window.addEventListener("resize",(e) => {
+      const size = getWindowSize();
+      const w = size.width;
+      const h = size.height;
+            
+      console.log(this.tex.baseTexture.width, this.tex.baseTexture.height)
+      sprite_size = backgroundSize(w, h, this.tex.baseTexture.width, this.tex.baseTexture.height)
+      TweenMax.staggerTo(this.sprite_array, 0.1, {x: w / 2, y: h / 2}, -0.05);
+
+
+
+      // this.width = w;
+      // this.height = h;
+  
+   
+      // for (let i = 0; i < this.sprite_array.length; i++) {
+      //   const sprite = this.sprite_array[i];
+      //   sprite.x = w / 2;
+      //   sprite.y = h / 2 + (i * 10);        
+      // }
+      // this.x = pixi_app.renderer.width / 2;
+      // this.y = pixi_app.renderer.height / 2;
+    });
   }
   fadeToWhite(time) {
     TweenMax.to(whitewash, time, {alpha: 1})
@@ -115,9 +128,12 @@ export default class PhotoJam extends PIXI.Sprite {
     // }
   }  
   resize() {
+
   }
 
 }
+
+
 
 
 

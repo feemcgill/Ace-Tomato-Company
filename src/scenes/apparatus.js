@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js'
-import {TweenMax} from "gsap/TweenMax";
+import {TweenMax, TimelineLite} from "gsap/TweenMax";
 import pixi_app from '../base/pixi/app'
 
 
@@ -12,6 +12,7 @@ import appState from '../base/state.js'
 export default class Apparatus extends PIXI.Container {
   constructor() {
     super();
+    this.timeline = null
   }
   load() {
     pixi_app.loader      
@@ -19,8 +20,7 @@ export default class Apparatus extends PIXI.Container {
     .add('ata_2', './../assets/apparatus/ata_1.jpg')
     .add('ata_3', './../assets/apparatus/ata_1.jpg')
     .add('ata_4', './../assets/apparatus/ata_1.jpg')
-    .add('ata_vid','./../assets/apparatus/ata.mp4')
-  
+    .add('ata_vid','./../assets/apparatus/ata.mp4')  
     .load((loader, resources) => {
       this.run();
     });
@@ -85,11 +85,21 @@ export default class Apparatus extends PIXI.Container {
       TweenMax.to(vv, 1, {alpha: 1, delay: 1})
       TweenMax.to(ks_container, 1, {alpha: 1, delay: 1})      
     } else {
-      TweenMax.to(vv, 30, {alpha: 1, delay: 60})
-      setTimeout(() => {
-        pj.fadeToWhite(20);
-      }, 90000);
-      TweenMax.to(ks_container, 15, {alpha: 1, delay: 90})
+
+      //WITH Timelines (cleaner, more versatile)
+      this.timeline = new TimelineLite();
+      this.timeline.to(vv, 6, {alpha: 1, delay: 6});
+      this.timeline.to(ks_container, 6, {alpha: 1, delay: 6});
+      this.timeline.to(pj, 6, {alpha: 1, delay: 6});
+
+      // // then we can control the whole thing easily...
+      // tl.pause();
+      // tl.resume();
+      // tl.seek(1.5);
+      // tl.reverse();
+
+
+
     }
 
 

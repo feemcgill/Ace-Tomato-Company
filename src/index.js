@@ -65,10 +65,8 @@ function endScene() {
     pixi_app.stage.removeChildren();
     document.getElementById('now-playing').innerHTML = "";
     if (currentTrack + 1 == config.tracks.length) {
-      console.log('play first')
       playScene(0);
     } else {
-      console.log('play next')
       playScene(currentTrack + 1)
     }       
   }})
