@@ -94,7 +94,7 @@ export default class Apparatus extends PIXI.Container {
     this.timeline.add(() =>{
       pj.setAmplify([0.5,3])
     })   
-    this.timeline.to(ks_container, 60, {alpha: 0.3, delay: 20});
+    this.timeline.to(ks_container, 10, {alpha: 0.3, delay: 50});
     this.timeline.add(() =>{
       pj.setAmplify([0.1,0.4])
     })    
