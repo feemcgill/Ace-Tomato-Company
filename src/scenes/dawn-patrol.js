@@ -5,6 +5,7 @@ import {getWindowSize, backgroundSize, debounce} from '../base/utils/helpers'
 import Kaleidoscope from '../vibes/kscope.js'
 import PhotoJam from '../vibes/photojam.js'
 import VidVibe from '../vibes/vidvibe.js'
+import appState from '../base/state.js';
 
 
 
@@ -25,23 +26,24 @@ export default class DawnPatrol extends PIXI.Container {
       });    
   }
   run() {
-    const debug = false;
-    const pj_container = new PIXI.Container();
-    pixi_app.stage.addChild(pj_container)
+    console.log('RUN DAWN PATROL')
 
-    const pj = new PhotoJam(pixi_app.loader.resources.dp_1.texture, 1, () => {
-    })
+    const pj_container = new PIXI.Container();
+    this.addChild(pj_container)
+    const pj = new PhotoJam(pixi_app.loader.resources.dp_1.texture, 1, null, [18,20,22,24,26,28], [1, 1.2], 0.5)
     pj.transitionIn();
 
     pj_container.addChild(pj)
     
+    // pj.scale.x = 0.5;
+    // pj.scale.y = 0.5;
 
     const vv = new VidVibe(pixi_app.loader.resources.vid.url, () => {
     })
     vv.transitionIn();
-    pixi_app.stage.addChild(vv)
+    this.addChild(vv)
     vv.blendMode = 1;
-    vv.alpha = 1;
+    vv.alpha = 0;
 
 
     let brt = new PIXI.BaseRenderTexture(pixi_app.renderer.width, pixi_app.renderer.height, PIXI.SCALE_MODES.NEAREST, 1);
@@ -49,15 +51,19 @@ export default class DawnPatrol extends PIXI.Container {
     let rsprite = new PIXI.Sprite(rt);
     rsprite.x = 30;
     rsprite.y = 30;    
-    //pixi_app.stage.addChild(rsprite);
+    //this.addChild(rsprite);
 
     vv.mask = rsprite
 
 
-    const ks_container = new PIXI.Container();
-    pixi_app.stage.addChild(ks_container)
 
-    const kscope = new Kaleidoscope(pixi_app.loader.resources.dp_3.texture, 1)
+
+
+
+    const ks_container = new PIXI.Container();
+    this.addChild(ks_container)
+
+    const kscope = new Kaleidoscope(pixi_app.loader.resources.dp_3.texture, 1, [40, 132])
     kscope.draw()
     ks_container.addChild(kscope);
     ks_container.alpha = 0;
@@ -66,16 +72,21 @@ export default class DawnPatrol extends PIXI.Container {
       pixi_app.renderer.render(pj_container, rt);
     });
 
+    this.timeline = new TimelineLite();
+    this.timeline.to(vv, 60, {alpha: 1, delay: 60,  ease: "power4.in"});
+    this.timeline.add( () => {
+      pj.setAmplify([1,1.3])
+      pj.fadeToWhite(10)
+    })
+    this.timeline.to(ks_container, 60, {alpha: 1, delay: 8,  ease: "power4.in"});
+    this.timeline.add( () => {
+      pj.fadeToJam(10)
+    })
 
-
-    if (debug) {
-      TweenMax.to(vv, 1, {alpha: 1, delay: 1})
-      TweenMax.to(ks_container, 1, {alpha: 1, delay: 1})      
-    } else {
-      this.timeline = new TimelineLite();
-      this.timeline.to(vv, 0, {alpha: 1, delay: 0});
-      this.timeline.to(ks_container, 1, {alpha: 1, delay: 1});
-      //this.timeline.to(pj, 6, {alpha: 0, delay: 6});
+    if (appState.debug) {
+      // TweenMax.to(vv, 1, {alpha: 1, delay: 1,  ease: "power4.in"})
+      // TweenMax.to(ks_container, 1, {alpha: 1, delay: 1}) 
+      this.timeline.timeScale(10)     
     }
 
     pixi_app.ticker.add(() => {
@@ -83,6 +94,7 @@ export default class DawnPatrol extends PIXI.Container {
     });
 
     window.addEventListener("resize",debounce(function(e){
+      console.log('DP RESIZE');
       vv.mask = null;
       brt.destroy();
       rt.destroy();
@@ -95,10 +107,7 @@ export default class DawnPatrol extends PIXI.Container {
       vv.mask = rsprite;  
     }, 500));  
 
-    setTimeout(() => {
 
-
-    }, 4000);
    
   }
   fadeToWhite(time) {

@@ -7,7 +7,7 @@ import appState from '../base/state.js';
 
 export default class Kaleidoscope extends PIXI.Container  {
     
-    constructor(tex, blendMode = 0) {
+    constructor(tex, blendMode = 0, moveData) {
         super();
         this.HALF_PI = Math.PI / 2;
         this.TWO_PI = Math.PI * 2;
@@ -29,6 +29,7 @@ export default class Kaleidoscope extends PIXI.Container  {
         this.mouseX = 0;
         this.mouseY = 0;
         this.blendMode = blendMode;
+        this.moveData = moveData || [5,10]
     }
 
     draw() {
@@ -84,8 +85,8 @@ export default class Kaleidoscope extends PIXI.Container  {
             if (appState.audioKicking) {
                 analyser.getByteFrequencyData(dataArray); 
         
-                let r = mapRange(dataArray[5], 0, 255, 0.95, 1.5);
-                let s = mapRange(dataArray[8], 0, 255, 0.95, 1.5);
+                let r = mapRange(dataArray[this.moveData[0]], 0, 255, 0.95, 1.5);
+                let s = mapRange(dataArray[this.moveData[1]], 0, 255, 0.95, 1.5);
                 TweenMax.to(mainContainer.scale, 2, {x: r, y: s});
 
               }              
@@ -94,7 +95,6 @@ export default class Kaleidoscope extends PIXI.Container  {
             mainContainer.removeChildren();
             createKScope();
             TweenMax.to(mainContainer, 0.3, {x: pixi_app.renderer.width / 2, y: pixi_app.renderer.height / 2})
-            console.log(pixi_app.stage.children, 'pixi.app', this.children[0].children )
         }, 500));          
         
     }
