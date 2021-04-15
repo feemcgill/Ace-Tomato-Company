@@ -6,6 +6,7 @@ import Kaleidoscope from '../vibes/kscope.js'
 import PhotoJam from '../vibes/photojam.js'
 import VidVibe from '../vibes/vidvibe.js'
 import appState from '../base/state.js';
+import config from '../config.js'
 
 
 
@@ -15,12 +16,12 @@ export default class DawnPatrol extends PIXI.Container {
   }
   load() {
     pixi_app.loader
-      .add('dp_1', './../../assets/dawn_patrol/dp-1.jpg')
-      .add('dp_2', './../../assets/dawn_patrol/dp-2.jpg')
-      .add('dp_2_bg', './../../assets/dawn_patrol/dp-2-bg.jpg')
-      .add('vid', './../../assets/dawn_patrol/dp-1.mp4')
-      .add('dp_3', './../../assets/dawn_patrol/dp-3.jpg')
-      .add('dp_4', './../../assets/dawn_patrol/dp-4.jpg')
+      .add('dp_1', config.asset_url + 'dawn_patrol/dp-1.jpg')
+      .add('dp_2', config.asset_url + 'dawn_patrol/dp-2.jpg')
+      .add('dp_2_bg', config.asset_url + 'dawn_patrol/dp-2-bg.jpg')
+      .add('vid', config.asset_url + 'dawn_patrol/dp-1.mp4')
+      .add('dp_3', config.asset_url + 'dawn_patrol/dp-3.jpg')
+      .add('dp_4', config.asset_url + 'dawn_patrol/dp-4.jpg')
       .load((loader, resources) => {
         this.run();
       });    

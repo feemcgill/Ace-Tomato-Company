@@ -76,7 +76,7 @@ function playScene(track) {
   }
 
   // Play the track
-  playTrack(config.tracks[track].mp3, endScene)
+  playTrack(config.asset_url+config.tracks[track].mp3, endScene)
   TweenMax.to(currentScene.parent, 2.5, {alpha: 1});
 
   currentTrack = track;

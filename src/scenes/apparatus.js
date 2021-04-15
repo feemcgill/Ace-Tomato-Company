@@ -8,6 +8,7 @@ import Kaleidoscope from '../vibes/kscope.js'
 import PhotoJam from '../vibes/photojam.js'
 import VidVibe from '../vibes/vidvibe.js'
 import appState from '../base/state.js'
+import config from '../config.js'
 
 
 export default class Apparatus extends PIXI.Container {
@@ -19,11 +20,11 @@ export default class Apparatus extends PIXI.Container {
     console.log('LOAD APPARATUS');
 
     pixi_app.loader      
-    .add('ata_1', './../assets/apparatus/ata_1.jpg')
-    .add('ata_2', './../assets/apparatus/ata_1.jpg')
-    .add('ata_3', './../assets/apparatus/ata_1.jpg')
-    .add('ata_4', './../assets/apparatus/ata_1.jpg')
-    .add('ata_vid','./../assets/apparatus/ata.mp4')  
+    .add('ata_1', config.asset_url + '/apparatus/ata_1.jpg')
+    .add('ata_2', config.asset_url + '/apparatus/ata_1.jpg')
+    .add('ata_3', config.asset_url + '/apparatus/ata_1.jpg')
+    .add('ata_4', config.asset_url + '/apparatus/ata_1.jpg')
+    .add('ata_vid',config.asset_url + '/apparatus/ata.mp4')  
     .load((loader, resources) => {
       this.run();
     });
