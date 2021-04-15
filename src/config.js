@@ -1,5 +1,5 @@
 const config = {
-  asset_url: 'https://square-community.s3-us-west-1.amazonaws.com/',
+  asset_url: 'https://square-community.s3-us-west-1.amazonaws.com',
   tracks: [
     {
       name: 'Dawn Patrol',

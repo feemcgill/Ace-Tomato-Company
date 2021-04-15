@@ -10,6 +10,9 @@ import appState from './base/state.js';
 
 import DawnPatrol from './scenes/dawn-patrol.js'
 import Apparatus from './scenes/apparatus'
+import DownOnAllFives from './scenes/down-on-all-fives.js'
+import HitTheSheets from './scenes/hit-the-sheets.js'
+
 import config from './config.js'
 import Vizzies from './vibes/vizziesweep.js'
 
@@ -59,6 +62,12 @@ function playScene(track) {
       break;
     case 1:
       currentScene = new Apparatus();
+      break;
+    case 2:
+      currentScene = new DownOnAllFives();
+      break;
+    case 3:
+      currentScene = new HitTheSheets();        
   }
 
   // Play the scene
@@ -76,7 +85,7 @@ function playScene(track) {
   }
 
   // Play the track
-  playTrack(config.asset_url+config.tracks[track].mp3, endScene)
+  playTrack(config.asset_url+'/'+config.tracks[track].mp3, endScene)
   TweenMax.to(currentScene.parent, 2.5, {alpha: 1});
 
   currentTrack = track;

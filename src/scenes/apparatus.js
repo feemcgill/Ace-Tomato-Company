@@ -21,9 +21,9 @@ export default class Apparatus extends PIXI.Container {
 
     pixi_app.loader      
     .add('ata_1', config.asset_url + '/apparatus/ata_1.jpg')
-    .add('ata_2', config.asset_url + '/apparatus/ata_1.jpg')
-    .add('ata_3', config.asset_url + '/apparatus/ata_1.jpg')
-    .add('ata_4', config.asset_url + '/apparatus/ata_1.jpg')
+    .add('ata_2', config.asset_url + '/apparatus/ata_2.jpg')
+    .add('ata_3', config.asset_url + '/apparatus/ata_3.jpg')
+    .add('ata_4', config.asset_url + '/apparatus/ata_4.jpg')
     .add('ata_vid',config.asset_url + '/apparatus/ata.mp4')  
     .load((loader, resources) => {
       this.run();
@@ -40,7 +40,7 @@ export default class Apparatus extends PIXI.Container {
     const pj_container = new PIXI.Container();
     this.addChild(pj_container)
 
-    const pj = new PhotoJam(pixi_app.loader.resources.ata_4.texture, 3, null, [11,12,13,14], [1, 1.5], 10)
+    const pj = new PhotoJam(pixi_app.loader.resources.ata_1.texture, 3, null, [11,12,13,14], [1, 1.5], 10)
     pj.transitionIn();
 
     pj_container.addChild(pj)
@@ -64,7 +64,7 @@ export default class Apparatus extends PIXI.Container {
     const ks_container = new PIXI.Container();
     this.addChild(ks_container)
 
-    const kscope = new Kaleidoscope(pixi_app.loader.resources.ata_3.texture, 2, [30,26])
+    const kscope = new Kaleidoscope(pixi_app.loader.resources.ata_1.texture, 2, [30,26])
     kscope.draw()
     ks_container.addChild(kscope);
     ks_container.alpha = 1;
