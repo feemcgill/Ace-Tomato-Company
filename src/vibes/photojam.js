@@ -19,6 +19,10 @@ export default class PhotoJam extends PIXI.Sprite {
     this.moveData = moveData || [5,10,15]
     this.amplify = amplify || [0.95, 1.5];
     this.moveSpeed = moveSpeed || 1;
+    this.state = {
+      canScaleDance: true,
+      canRotatePointer: true
+    }
     this.on('mousemove', this.handleMove)
     .on('touchmove', this.handleMove)
   }
@@ -54,6 +58,7 @@ export default class PhotoJam extends PIXI.Sprite {
       //   sprite.scale.y = -sprite_size.scale;
       //   sprite.scale.x = -sprite_size.scale;
       // } 
+      sprite.rotation += 2 * (index + 1);
 
       this.sprite_array.push(sprite)
       this.addChild(sprite);
@@ -76,8 +81,12 @@ export default class PhotoJam extends PIXI.Sprite {
           }
           const sprite = this.sprite_array[i];
           let r = mapRange(mover, 0, 255, sprite_size.scale * this.amplify[0], sprite_size.scale * this.amplify[1]);
-          TweenMax.to(sprite.scale, this.moveSpeed, {x:r, y:r});      
-          sprite.rotation += this.rotation_factor * (i + 1);
+          if (this.state.canScaleDance) {
+            TweenMax.to(sprite.scale, this.moveSpeed, {x:r, y:r});      
+          }
+          if (this.state.canRotatePointer) {
+            sprite.rotation += this.rotation_factor * (i + 1);
+          }
           // if(i % 2 == 0) {
           //   sprite.rotation += this.rotation_factor_reverse * (i + 1);
           // } 
@@ -112,6 +121,28 @@ export default class PhotoJam extends PIXI.Sprite {
   }
   fadeToJam(time = 10) {
     TweenMax.to(this.whitewash, time, {alpha: 0})
+  }
+  rotateTo(rotate) {
+    this.state.canRotatePointer = false;
+    TweenMax.staggerTo(this.sprite_array, 1, {rotation: rotate }, -0.06);
+
+
+  }
+  scaleTo(scale = 1, time = 1, callback = null) {
+    this.state.canScaleDance = false;
+    for (let i = 0; i < this.sprite_array.length; i++) {
+      const sprite = this.sprite_array[i];
+      TweenMax.to(sprite.scale, time, {x:scale, y:scale, delay: i * 0.2, onComplete: () => {
+        if (i + 1 == this.sprite_array.length ) {
+          this.state.canScaleDance = true;
+          if(callback) {
+            callback()
+          }
+        }
+      }});      
+    }
+
+
   }
   setAmplify(input = [1,1.5]) {
     this.amplify = input;

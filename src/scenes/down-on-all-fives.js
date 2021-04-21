@@ -61,15 +61,15 @@ export default class DownOnAllFives extends PIXI.Container {
     const pj_container = new PIXI.Container();
     this.addChild(pj_container)
 
-    const pj = new PhotoJam(pixi_app.loader.resources.d5_4.texture, 3, null, [11,12,13,14], [1, 1.5], 10)
-    pj_container.addChild(pj)
-    pj.transitionIn();
-    pj.scale.x = 0.5;
-    pj.scale.y = 0.5;
-    pj.anchor.x = 0.5;
-    pj.anchor.y = 0.5;
-    pj.x = 0;
-    pj.y = 0;        
+    // const pj = new PhotoJam(pixi_app.loader.resources.d5_4.texture, 3, null, [11,12,13,14], [1, 1.5], 10)
+    // pj_container.addChild(pj)
+    // pj.transitionIn();
+    // pj.scale.x = 0.5;
+    // pj.scale.y = 0.5;
+    // pj.anchor.x = 0.5;
+    // pj.anchor.y = 0.5;
+    // pj.x = 0;
+    // pj.y = 0;        
 
 
     const pj_2 = new PhotoJam(pixi_app.loader.resources.d5_2.texture, 3, null, [11,12,13,14], [1, 2.5], 10)
@@ -80,20 +80,20 @@ export default class DownOnAllFives extends PIXI.Container {
     pj_2.anchor.x = 0.5;
     pj_2.anchor.y = 0.5;
     pj_2.x = pixi_app.renderer.width / 2;
-    pj_2.y = 0;
+    pj_2.y = pixi_app.renderer.height / 4.5;
 
 
 
 
-    const pj_3 = new PhotoJam(pixi_app.loader.resources.d5_1.texture, 3, null, [11,12,13,14], [1, 2.5], 3)
-    pj_container.addChild(pj_3)
-    pj_3.transitionIn();    
-    pj_3.scale.x = 0.5;
-    pj_3.scale.y = 0.5;
-    pj_3.anchor.x = 0.5;
-    pj_3.anchor.y = 0.5;
-    pj_3.x = 0;
-    pj_3.y = pixi_app.renderer.height / 2;
+    // const pj_3 = new PhotoJam(pixi_app.loader.resources.d5_1.texture, 3, null, [11,12,13,14], [1, 2.5], 3)
+    // pj_container.addChild(pj_3)
+    // pj_3.transitionIn();    
+    // pj_3.scale.x = 0.5;
+    // pj_3.scale.y = 0.5;
+    // pj_3.anchor.x = 0.5;
+    // pj_3.anchor.y = 0.5;
+    // pj_3.x = 0;
+    // pj_3.y = pixi_app.renderer.height / 2;
 
   
 
@@ -105,8 +105,8 @@ export default class DownOnAllFives extends PIXI.Container {
     pj_4.scale.y = 0.5;
     pj_4.anchor.x = 0.5;
     pj_4.anchor.y = 0.5;
-    pj_4.x = pixi_app.renderer.width / 2;
-    pj_4.y = pixi_app.renderer.height / 2;
+    pj_4.x = 0;
+    pj_4.y = pixi_app.renderer.height / 4.5;
 
 
     pixi_app.ticker.add(() => {
@@ -116,7 +116,13 @@ export default class DownOnAllFives extends PIXI.Container {
 
 
     this.timeline = new TimelineLite();
-    // this.timeline.to(ks_container, 60, {alpha: 0, delay: 60});
+    this.timeline.to(pj_4, 60, {alpha: 1,});
+    this.timeline.add(() =>{
+      pj_4.scaleTo(0.1, 1, () => {
+        pj_4.setAmplify([0.1,0.5])
+      });
+      pj_2.rotateTo(0);
+    }) 
     // this.timeline.to(vv, 30, {alpha: 0, delay: 0});
     // this.timeline.add(() =>{
     //   pj.setAmplify([0.5,3])
