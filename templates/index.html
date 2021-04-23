@@ -1,133 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
 
-    <meta charset="UTF-8">
-    <!-- <meta name="viewport" content="width=900, user-scalable=no"> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <base href="/"/>
-    <!-- ICONS / WEBAPP -->
+<head>
 
-
-
-    <style>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=900, user-scalable=no"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <base href="/" />
+  <!-- ICONS / WEBAPP -->
 
 
 
-      html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
-      ol, ul {
-        list-style: none;
-      }
-      h1,h2,h3,h4,h5,p,a {
-        -webkit-margin-before: 0;
-        -webkit-margin-after: 0;
-        -webkit-margin-start: 0;
-        -webkit-margin-end: 0;
-      }
-      html {
-        -webkit-font-smoothing: antialiased;
-        overflow-y: scroll;
-        overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
-      }
-      body {
-        font-size: 16px;
-        overflow-x: hidden;
-        width: 100vw;
-        min-height: 100vh;
-        margin: 0;
-        font-family: 'VT323', monospace;        
-        font-size: 30px;
-        overflow-y: hidden;
-        background: white;
-      }
-      * {
-        box-sizing: border-box;
-        outline: 0;
-      }
-      canvas {
-        display: block;
-      }
-      img {
-        width: 100%;
-        height: auto;
-      }
-      #the-box {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
-      }
-      #interface {
-        position: fixed;
-        z-index: 100000000;
-        bottom: 10px;
-        left: 10px;
-        padding: 20px;
-        border: 2px solid black;
-        /* background: url(/assets/bg.png); */
-        background: white;
-        opacity: 1;
-        transition: all 0.5s ease-in;
-      }
-      #interface.hide {
-        opacity: 0;
-      }
-      #tracklist a{
-        display: block;
-        color: black;
-        text-shadow: 1px 1px 1px white;
-      }
-      #nowplaying {
-        display: none;
-      }
-      #nowplaying.show {
-        display: block;
-      }
-      #nowplaying .label {
-        font-size: 20px;
-        text-shadow: 1px 1px 1px white;
+  <style>
+    html,
+    body,
+    div,
+    span,
+    applet,
+    object,
+    iframe,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote,
+    pre,
+    a,
+    abbr,
+    acronym,
+    address,
+    big,
+    cite,
+    code,
+    del,
+    dfn,
+    em,
+    img,
+    ins,
+    kbd,
+    q,
+    s,
+    samp,
+    small,
+    strike,
+    strong,
+    sub,
+    sup,
+    tt,
+    var,
+    b,
+    u,
+    i,
+    center,
+    dl,
+    dt,
+    dd,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    legend,
+    table,
+    caption,
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td,
+    article,
+    aside,
+    canvas,
+    details,
+    embed,
+    figure,
+    figcaption,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    output,
+    ruby,
+    section,
+    summary,
+    time,
+    mark,
+    audio,
+    video {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+      font: inherit;
+      vertical-align: baseline
+    }
 
-      }
-      #now-playing {
-        font-size: 50px;
-        text-shadow: 1px 1px 1px white;
-      }
-      #button {
-        position: fixed;
-        width: 60px;
-        top: 20px;
-        right: 20px;
-        cursor: pointer;
-        transition: all 0.5s ease-in;
-      }
-      #button:hover {
-        transform: scale(0.87);
-      }
- 
-    </style>
-        
-  <body>
-    <canvas id="canvas" style="position:fixed; top: 0; left: 0; bottom: 0; right: 0; opacity: 1; background: transparent!important;"></canvas>
-    <!-- <div id="root"></div>
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+      display: block
+    }
+
+    body {
+      line-height: 1
+    }
+
+    ol,
+    ul {
+      list-style: none
+    }
+
+    blockquote,
+    q {
+      quotes: none
+    }
+
+    blockquote:before,
+    blockquote:after,
+    q:before,
+    q:after {
+      content: '';
+      content: none
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0
+    }
+
+    ol,
+    ul {
+      list-style: none;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    p,
+    a {
+      -webkit-margin-before: 0;
+      -webkit-margin-after: 0;
+      -webkit-margin-start: 0;
+      -webkit-margin-end: 0;
+    }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    body {
+      font-size: 16px;
+      overflow-x: hidden;
+      width: 100vw;
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'VT323', monospace;
+      font-size: 30px;
+      overflow-y: hidden;
+      background: white;
+    }
+
+    * {
+      box-sizing: border-box;
+      outline: 0;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+
+    #the-box {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+
+    #interface {
+      position: fixed;
+      z-index: 100000000;
+      bottom: 10px;
+      left: 10px;
+      padding: 20px;
+      border: 2px solid black;
+      /* background: url(/assets/bg.png); */
+      background: white;
+      opacity: 1;
+      transition: all 0.5s ease-in;
+    }
+
+    #interface.hide {
+      opacity: 0;
+    }
+
+    #tracklist a {
+      display: block;
+      color: black;
+      text-shadow: 1px 1px 1px white;
+    }
+
+    #nowplaying {
+      display: none;
+    }
+
+    #nowplaying.show {
+      display: block;
+    }
+
+    #nowplaying .label {
+      font-size: 20px;
+      text-shadow: 1px 1px 1px white;
+
+    }
+
+    #now-playing {
+      font-size: 50px;
+      text-shadow: 1px 1px 1px white;
+    }
+
+    #button {
+      position: fixed;
+      width: 60px;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      transition: all 0.5s ease-in;
+    }
+
+    #button:hover {
+      transform: scale(0.87);
+    }
+  </style>
+
+<body>
+  <canvas id="canvas"
+    style="position:fixed; top: 0; left: 0; bottom: 0; right: 0; opacity: 1; background: transparent!important;"></canvas>
+  <!-- <div id="root"></div>
     <div id="the-box"></div> -->
-    <div id="button">
-      <img src="assets/smokin_dead_dude.gif" alt="">
+  <div id="button">
+    <img src="assets/smokin_dead_dude.gif" alt="">
+  </div>
+  <div id="interface">
+    <div id="nowplaying">
+      <div class="label">Now Playing:</div>
+      <div id="now-playing"></div>
+      <div><input type="range" min="0" max="100" value="30" oninput="changeVolume(this);"> Volume</div>
+      <div><button id="stop_track_button">Stop</button></div>
     </div>
-    <div id="interface">
-      <div id="nowplaying">
-        <div class="label">Now Playing:</div>
-        <div id="now-playing"></div>
-        <div><input type="range" min="0" max="100" value="30" oninput="changeVolume(this);"> Volume</div>
-      </div>
-      <div id="tracklist">Loading...</div>
+    <div id="tracklist">Loading...</div>
 
-    </div>
-  </body>
+  </div>
+</body>
 
 </html>

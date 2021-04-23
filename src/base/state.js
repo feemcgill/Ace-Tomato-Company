@@ -3,7 +3,8 @@ const appState = {
   audioKicking: null,
   usingWebAudio: null,
   currentTrackSource: null,
-  debug: false
+  debug: false,
+  userStopped: false,
 }
 
-export default appState;
+export default appState
