@@ -55,8 +55,8 @@ export default class PhotoJam extends PIXI.Sprite {
       sprite.scale.x = sprite_size.scale
       sprite.scale.y = sprite_size.scale
 
-      sprite.x = pixi_app.renderer.width / 2
-      sprite.y = pixi_app.renderer.height / 2 + index * 10
+      sprite.x = this.width / 2
+      sprite.y = this.height / 2 + index * 10
 
       sprite.anchor.x = 0.5
       sprite.anchor.y = 0.5
@@ -66,7 +66,7 @@ export default class PhotoJam extends PIXI.Sprite {
       //   sprite.scale.y = -sprite_size.scale;
       //   sprite.scale.x = -sprite_size.scale;
       // }
-      sprite.rotation += 2 * (index + 1)
+      // sprite.rotation += 2 * (index + 1)
 
       this.sprite_array.push(sprite)
       this.addChild(sprite)
@@ -76,6 +76,7 @@ export default class PhotoJam extends PIXI.Sprite {
     this.addChild(this.whitewash)
     this.whitewash.alpha = 0
     console.log(1.5 * this.amplify)
+
     pixi_app.ticker.add(() => {
       if (appState.audioKicking) {
         analyser.getByteFrequencyData(dataArray)
@@ -106,10 +107,11 @@ export default class PhotoJam extends PIXI.Sprite {
         }
       }
     })
+
     window.addEventListener('resize', (e) => {
       const size = getWindowSize()
-      const w = size.width
-      const h = size.height
+      const w = this.width
+      const h = this.height
 
       sprite_size = backgroundSize(
         w,
@@ -117,6 +119,7 @@ export default class PhotoJam extends PIXI.Sprite {
         this.tex.baseTexture.width,
         this.tex.baseTexture.height
       )
+
       TweenMax.staggerTo(this.sprite_array, 0.1, { x: w / 2, y: h / 2 }, -0.05)
 
       // this.width = w;
@@ -165,7 +168,7 @@ export default class PhotoJam extends PIXI.Sprite {
   }
   handleMove(e) {
     var rotation_const = 0.0005
-    var move_const = 100
+    var move_const = 200
     var x = e.data.global.x
     var y = e.data.global.y
 
@@ -187,15 +190,15 @@ export default class PhotoJam extends PIXI.Sprite {
       x,
       0,
       pixi_app.renderer.width,
-      pixi_app.renderer.width / 2 - move_const,
-      pixi_app.renderer.width / 2 + move_const
+      this.width / 2 - move_const,
+      this.width / 2 + move_const
     )
     var moveFactorY = mapRange(
       y,
       0,
       pixi_app.renderer.height,
-      pixi_app.renderer.height / 2 - move_const,
-      pixi_app.renderer.height / 2 + move_const
+      this.height / 2 - move_const,
+      this.height / 2 + move_const
     )
     TweenMax.staggerTo(
       this.sprite_array,
