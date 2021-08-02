@@ -195,15 +195,19 @@ export default class PhotoJam extends PIXI.Sprite {
       x,
       0,
       pixi_app.renderer.width,
-      this.width / 2 - move_const,
-      this.width / 2 + move_const
+      // this.width / 2 - move_const,
+      // this.width / 2 + move_const
+      pixi_app.renderer.width / 2 - move_const,
+      pixi_app.renderer.width / 2 + move_const      
     )
     var moveFactorY = mapRange(
       y,
       0,
       pixi_app.renderer.height,
-      this.height / 2 - move_const,
-      this.height / 2 + move_const
+      // this.height / 2 - move_const,
+      // this.height / 2 + move_const
+      pixi_app.renderer.height / 2 - move_const,
+      pixi_app.renderer.height / 2 + move_const      
     )
     TweenMax.staggerTo(
       this.sprite_array,

@@ -3,7 +3,7 @@ const appState = {
   audioKicking: null,
   usingWebAudio: null,
   currentTrackSource: null,
-  debug: false,
+  debug: true,
   userStopped: false,
 }
 

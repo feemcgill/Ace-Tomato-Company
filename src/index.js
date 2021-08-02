@@ -22,6 +22,7 @@ import DawnPatrol from './scenes/dawn-patrol.js'
 import Apparatus from './scenes/apparatus'
 import DownOnAllFives from './scenes/down-on-all-fives.js'
 import HitTheSheets from './scenes/hit-the-sheets.js'
+import NewJersey from './scenes/new-jersey'
 
 import config from './config.js'
 import Vizzies from './vibes/vizziesweep.js'
@@ -74,6 +75,8 @@ function playScene(track) {
       break
     case 3:
       currentScene = new HitTheSheets()
+    case 4:
+      currentScene = new NewJersey()      
   }
 
   // Play the scene

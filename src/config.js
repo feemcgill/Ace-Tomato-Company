@@ -24,8 +24,14 @@ const config = {
       loaded: false,
       mp3: 'hit_the_sheets/hts.mp3',
       vid: 'hit_the_sheets/hts.mp4'
-    },         
-
+    },   
+    {
+      name: 'New Jersey',
+      loaded: false,
+      mp3: 'mp3/06 - New Jersey_for streaming.mp3',
+      vid: 'hit_the_sheets/hts.mp4'
+    },             
+    
   ]
 }
 
