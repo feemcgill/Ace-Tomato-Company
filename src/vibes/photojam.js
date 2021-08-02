@@ -55,8 +55,11 @@ export default class PhotoJam extends PIXI.Sprite {
       sprite.scale.x = sprite_size.scale
       sprite.scale.y = sprite_size.scale
 
-      sprite.x = this.width / 2
-      sprite.y = this.height / 2 + index * 10
+      // sprite.x = this.width / 2
+      // sprite.y = this.height / 2 + index * 10
+
+      sprite.x = pixi_app.renderer.width / 2
+      sprite.y = pixi_app.renderer.height / 2 + index * 10
 
       sprite.anchor.x = 0.5
       sprite.anchor.y = 0.5
@@ -110,8 +113,10 @@ export default class PhotoJam extends PIXI.Sprite {
 
     window.addEventListener('resize', (e) => {
       const size = getWindowSize()
-      const w = this.width
-      const h = this.height
+      // const w = this.width
+      // const h = this.height
+      const w = size.width
+      const h = size.height
 
       sprite_size = backgroundSize(
         w,
