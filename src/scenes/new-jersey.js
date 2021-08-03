@@ -38,28 +38,41 @@ export default class NewJersey extends PIXI.Container {
     const pj_container = new PIXI.Container();
     this.addChild(pj_container)
 
-    const pj = new PhotoJam(pixi_app.loader.resources.nj_2.texture, 3, null, [11,12,13,14], [1, 1.5], 10)
+    // const pj = new PhotoJam(pixi_app.loader.resources.nj_2.texture, 3, null, [11,12,13,14], [1, 1.5], 10)
+    const pj = new PhotoJam(pixi_app.loader.resources.nj_1.texture, 3, null, [110,120,130,140], [1, 1.5], 10)
     pj.transitionIn();
-
     pj_container.addChild(pj)
+    pj.alpha = 1;
+
+    
     
  
 
     const ks_container = new PIXI.Container();
-    //this.addChild(ks_container)
+    this.addChild(ks_container)
 
-    const kscope = new Kaleidoscope(pixi_app.loader.resources.nj_3.texture, 2, [30,26])
+    const kscope = new Kaleidoscope(pixi_app.loader.resources.nj_1.texture, 2, [30,26])
     kscope.draw()
     ks_container.addChild(kscope);
-    ks_container.alpha = 1;
+    ks_container.alpha = 0;
 
 
 
     const vv = new VidVibe(pixi_app.loader.resources.nj_vid.url, () => {})
     vv.transitionIn();  
-    //this.addChild(vv)
-    vv.blendMode = 3;
-    vv.alpha = 1;
+    this.addChild(vv)
+    vv.blendMode = 2;
+    vv.alpha = 0;
+
+
+
+    // pj2
+    const pj2_container = new PIXI.Container();
+    this.addChild(pj2_container);
+    const pj2 = new PhotoJam(pixi_app.loader.resources.nj_2.texture, 3, null, [11,12,13,14], [1, 1.5], 10)
+    pj2.transitionIn();
+    pj2_container.addChild(pj2)
+    pj2.alpha = 0;
 
 
 
@@ -72,16 +85,21 @@ export default class NewJersey extends PIXI.Container {
 
 
     this.timeline = new TimelineLite();
-    this.timeline.to(ks_container, 60, {alpha: 0, delay: 60});
-    this.timeline.to(vv, 30, {alpha: 0, delay: 0});
+    this.timeline.to(ks_container, 30, {alpha: 0.3, delay: 10});
+    this.timeline.to(pj, 30, {alpha: 0}, "-=25");
+    this.timeline.to(vv, 30, {alpha: 1}, "-=20");
+
+    this.timeline.to(vv, 10, {alpha: 0}, "95");
+    this.timeline.to(ks_container, 10, {alpha: 0}, "95");
+    this.timeline.to(pj2, 10, {alpha: 1}, "95");
+
     this.timeline.add(() =>{
       pj.setAmplify([0.5,3])
     })   
-    this.timeline.to(ks_container, 10, {alpha: 0.05, delay: 50});
+    
     this.timeline.add(() =>{
       pj.setAmplify([0.1,0.4])
     })    
-    this.timeline.to(ks_container, 10, {alpha: 0, delay: 0});
 
 
      if (appState.debug) {
