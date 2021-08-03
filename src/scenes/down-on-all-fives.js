@@ -30,10 +30,11 @@ export default class DownOnAllFives extends PIXI.Container {
     const duration = appState.currentTrackSource
 
     const ks_container = new PIXI.Container()
-    const kscope = new Kaleidoscope(pixi_app.loader.resources.d5_3.texture, 2, [
-      30,
-      26,
-    ])
+    const kscope = new Kaleidoscope(
+      pixi_app.loader.resources.d5_3.texture,
+      2,
+      [30, 26]
+    )
     kscope.draw()
     ks_container.addChild(kscope)
     ks_container.alpha = 1
@@ -60,13 +61,12 @@ export default class DownOnAllFives extends PIXI.Container {
     // pj.x = 0;
     // pj.y = 0;
 
-    const pj_2 = new PhotoJam(
-      pixi_app.loader.resources.d5_2.texture,
-      3,
-      null,
-      [11, 12, 13, 14],
-      [1, 2.5]
-    )
+    const pj_2 = new PhotoJam(pixi_app.loader.resources.d5_2.texture, {
+      blendMode: 3,
+      moveData: [11, 12, 13, 14],
+      amplify: [1, 2.5],
+    })
+
     pj_container.addChild(pj_2)
     pj_2.transitionIn()
     pj_2.scale.x = 0.5

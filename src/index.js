@@ -75,8 +75,9 @@ function playScene(track) {
       break
     case 3:
       currentScene = new HitTheSheets()
+      break
     case 4:
-      currentScene = new NewJersey()      
+      currentScene = new NewJersey()
   }
 
   // Play the scene
