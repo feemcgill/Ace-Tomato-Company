@@ -5,20 +5,35 @@ import { mapRange, backgroundSize, getWindowSize } from '../base/utils/helpers'
 import appState from '../base/state.js'
 import { analyser, dataArray } from '../base/audio/audioInit'
 
+const defaults = {
+  blendMode: 0,
+  callback: null,
+  moveData: [5, 10, 15],
+  amplify: [0.95, 1.5],
+  moveSpeed: 1,
+  rotation_factor: 0.00005,
+  rotation_factor_reverse: -0.0005,
+}
+// texture, (blendMode = 0), callback, moveData, amplify, moveSpeed
 export default class PhotoJam extends PIXI.Sprite {
-  constructor(texture, blendMode = 0, callback, moveData, amplify, moveSpeed) {
+  constructor(texture, options_in) {
     super()
-    this.callback = callback
-    this.blendMode = blendMode
+    this.settings = { ...defaults, ...options_in }
+    // this.settings.callback = this.settings.callback
+    //this.blendMode = this.settings.blendMode
+    //this.moveData = this.settings.moveData
+    // this.amplify = this.settings.amplify
+    // this.settings.moveSpeed = this.settings.moveSpeed
+    // this.settings.rotation_factor = this.settings.rotation_factor
+    // this.settings.rotation_factor_reverse = this.settings.rotation_factor_reverse
+
+    console.log(this.settings)
+
     this.tex = texture
     this.sprite_array = []
-    this.rotation_factor = 0.00005
-    this.rotation_factor_reverse = -0.0005
+
     this.interactive = true
     this.whitewash = new PIXI.Graphics()
-    this.moveData = moveData || [5, 10, 15]
-    this.amplify = amplify || [0.95, 1.5]
-    this.moveSpeed = moveSpeed || 1
     this.state = {
       canScaleDance: true,
       canRotatePointer: true,
@@ -27,7 +42,9 @@ export default class PhotoJam extends PIXI.Sprite {
   }
 
   transitionOut() {
-    this.callback()
+    if (this.settings.callback) {
+      this.settings.callback()
+    }
     this.removeChildren()
   }
 
@@ -49,7 +66,7 @@ export default class PhotoJam extends PIXI.Sprite {
     )
     // const sprite = new PIXI.Sprite(this.tex);
 
-    for (let index = 0; index < this.moveData.length; index++) {
+    for (let index = 0; index < this.settings.moveData.length; index++) {
       const sprite = new PIXI.Sprite(this.tex)
 
       sprite.scale.x = sprite_size.scale
@@ -64,7 +81,7 @@ export default class PhotoJam extends PIXI.Sprite {
       sprite.anchor.x = 0.5
       sprite.anchor.y = 0.5
       sprite.alpha = 0.6
-      sprite.blendMode = this.blendMode
+      sprite.blendMode = this.settings.blendMode
       // if(index % 2 == 0) {
       //   sprite.scale.y = -sprite_size.scale;
       //   sprite.scale.x = -sprite_size.scale;
@@ -78,7 +95,7 @@ export default class PhotoJam extends PIXI.Sprite {
     this.sprite_array[0].blendMode = 0
     this.addChild(this.whitewash)
     this.whitewash.alpha = 0
-    console.log(1.5 * this.amplify)
+    console.log(1.5 * this.settings.amplify)
 
     pixi_app.ticker.add(() => {
       if (appState.audioKicking) {
@@ -87,25 +104,25 @@ export default class PhotoJam extends PIXI.Sprite {
 
         for (let i = 0; i < this.sprite_array.length; i++) {
           let mover = dataArray[i * 5 + 3]
-          if (this.moveData[i]) {
-            mover = dataArray[this.moveData[i]]
+          if (this.settings.moveData[i]) {
+            mover = dataArray[this.settings.moveData[i]]
           }
           const sprite = this.sprite_array[i]
           let r = mapRange(
             mover,
             0,
             255,
-            sprite_size.scale * this.amplify[0],
-            sprite_size.scale * this.amplify[1]
+            sprite_size.scale * this.settings.amplify[0],
+            sprite_size.scale * this.settings.amplify[1]
           )
           if (this.state.canScaleDance) {
-            TweenMax.to(sprite.scale, this.moveSpeed, { x: r, y: r })
+            TweenMax.to(sprite.scale, this.settings.moveSpeed, { x: r, y: r })
           }
           if (this.state.canRotatePointer) {
-            sprite.rotation += this.rotation_factor * (i + 1)
+            sprite.rotation += this.settings.rotation_factor * (i + 1)
           }
           // if(i % 2 == 0) {
-          //   sprite.rotation += this.rotation_factor_reverse * (i + 1);
+          //   sprite.rotation += this.settings.rotation_factor_reverse * (i + 1);
           // }
         }
       }
@@ -169,7 +186,7 @@ export default class PhotoJam extends PIXI.Sprite {
     }
   }
   setAmplify(input = [1, 1.5]) {
-    this.amplify = input
+    this.settings.amplify = input
   }
   handleMove(e) {
     var rotation_const = 0.0005
@@ -177,14 +194,14 @@ export default class PhotoJam extends PIXI.Sprite {
     var x = e.data.global.x
     var y = e.data.global.y
 
-    this.rotation_factor = mapRange(
+    this.settings.rotation_factor = mapRange(
       x,
       0,
       pixi_app.renderer.width,
       -rotation_const,
       rotation_const
     )
-    this.rotation_factor_reverse = mapRange(
+    this.settings.rotation_factor_reverse = mapRange(
       x,
       0,
       pixi_app.renderer.width,
@@ -198,7 +215,7 @@ export default class PhotoJam extends PIXI.Sprite {
       // this.width / 2 - move_const,
       // this.width / 2 + move_const
       pixi_app.renderer.width / 2 - move_const,
-      pixi_app.renderer.width / 2 + move_const      
+      pixi_app.renderer.width / 2 + move_const
     )
     var moveFactorY = mapRange(
       y,
@@ -207,7 +224,7 @@ export default class PhotoJam extends PIXI.Sprite {
       // this.height / 2 - move_const,
       // this.height / 2 + move_const
       pixi_app.renderer.height / 2 - move_const,
-      pixi_app.renderer.height / 2 + move_const      
+      pixi_app.renderer.height / 2 + move_const
     )
     TweenMax.staggerTo(
       this.sprite_array,
