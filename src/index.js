@@ -65,19 +65,35 @@ function playScene(track) {
   // Find the scene
   switch (track) {
     case 0:
-      currentScene = new DawnPatrol()
+      console.log('not yet')
       break
     case 1:
-      currentScene = new Apparatus()
+      currentScene = new DawnPatrol()
       break
     case 2:
-      currentScene = new DownOnAllFives()
+      currentScene = new Apparatus()
       break
     case 3:
-      currentScene = new HitTheSheets()
+      console.log('not yet')
       break
     case 4:
+      currentScene = new DownOnAllFives()
+      break
+    case 5:
       currentScene = new NewJersey()
+      break
+    case 6:
+      console.log('not yet')
+      break
+    case 7:
+      console.log('not yet')
+      break
+    case 8:
+      console.log('not yet')
+      break
+    case 9:
+      currentScene = new HitTheSheets()
+      break
   }
 
   // Play the scene
