@@ -69,7 +69,7 @@ export default class Apparatus extends PIXI.Container {
     ks_container.addChild(kscope)
     ks_container.alpha = 1
 
-    const vv = new VidVibe(pixi_app.loader.resources.ata_vid.url, () => {})
+    const vv = new VidVibe(pixi_app.loader.resources.ata_vid.url)
     vv.transitionIn()
     this.addChild(vv)
     vv.blendMode = 3

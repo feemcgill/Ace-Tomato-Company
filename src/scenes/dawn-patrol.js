@@ -43,7 +43,7 @@ export default class DawnPatrol extends PIXI.Container {
     // pj.scale.x = 0.5;
     // pj.scale.y = 0.5;
 
-    const vv = new VidVibe(pixi_app.loader.resources.vid.url, () => {})
+    const vv = new VidVibe(pixi_app.loader.resources.vid.url)
     vv.transitionIn()
     this.addChild(vv)
     vv.blendMode = 1

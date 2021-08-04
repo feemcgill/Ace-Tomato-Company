@@ -40,7 +40,7 @@ export default class DownOnAllFives extends PIXI.Container {
 
     //this.addChild(ks_container)
 
-    const vv = new VidVibe(pixi_app.loader.resources.d5_vid.url, () => {})
+    const vv = new VidVibe(pixi_app.loader.resources.d5_vid.url)
     vv.transitionIn()
     vv.blendMode = 3
     vv.alpha = 1
