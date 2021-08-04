@@ -66,11 +66,10 @@ export default class DawnPatrol extends PIXI.Container {
     const ks_container = new PIXI.Container()
     this.addChild(ks_container)
 
-    const kscope = new Kaleidoscope(
-      pixi_app.loader.resources.dp_3.texture,
-      1,
-      [40, 132]
-    )
+    const kscope = new Kaleidoscope(pixi_app.loader.resources.dp_3.texture, {
+      blendMode: 1,
+      moveData: [40, 132],
+    })
     kscope.draw()
     ks_container.addChild(kscope)
     ks_container.alpha = 0

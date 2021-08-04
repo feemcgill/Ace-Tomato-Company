@@ -61,11 +61,10 @@ export default class Apparatus extends PIXI.Container {
     const ks_container = new PIXI.Container()
     this.addChild(ks_container)
 
-    const kscope = new Kaleidoscope(
-      pixi_app.loader.resources.ata_1.texture,
-      2,
-      [30, 26]
-    )
+    const kscope = new Kaleidoscope(pixi_app.loader.resources.ata_1.texture, {
+      blendMode: 2,
+      moveData: [30, 26],
+    })
     kscope.draw()
     ks_container.addChild(kscope)
     ks_container.alpha = 1

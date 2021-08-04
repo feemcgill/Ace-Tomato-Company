@@ -14,7 +14,7 @@ const defaults = {
   rotation_factor: 0.00005,
   rotation_factor_reverse: -0.0005,
 }
-// texture, (blendMode = 0), callback, moveData, amplify, moveSpeed
+
 export default class PhotoJam extends PIXI.Sprite {
   constructor(texture, options_in) {
     super()
@@ -26,8 +26,6 @@ export default class PhotoJam extends PIXI.Sprite {
     // this.settings.moveSpeed = this.settings.moveSpeed
     // this.settings.rotation_factor = this.settings.rotation_factor
     // this.settings.rotation_factor_reverse = this.settings.rotation_factor_reverse
-
-    console.log(this.settings)
 
     this.tex = texture
     this.sprite_array = []
