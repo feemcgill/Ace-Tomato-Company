@@ -18,11 +18,31 @@ export default class Apparatus extends PIXI.Container {
     console.log('LOAD APPARATUS')
 
     pixi_app.loader
-      .add('ata_1', config.asset_url + '/apparatus/ata_1.jpg')
-      .add('ata_2', config.asset_url + '/apparatus/ata_2.jpg')
-      .add('ata_3', config.asset_url + '/apparatus/ata_3.jpg')
-      .add('ata_4', config.asset_url + '/apparatus/ata_4.jpg')
-      .add('ata_vid', config.asset_url + '/apparatus/ata.mp4')
+      .add(
+        'ata_1',
+        config.asset_url + '/062821/alpha/All the Apparatus/000053630017.jpg'
+      )
+      .add(
+        'ata_2',
+        config.asset_url + '/062821/alpha/All the Apparatus/000060940007.jpg'
+      )
+      .add(
+        'ata_3',
+        config.asset_url + '/062821/alpha/All the Apparatus/000060940008.jpg'
+      )
+      .add(
+        'ata_4',
+        config.asset_url + '/062821/alpha/All the Apparatus/000308310003.jpg'
+      )
+      .add(
+        'ata_5',
+        config.asset_url + '/062821/alpha/All the Apparatus/000323220024.jpg'
+      )
+      .add(
+        'ata_6',
+        config.asset_url + '/062821/alpha/All the Apparatus/000324000025.jpg'
+      )
+      .add('ata_vid', config.asset_url + '/062821/vids/All the app 4 B.mp4')
       .load((loader, resources) => {
         this.run()
       })

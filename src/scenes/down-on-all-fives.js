@@ -16,11 +16,23 @@ export default class DownOnAllFives extends PIXI.Container {
   }
   load() {
     pixi_app.loader
-      .add('d5_1', config.asset_url + '/down_on_all_fives/d5_1.jpg')
-      .add('d5_2', config.asset_url + '/down_on_all_fives/d5_2.jpg')
-      .add('d5_3', config.asset_url + '/down_on_all_fives/d5_3.jpg')
-      .add('d5_4', config.asset_url + '/down_on_all_fives/d5_4.jpg')
-      .add('d5_vid', config.asset_url + '/down_on_all_fives/d5.mp4')
+      .add(
+        'd5_1',
+        config.asset_url + '/062821/alpha/Down on All Fives/000304090003.jpg'
+      )
+      .add(
+        'd5_2',
+        config.asset_url + '/062821/alpha/Down on All Fives/000304090004.jpg'
+      )
+      .add(
+        'd5_3',
+        config.asset_url + '/062821/alpha/Down on All Fives/17190002.jpg'
+      )
+      .add(
+        'd5_4',
+        config.asset_url + '/062821/alpha/Down on All Fives/17190005.jpg'
+      )
+      .add('d5_vid', config.asset_url + '/062821/vids/down on all for B.mp4')
       .load((loader, resources) => {
         this.run()
       })
