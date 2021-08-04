@@ -61,7 +61,7 @@ export default class NewJersey extends PIXI.Container {
     ks_container.addChild(kscope)
     ks_container.alpha = 0
 
-    const vv = new VidVibe(pixi_app.loader.resources.nj_vid.url, () => {})
+    const vv = new VidVibe(pixi_app.loader.resources.nj_vid.url)
     vv.transitionIn()
     this.addChild(vv)
     vv.blendMode = 2
