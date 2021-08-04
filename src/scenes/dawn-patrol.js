@@ -42,7 +42,7 @@ export default class DawnPatrol extends PIXI.Container {
     const pj_container = new PIXI.Container()
     this.addChild(pj_container)
     //(blendMode = 0), callback, moveData, amplify, moveSpeed
-    const pj = new PhotoJam(pixi_app.loader.resources.dp_1.texture, {
+    const pj = new PhotoJam(pixi_app.loader.resources.dp_4.texture, {
       blendMode: 1,
       moveData: [18, 20, 22, 24, 26, 28],
       amplify: [1, 1.2],
@@ -78,7 +78,7 @@ export default class DawnPatrol extends PIXI.Container {
     const ks_container = new PIXI.Container()
     this.addChild(ks_container)
 
-    const kscope = new Kaleidoscope(pixi_app.loader.resources.dp_3.texture, {
+    const kscope = new Kaleidoscope(pixi_app.loader.resources.dp_2.texture, {
       blendMode: 1,
       moveData: [40, 132],
     })
