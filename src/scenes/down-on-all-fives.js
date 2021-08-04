@@ -59,83 +59,90 @@ export default class DownOnAllFives extends PIXI.Container {
 
     //this.addChild(vv)
 
+    var xprite = new PIXI.Sprite(PIXI.Texture.WHITE)
+    xprite.tint = 0xff0000 //Change with the color wanted
+    xprite.width = 500
+    xprite.height = 500
+    xprite.x = 100
+    xprite.y = 100
+    this.addChild(xprite)
+
     const pj_container = new PIXI.Container()
     this.addChild(pj_container)
 
-    // const pj = new PhotoJam(pixi_app.loader.resources.d5_4.texture, 3, null, [11,12,13,14], [1, 1.5], 10)
-    // pj_container.addChild(pj)
-    // pj.transitionIn();
-    // pj.scale.x = 0.5;
-    // pj.scale.y = 0.5;
-    // pj.anchor.x = 0.5;
-    // pj.anchor.y = 0.5;
-    // pj.x = 0;
-    // pj.y = 0;
-
-    const pj_2 = new PhotoJam(pixi_app.loader.resources.d5_2.texture, {
+    const pj_2 = new PhotoJam(pixi_app.loader.resources.d5_3.texture, {
       blendMode: 3,
       moveData: [11, 12, 13, 14],
-      amplify: [1, 2.5],
+      amplify: [1, 1],
+      size: 'cover',
+      container: xprite,
     })
 
     pj_container.addChild(pj_2)
     pj_2.transitionIn()
-    pj_2.scale.x = 0.5
-    pj_2.scale.y = 0.5
-    pj_2.anchor.x = 0.5
-    pj_2.anchor.y = 0.5
-    pj_2.x = pixi_app.renderer.width / 2
-    pj_2.y = pixi_app.renderer.height / 2
 
-    // const pj_3 = new PhotoJam(pixi_app.loader.resources.d5_1.texture, 3, null, [11,12,13,14], [1, 2.5], 3)
+    // pj_2.scale.x = 0.5
+    // pj_2.scale.y = 0.5
+    // pj_2.anchor.x = 0.5
+    // pj_2.anchor.y = 0.5
+    // pj_2.x = pixi_app.renderer.width / 2
+    // pj_2.y = pixi_app.renderer.height / 2
+
+    // const pj_3 = new PhotoJam(
+    //   pixi_app.loader.resources.d5_1.texture,
+    //   3,
+    //   null,
+    //   [11, 12, 13, 14],
+    //   [1, 2.5],
+    //   3
+    // )
     // pj_container.addChild(pj_3)
-    // pj_3.transitionIn();
-    // pj_3.scale.x = 0.5;
-    // pj_3.scale.y = 0.5;
-    // pj_3.anchor.x = 0.5;
-    // pj_3.anchor.y = 0.5;
-    // pj_3.x = 0;
-    // pj_3.y = pixi_app.renderer.height / 2;
+    // pj_3.transitionIn()
+    // pj_3.scale.x = 0.5
+    // pj_3.scale.y = 0.5
+    // pj_3.anchor.x = 0.5
+    // pj_3.anchor.y = 0.5
+    // pj_3.x = 0
+    // pj_3.y = pixi_app.renderer.height / 2
 
-    /*
-    const pj_4 = new PhotoJam(
-      pixi_app.loader.resources.d5_3.texture,
-      3,
-      null,
-      [11, 12, 13, 14],
-      [1, 1.5],
-      10
-    )
-    pj_container.addChild(pj_4)
-    pj_4.transitionIn()
-    pj_4.scale.x = 0.5
-    pj_4.scale.y = 0.5
-    pj_4.anchor.x = 0.5
-    pj_4.anchor.y = 0.5
-    pj_4.x = 0
-    pj_4.y = pixi_app.renderer.height / 4.5
+    // const pj_4 = new PhotoJam(
+    //   pixi_app.loader.resources.d5_3.texture,
+    //   3,
+    //   null,
+    //   [11, 12, 13, 14],
+    //   [1, 1.5],
+    //   10
+    // )
+    // pj_container.addChild(pj_4)
+    // pj_4.transitionIn()
+    // pj_4.scale.x = 0.5
+    // pj_4.scale.y = 0.5
+    // pj_4.anchor.x = 0.5
+    // pj_4.anchor.y = 0.5
+    // pj_4.x = 0
+    // pj_4.y = pixi_app.renderer.height / 4.5
 
     pixi_app.ticker.add(() => {})
 
     this.timeline = new TimelineLite()
-    this.timeline.to(pj_4, 60, { alpha: 1 })
-    this.timeline.add(() => {
-      pj_4.scaleTo(0.1, 1, () => {
-        pj_4.setAmplify([0.1, 0.5])
-      })
-      pj_2.rotateTo(0)
-    })
-    */
 
-    // this.timeline.to(vv, 30, {alpha: 0, delay: 0});
-    // this.timeline.add(() =>{
-    //   pj.setAmplify([0.5,3])
+    // this.timeline.to(pj_4, 60, { alpha: 1 })
+    // this.timeline.add(() => {
+    //   pj_4.scaleTo(0.1, 1, () => {
+    //     pj_4.setAmplify([0.1, 0.5])
+    //   })
+    //   pj_2.rotateTo(0)
     // })
-    // this.timeline.to(ks_container, 10, {alpha: 0.05, delay: 50});
-    // this.timeline.add(() =>{
-    //   pj.setAmplify([0.1,0.4])
+
+    // this.timeline.to(vv, 30, { alpha: 0, delay: 0 })
+    // this.timeline.add(() => {
+    //   pj.setAmplify([0.5, 3])
     // })
-    // this.timeline.to(ks_container, 10, {alpha: 0, delay: 0});
+    // this.timeline.to(ks_container, 10, { alpha: 0.05, delay: 50 })
+    // this.timeline.add(() => {
+    //   pj.setAmplify([0.1, 0.4])
+    // })
+    // this.timeline.to(ks_container, 10, { alpha: 0, delay: 0 })
 
     if (appState.debug) {
       this.timeline.timeScale(10)
