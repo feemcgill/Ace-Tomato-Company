@@ -26,70 +26,68 @@ export default class DownOnAllFives extends PIXI.Container {
       })
   }
   run() {
-    const debug = false
-    const duration = appState.currentTrackSource
+    var top_left = new PIXI.Sprite(PIXI.Texture.WHITE)
+    top_left.tint = 0xff0000 //Change with the color wanted
+    top_left.width = pixi_app.renderer.width / 2
+    top_left.height = pixi_app.renderer.height / 2
+    top_left.x = 0
+    top_left.y = 0
+    this.addChild(top_left)
 
-    const ks_container = new PIXI.Container()
-    const kscope = new Kaleidoscope(pixi_app.loader.resources.d5_3.texture, {
-      blendMode: 2,
-      moveData: [30, 26],
-    })
-    kscope.draw()
-    ks_container.addChild(kscope)
-    ks_container.alpha = 1
+    var top_right = new PIXI.Sprite(PIXI.Texture.WHITE)
+    top_right.tint = 0xfff000 //Change with the color wanted
+    top_right.width = pixi_app.renderer.width / 2
+    top_right.height = pixi_app.renderer.height / 2
+    top_right.x = pixi_app.renderer.width / 2
+    top_right.y = 0
+    this.addChild(top_right)
 
-    //this.addChild(ks_container)
+    var bottom_right = new PIXI.Sprite(PIXI.Texture.WHITE)
+    bottom_right.tint = 0x0fff00 //Change with the color wanted
+    bottom_right.width = pixi_app.renderer.width / 2
+    bottom_right.height = pixi_app.renderer.height / 2
+    bottom_right.x = pixi_app.renderer.width / 2
+    bottom_right.y = pixi_app.renderer.height / 2
+    this.addChild(bottom_right)
 
-    const vv = new VidVibe(pixi_app.loader.resources.d5_vid.url)
-    vv.transitionIn()
-    vv.blendMode = 3
-    vv.alpha = 1
+    var bottom_left = new PIXI.Sprite(PIXI.Texture.WHITE)
+    bottom_left.tint = 0x00fff0 //Change with the color wanted
+    bottom_left.width = pixi_app.renderer.width / 2
+    bottom_left.height = pixi_app.renderer.height / 2
+    bottom_left.x = 0
+    bottom_left.y = pixi_app.renderer.height / 2
+    this.addChild(bottom_left)
 
-    //this.addChild(vv)
-
-    var xprite = new PIXI.Sprite(PIXI.Texture.WHITE)
-    xprite.tint = 0xff0000 //Change with the color wanted
-    xprite.width = 500
-    xprite.height = 500
-    xprite.x = 100
-    xprite.y = 100
-    this.addChild(xprite)
-
-    const pj_container = new PIXI.Container()
-    this.addChild(pj_container)
-
-    const pj_2 = new PhotoJam(pixi_app.loader.resources.d5_3.texture, {
+    const pj_defaults = {
       blendMode: 3,
-      moveData: [11, 12, 13, 14],
-      amplify: [1, 1.1],
-      size: 'contain',
-      container: xprite,
+      moveData: [1, 5, 10, 14],
+      amplify: [1, 2.1],
+      size: 'cover',
       mousemove_factor: 50,
       mousemove_time: 0.2,
-      mousemove_delay: 0.3,
+      mousemove_delay: 0.03,
       rotation_const: 0.0005,
-    })
+    }
 
-    pj_container.addChild(pj_2)
+    const pj_1 = new PhotoJam(pixi_app.loader.resources.d5_1.texture, { ...pj_defaults, ...{ container: top_left } })
+    this.addChild(pj_1)
+    pj_1.transitionIn()
+    //pj_1.mask = top_left
+
+    const pj_2 = new PhotoJam(pixi_app.loader.resources.d5_2.texture, { ...pj_defaults, ...{ container: top_right } })
+    this.addChild(pj_2)
     pj_2.transitionIn()
-    // pj_2.scale.set(0.5)
-    // pj_2.scaleTo(0.0, 0.1)
-    // setTimeout(() => {
-    //   pj_2.scaleTo(1, 10)
-    // }, 2000)
+    //pj_2.mask = top_right
 
-    // setTimeout(() => {
-    //   pj_2.rotateTo(5, 2, 1, () => {
-    //     pj_2.state.canRotatePointer = true
-    //     pj_2.settings.rotation_const = 0.02
-    //   })
-    // }, 4000)
+    const pj_3 = new PhotoJam(pixi_app.loader.resources.d5_3.texture, { ...pj_defaults, ...{ container: bottom_right } })
+    this.addChild(pj_3)
+    pj_3.transitionIn()
+    //pj_3.mask = bottom_right
 
-    // setTimeout(() => {
-    //   pj_2.scaleTo(5, 2)
-    // }, 16000)
-
-    //pj_2.mask = xprite
+    const pj_4 = new PhotoJam(pixi_app.loader.resources.d5_4.texture, { ...pj_defaults, ...{ container: bottom_left } })
+    this.addChild(pj_4)
+    pj_4.transitionIn()
+    //pj_4.mask = bottom_left
 
     pixi_app.ticker.add(() => {})
 
@@ -105,8 +103,8 @@ export default class DownOnAllFives extends PIXI.Container {
     window.addEventListener(
       'resize',
       debounce(function (e) {
-        xprite.x = 50
-        xprite.y = 50
+        top_left.x = 50
+        top_left.y = 50
       }, 50)
     )
   }
