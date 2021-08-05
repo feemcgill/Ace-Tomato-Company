@@ -78,7 +78,13 @@ export default class PhotoJam extends PIXI.Sprite {
             mover = dataArray[this.settings.moveData[i]]
           }
           const sprite = this.sprite_array[i]
-          let r = mapRange(mover, 0, 255, this.currentScaleFactor * this.settings.amplify[0], this.currentScaleFactor * this.settings.amplify[1])
+          let r = mapRange(
+            mover,
+            0,
+            255,
+            this.currentScaleFactor * this.sprite_size.scale * this.settings.amplify[0],
+            this.currentScaleFactor * this.sprite_size.scale * this.settings.amplify[1]
+          )
           if (this.state.canScaleDance) {
             TweenMax.to(sprite.scale, this.settings.moveSpeed, { x: r, y: r })
           }
