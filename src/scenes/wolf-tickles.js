@@ -29,18 +29,12 @@ export default class WolfTickles extends PIXI.Container {
     const debug = true
     const duration = appState.currentTrackSource
 
-
-
-
     // VidVibe
     const vv = new VidVibe(pixi_app.loader.resources.wt_vid.url)
     vv.transitionIn()
     this.addChild(vv)
     vv.blendMode = 0
     vv.alpha = 0
-
-
-
 
     // PJ 1
     const pj_container = new PIXI.Container()
@@ -57,8 +51,6 @@ export default class WolfTickles extends PIXI.Container {
     pj_container.addChild(pj)
     pj.alpha = 0
 
-
-    
     // Kaleidscope
     const ks_container = new PIXI.Container()
     this.addChild(ks_container)
@@ -72,8 +64,6 @@ export default class WolfTickles extends PIXI.Container {
     ks_container.addChild(kscope)
     ks_container.alpha = 0
 
-
-    
     // pj2
     const pj2_container = new PIXI.Container()
     this.addChild(pj2_container)
@@ -101,14 +91,13 @@ export default class WolfTickles extends PIXI.Container {
     pj3_container.addChild(pj3)
     pj3.alpha = 0
 
-
     pixi_app.ticker.add(() => {})
 
     this.timeline = new TimelineLite()
 
     this.timeline.to(vv, 10, { alpha: 1 })
     this.timeline.to(ks_container, 10, { alpha: 0.75 }, '10')
-    
+
     this.timeline.to(pj, 10, { alpha: 1 }, '15')
     this.timeline.to(pj, 10, { alpha: 0 }, '35')
 
@@ -120,8 +109,7 @@ export default class WolfTickles extends PIXI.Container {
 
     this.timeline.to(ks_container, 10, { alpha: 0 }, '120')
 
-
-    if (appState.debug) {
+    if (process.env.DEBUG) {
       this.timeline.timeScale(10)
     }
 
