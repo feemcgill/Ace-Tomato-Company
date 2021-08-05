@@ -62,20 +62,20 @@ export default class DownOnAllFives extends PIXI.Container {
       blendMode: 3,
       moveData: [11, 12, 13, 14],
       amplify: [1, 1.1],
-      size: 'cover',
+      size: 'contain',
       container: xprite,
-      mousemove_factor: 50,
-      mousemove_time: 0.2,
-      mousemove_delay: 0.1,
+      mousemove_factor: 500,
+      mousemove_time: 1.2,
+      mousemove_delay: 0.3,
       rotation_const: 0.0005,
     })
 
     pj_container.addChild(pj_2)
     pj_2.transitionIn()
-    //pj_2.scale.set(0.5)
+    pj_2.scale.set(0.5)
     pj_2.scaleTo(0.0, 0.1)
     setTimeout(() => {
-      pj_2.scaleTo(0.8, 10)
+      pj_2.scaleTo(1, 10)
     }, 2000)
 
     setTimeout(() => {
@@ -85,7 +85,11 @@ export default class DownOnAllFives extends PIXI.Container {
       })
     }, 4000)
 
-    //pj_2.mask = xprite
+    setTimeout(() => {
+      pj_2.scaleTo(5, 2)
+    }, 16000)
+
+    pj_2.mask = xprite
 
     pixi_app.ticker.add(() => {})
 
