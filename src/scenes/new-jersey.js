@@ -100,7 +100,7 @@ export default class NewJersey extends PIXI.Container {
     })
 
     if (process.env.DEBUG) {
-      this.timeline.timeScale(10)
+      // this.timeline.timeScale(10)
     }
 
     pixi_app.ticker.add(() => {})
