@@ -59,7 +59,6 @@ export default class VidVibe extends PIXI.Sprite {
     this.preload = 'auto'
 
     window.addEventListener('resize', (e) => {
-      console.log('vidvibe resize')
       const size = getWindowSize()
       const w = size.width
       const h = size.height

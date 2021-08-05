@@ -16,22 +16,10 @@ export default class DownOnAllFives extends PIXI.Container {
   }
   load() {
     pixi_app.loader
-      .add(
-        'd5_1',
-        config.asset_url + '/062821/alpha/Down on All Fives/000304090003.jpg'
-      )
-      .add(
-        'd5_2',
-        config.asset_url + '/062821/alpha/Down on All Fives/000304090004.jpg'
-      )
-      .add(
-        'd5_3',
-        config.asset_url + '/062821/alpha/Down on All Fives/17190002.jpg'
-      )
-      .add(
-        'd5_4',
-        config.asset_url + '/062821/alpha/Down on All Fives/17190005.jpg'
-      )
+      .add('d5_1', config.asset_url + '/062821/alpha/Down on All Fives/000304090003.jpg')
+      .add('d5_2', config.asset_url + '/062821/alpha/Down on All Fives/000304090004.jpg')
+      .add('d5_3', config.asset_url + '/062821/alpha/Down on All Fives/17190002.jpg')
+      .add('d5_4', config.asset_url + '/062821/alpha/Down on All Fives/17190005.jpg')
       .add('d5_vid', config.asset_url + '/062821/vids/down on all for B.mp4')
       .load((loader, resources) => {
         this.run()
@@ -73,76 +61,35 @@ export default class DownOnAllFives extends PIXI.Container {
     const pj_2 = new PhotoJam(pixi_app.loader.resources.d5_3.texture, {
       blendMode: 3,
       moveData: [11, 12, 13, 14],
-      amplify: [1, 1],
+      amplify: [1, 1.1],
       size: 'cover',
       container: xprite,
+      mousemove_factor: 50,
+      mousemove_time: 0.2,
+      mousemove_delay: 0.1,
+      rotation_const: 0.0005,
     })
 
     pj_container.addChild(pj_2)
     pj_2.transitionIn()
+    //pj_2.scale.set(0.5)
+    pj_2.scaleTo(0.0, 0.1)
+    setTimeout(() => {
+      pj_2.scaleTo(0.8, 10)
+    }, 2000)
 
-    // pj_2.scale.x = 0.5
-    // pj_2.scale.y = 0.5
-    // pj_2.anchor.x = 0.5
-    // pj_2.anchor.y = 0.5
-    // pj_2.x = pixi_app.renderer.width / 2
-    // pj_2.y = pixi_app.renderer.height / 2
+    setTimeout(() => {
+      pj_2.rotateTo(5, 2, 1, () => {
+        pj_2.state.canRotatePointer = true
+        pj_2.settings.rotation_const = 0.02
+      })
+    }, 4000)
 
-    // const pj_3 = new PhotoJam(
-    //   pixi_app.loader.resources.d5_1.texture,
-    //   3,
-    //   null,
-    //   [11, 12, 13, 14],
-    //   [1, 2.5],
-    //   3
-    // )
-    // pj_container.addChild(pj_3)
-    // pj_3.transitionIn()
-    // pj_3.scale.x = 0.5
-    // pj_3.scale.y = 0.5
-    // pj_3.anchor.x = 0.5
-    // pj_3.anchor.y = 0.5
-    // pj_3.x = 0
-    // pj_3.y = pixi_app.renderer.height / 2
-
-    // const pj_4 = new PhotoJam(
-    //   pixi_app.loader.resources.d5_3.texture,
-    //   3,
-    //   null,
-    //   [11, 12, 13, 14],
-    //   [1, 1.5],
-    //   10
-    // )
-    // pj_container.addChild(pj_4)
-    // pj_4.transitionIn()
-    // pj_4.scale.x = 0.5
-    // pj_4.scale.y = 0.5
-    // pj_4.anchor.x = 0.5
-    // pj_4.anchor.y = 0.5
-    // pj_4.x = 0
-    // pj_4.y = pixi_app.renderer.height / 4.5
+    //pj_2.mask = xprite
 
     pixi_app.ticker.add(() => {})
 
     this.timeline = new TimelineLite()
-
-    // this.timeline.to(pj_4, 60, { alpha: 1 })
-    // this.timeline.add(() => {
-    //   pj_4.scaleTo(0.1, 1, () => {
-    //     pj_4.setAmplify([0.1, 0.5])
-    //   })
-    //   pj_2.rotateTo(0)
-    // })
-
-    // this.timeline.to(vv, 30, { alpha: 0, delay: 0 })
-    // this.timeline.add(() => {
-    //   pj.setAmplify([0.5, 3])
-    // })
-    // this.timeline.to(ks_container, 10, { alpha: 0.05, delay: 50 })
-    // this.timeline.add(() => {
-    //   pj.setAmplify([0.1, 0.4])
-    // })
-    // this.timeline.to(ks_container, 10, { alpha: 0, delay: 0 })
 
     if (appState.debug) {
       this.timeline.timeScale(10)
@@ -152,7 +99,10 @@ export default class DownOnAllFives extends PIXI.Container {
 
     window.addEventListener(
       'resize',
-      debounce(function (e) {}, 500)
+      debounce(function (e) {
+        xprite.x = 50
+        xprite.y = 50
+      }, 50)
     )
   }
 }

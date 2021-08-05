@@ -47,6 +47,7 @@ export default class DawnPatrol extends PIXI.Container {
       moveData: [18, 20, 22, 24, 26, 28],
       amplify: [1, 1.2],
       moveSpeed: 0.5,
+      size: 'cover',
     })
     pj.transitionIn()
 
