@@ -16,7 +16,7 @@ const defaults = {
   mousemove_factor: 50,
   mousemove_time: 10,
   mousemove_delay: -0.3,
-  rotation_const: 0.005,
+  rotation_const: 0.0005,
 }
 
 export default class PhotoJam extends PIXI.Sprite {
@@ -130,7 +130,6 @@ export default class PhotoJam extends PIXI.Sprite {
     this.settings.amplify = input
   }
   handleMove(e) {
-    console.log(this.settings.mousemove)
     var move_factor = this.settings.mousemove_factor
     var x = e.data.global.x
     var y = e.data.global.y

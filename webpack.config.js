@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 
 const pathsToClean = ['dist']
 
@@ -52,6 +53,8 @@ module.exports = (env, options) => {
     },
     devtool: 'eval-source-map',
     plugins: [
+      new Dotenv(),
+
       new CleanWebpackPlugin(pathsToClean, cleanOptions),
       new HtmlWebpackPlugin({
         title: '',

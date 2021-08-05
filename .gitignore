@@ -4,3 +4,4 @@ node_modules
 _things
 dist/
 assets/track_media
+.env

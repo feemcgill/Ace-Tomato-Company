@@ -3,18 +3,8 @@ import * as PIXI from 'pixi.js'
 import { Linear, TweenMax } from 'gsap/TweenMax'
 
 import pixi_app from './base/pixi/app'
-import {
-  debounce,
-  getWindowSize,
-  mapRange,
-  backgroundSize,
-} from './base/utils/helpers'
-import {
-  initAudio,
-  audioContext,
-  analyser,
-  dataArray,
-} from './base/audio/audioInit'
+import { debounce, getWindowSize, mapRange, backgroundSize } from './base/utils/helpers'
+import { initAudio, audioContext, analyser, dataArray } from './base/audio/audioInit'
 import { trackSource, playTrack } from './base/audio/playTrack.js'
 import appState from './base/state.js'
 
@@ -45,6 +35,7 @@ const vizzies = new Vizzies()
 vizzies.zIndex = 1000
 
 function playScene(track) {
+  console.log('playscene', track)
   //Clear the table
   if (!appState.audioInitiated) {
     initAudio()
@@ -181,3 +172,11 @@ window.addEventListener('resize', function (e) {
   pixi_app.renderer.view.style.height = h + 'px'
   pixi_app.renderer.resize(w, h)
 })
+
+if (process.env.WORKING_ON) {
+  console.log(process.env.WORKING_ON, typeof process.env.WORKING_ON)
+  setTimeout(() => {
+    playScene(parseInt(process.env.WORKING_ON))
+    document.getElementById('interface').classList.add('hide')
+  }, 100)
+}
