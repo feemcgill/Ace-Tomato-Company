@@ -20,7 +20,7 @@ const initAudio = function (callback) {
   }
 
   gainNode = audioContext.createGain()
-  gainNode.gain.value = 0.5
+  gainNode.gain.value = process.env.VOLUME || 1
   gainNode.connect(audioContext.destination)
 
   analyser = audioContext.createAnalyser()

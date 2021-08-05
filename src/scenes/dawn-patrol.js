@@ -14,22 +14,10 @@ export default class DawnPatrol extends PIXI.Container {
   }
   load() {
     pixi_app.loader
-      .add(
-        'dp_1',
-        config.asset_url + '/062821/alpha/Dawn Patrol/000046690004.jpg'
-      )
-      .add(
-        'dp_2',
-        config.asset_url + '/062821/alpha/Dawn Patrol/000046690016.jpg'
-      )
-      .add(
-        'dp_3',
-        config.asset_url + '/062821/alpha/Dawn Patrol/000046690018.jpg'
-      )
-      .add(
-        'dp_4',
-        config.asset_url + '/062821/alpha/Dawn Patrol/000046690019.jpg'
-      )
+      .add('dp_1', config.asset_url + '/062821/alpha/Dawn Patrol/000046690004.jpg')
+      .add('dp_2', config.asset_url + '/062821/alpha/Dawn Patrol/000046690016.jpg')
+      .add('dp_3', config.asset_url + '/062821/alpha/Dawn Patrol/000046690018.jpg')
+      .add('dp_4', config.asset_url + '/062821/alpha/Dawn Patrol/000046690019.jpg')
       .add('vid', config.asset_url + '/dawn_patrol/dp-1.mp4')
 
       .load((loader, resources) => {
@@ -62,12 +50,7 @@ export default class DawnPatrol extends PIXI.Container {
     vv.blendMode = 1
     vv.alpha = 0
 
-    let brt = new PIXI.BaseRenderTexture(
-      pixi_app.renderer.width,
-      pixi_app.renderer.height,
-      PIXI.SCALE_MODES.NEAREST,
-      1
-    )
+    let brt = new PIXI.BaseRenderTexture(pixi_app.renderer.width, pixi_app.renderer.height, PIXI.SCALE_MODES.NEAREST, 1)
     let rt = new PIXI.RenderTexture(brt)
     let rsprite = new PIXI.Sprite(rt)
     rsprite.x = 30
@@ -106,7 +89,7 @@ export default class DawnPatrol extends PIXI.Container {
       pj.fadeToJam(10)
     })
 
-    if (appState.debug) {
+    if (process.env.DEBUG) {
       // TweenMax.to(vv, 1, {alpha: 1, delay: 1,  ease: "power4.in"})
       // TweenMax.to(ks_container, 1, {alpha: 1, delay: 1})
       this.timeline.timeScale(10)
@@ -124,12 +107,7 @@ export default class DawnPatrol extends PIXI.Container {
         brt.destroy()
         rt.destroy()
         rsprite.destroy()
-        brt = new PIXI.BaseRenderTexture(
-          pixi_app.renderer.width,
-          pixi_app.renderer.height,
-          PIXI.SCALE_MODES.LINEAR,
-          1
-        )
+        brt = new PIXI.BaseRenderTexture(pixi_app.renderer.width, pixi_app.renderer.height, PIXI.SCALE_MODES.LINEAR, 1)
         rt = new PIXI.RenderTexture(brt)
         rsprite = new PIXI.Sprite(rt)
         rsprite.x = 0

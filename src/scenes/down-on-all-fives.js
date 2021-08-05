@@ -95,7 +95,8 @@ export default class DownOnAllFives extends PIXI.Container {
 
     this.timeline = new TimelineLite()
 
-    if (appState.debug) {
+    if (process.env.DEBUG) {
+      console.log('we debuggin')
       this.timeline.timeScale(10)
     }
 

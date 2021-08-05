@@ -99,7 +99,7 @@ export default class NewJersey extends PIXI.Container {
       pj.setAmplify([0.1, 0.4])
     })
 
-    if (appState.debug) {
+    if (process.env.DEBUG) {
       this.timeline.timeScale(10)
     }
 
