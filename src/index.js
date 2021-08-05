@@ -23,6 +23,7 @@ import Apparatus from './scenes/apparatus'
 import DownOnAllFives from './scenes/down-on-all-fives.js'
 import HitTheSheets from './scenes/hit-the-sheets.js'
 import NewJersey from './scenes/new-jersey'
+import WolfTickles from './scenes/wolf-tickles'
 
 import config from './config.js'
 import Vizzies from './vibes/vizziesweep.js'
@@ -74,7 +75,7 @@ function playScene(track) {
       currentScene = new Apparatus()
       break
     case 3:
-      console.log('not yet')
+      currentScene = new WolfTickles()
       break
     case 4:
       currentScene = new DownOnAllFives()

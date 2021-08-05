@@ -9,17 +9,18 @@ import VidVibe from '../vibes/vidvibe.js'
 import appState from '../base/state.js'
 import config from '../config.js'
 
-export default class NewJersey extends PIXI.Container {
+export default class WolfTickles extends PIXI.Container {
   constructor() {
     super()
     this.timeline = null
   }
   load() {
     pixi_app.loader
-      .add('nj_1', config.asset_url + '/062821/alpha/New Jersey/Lectroid.jpg')
-      .add('nj_2', config.asset_url + '/062821/alpha/New Jersey/New Jersey.jpg')
-      .add('nj_3', config.asset_url + '/062821/alpha/New Jersey/banzai6.jpg')
-      .add('nj_vid', config.asset_url + '/062821/vids/New Jersey for B.mp4')
+      .add('wt_1', config.asset_url + '/062821/alpha/Wolf Tickles/000053620023.jpg')
+      .add('wt_2', config.asset_url + '/062821/alpha/Wolf Tickles/000308290007.jpg')
+      .add('wt_3', config.asset_url + '/062821/alpha/Wolf Tickles/000324000005.jpg')
+      .add('wt_4', config.asset_url + '/062821/alpha/Wolf Tickles/000324000010.jpg')
+      .add('wt_vid', config.asset_url + '/062821/vids/Wolf Tickles 4 B.mp4')
       .load((loader, resources) => {
         this.run()
       })
@@ -28,20 +29,30 @@ export default class NewJersey extends PIXI.Container {
     const debug = true
     const duration = appState.currentTrackSource
 
+
+     // VidVibe
+     const vv = new VidVibe(pixi_app.loader.resources.wt_vid.url)
+     vv.transitionIn()
+     this.addChild(vv)
+     vv.blendMode = 0
+     vv.alpha = 1
+
+
+
     const pj_container = new PIXI.Container()
     this.addChild(pj_container)
 
-    //  const pj = new PhotoJam(pixi_app.loader.resources.nj_2.texture, {
+    //  const pj = new PhotoJam(pixi_app.loader.resources.wt_2.texture, {
     //     blendMode: 3,
     //     moveData: [11, 12, 13, 14],
     //     amplify: [1, 1.5],
     //     moveSpeed: 10,
     //   })
 
-    const pj = new PhotoJam(pixi_app.loader.resources.nj_1.texture, {
+    const pj = new PhotoJam(pixi_app.loader.resources.wt_1.texture, {
       blendMode: 3,
       moveData: [110, 120, 130, 140],
-      amplify: [1, 1.5],
+      amplify: [1.2, 1.7],
       moveSpeed: 10,
     })
 
@@ -52,7 +63,7 @@ export default class NewJersey extends PIXI.Container {
     const ks_container = new PIXI.Container()
     this.addChild(ks_container)
 
-    const kscope = new Kaleidoscope(pixi_app.loader.resources.nj_1.texture, {
+    const kscope = new Kaleidoscope(pixi_app.loader.resources.wt_1.texture, {
       blendMode: 2,
       moveData: [30, 26],
     })
@@ -61,16 +72,15 @@ export default class NewJersey extends PIXI.Container {
     ks_container.addChild(kscope)
     ks_container.alpha = 0
 
-    const vv = new VidVibe(pixi_app.loader.resources.nj_vid.url)
-    vv.transitionIn()
-    this.addChild(vv)
-    vv.blendMode = 2
-    vv.alpha = 0
 
+   
+
+    
+    
     // pj2
     const pj2_container = new PIXI.Container()
     this.addChild(pj2_container)
-    const pj2 = new PhotoJam(pixi_app.loader.resources.nj_2.texture, {
+    const pj2 = new PhotoJam(pixi_app.loader.resources.wt_2.texture, {
       blendMode: 3,
       moveData: [11, 12, 13, 14],
       amplify: [0.5, 1],
