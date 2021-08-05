@@ -123,8 +123,8 @@ export default class PhotoJam extends PIXI.Sprite {
         onComplete: () => {
           this.currentScaleFactor = scale
           if (i + 1 == this.sprite_array.length) {
+            this.state.canScaleDance = true
             if (callback) {
-              this.state.canScaleDance = true
               callback()
             }
           }
