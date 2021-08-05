@@ -64,10 +64,10 @@ export default class DownOnAllFives extends PIXI.Container {
       amplify: [1, 1.1],
       size: 'cover',
       container: xprite,
-      mousemove_factor: 50,
-      mousemove_time: 0.2,
-      mousemove_delay: 0.1,
-      rotation_const: 0.0005,
+      // mousemove_factor: 50,
+      // mousemove_time: 0.2,
+      // mousemove_delay: 0.1,
+      // rotation_const: 0.0005,
     })
 
     pj_container.addChild(pj_2)
@@ -81,7 +81,7 @@ export default class DownOnAllFives extends PIXI.Container {
     setTimeout(() => {
       pj_2.rotateTo(5, 2, 1, () => {
         pj_2.state.canRotatePointer = true
-        pj_2.settings.rotation_const = 0.02
+        // pj_2.settings.rotation_const = 0.02
       })
     }, 4000)
 

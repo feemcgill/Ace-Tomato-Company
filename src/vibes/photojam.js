@@ -16,7 +16,7 @@ const defaults = {
   mousemove_factor: 50,
   mousemove_time: 10,
   mousemove_delay: -0.3,
-  rotation_const: 0.0005,
+  rotation_const: 0.005,
 }
 
 export default class PhotoJam extends PIXI.Sprite {
@@ -29,7 +29,7 @@ export default class PhotoJam extends PIXI.Sprite {
     this.whitewash = new PIXI.Graphics()
     this.sprite_size = null
     this.currentScaleFactor = 1
-    this.rotation_factor = 0.00005
+    this.rotation_factor = 0.0005
 
     this.state = {
       canScaleDance: true,
