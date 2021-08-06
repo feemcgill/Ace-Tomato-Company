@@ -40,28 +40,38 @@ export default class ShootinSkip extends PIXI.Container {
       moveSpeed: 0.5,
       size: 'cover',
       rotation_const: 0.00005,
-      mousemove_factor: 200,
-      mousemove_time: 15,
-      mousemove_delay: 2,
+      mousemove_factor: 160,
+      mousemove_time: 2,
+      mousemove_delay: -0.2,
     })
+
+    pj.state.canRotatePointer = false
 
     const pj_2 = new PhotoJam(pixi_app.loader.resources.ss_2.texture, {
       blendMode: 3,
       moveData: [18, 20, 22, 24, 26, 28],
-      amplify: [1, 1],
+      amplify: [1, 1.5],
       moveSpeed: 0.5,
       size: 'cover',
       rotation_const: 0,
+      mousemove_factor: 60,
+      mousemove_time: 0.7,
+      mousemove_delay: 0.2,
     })
+    pj_2.state.canRotatePointer = false
 
     const pj_4 = new PhotoJam(pixi_app.loader.resources.ss_4.texture, {
       blendMode: 3,
       moveData: [18, 20, 22, 24, 26, 28],
-      amplify: [1, 1],
+      amplify: [1, 1.5],
       moveSpeed: 0.5,
       size: 'cover',
       rotation_const: 0,
+      mousemove_factor: 60,
+      mousemove_time: 2.7,
+      mousemove_delay: -0.7,
     })
+    pj_4.state.canRotatePointer = false
 
     this.addChild(vv)
     this.addChild(pj)
@@ -91,24 +101,24 @@ export default class ShootinSkip extends PIXI.Container {
         const pic = this.photos[i]
         pic.state.canRotatePointer = true
         pic.settings.rotation_const = 0.00005
-        pic.settings.mousemove_factor = 200
+        //pic.settings.mousemove_factor = 200
         pic.settings.amplify = [1, 1.5]
-        TweenMax.to(pic.settings, 30, { mousemove_factor: 0 })
+        //TweenMax.to(pic.settings, 30, { mousemove_factor: 0 })
       }
       pj.settings.blendMode = 0
     }, '120')
 
     this.timeline.add(() => {
       pj.mask = null
-      pj_4.scaleTo(0, 1, 0.5, () => {})
+      pj_4.scaleTo(0, 0.5, 0.2, () => {})
     }, '160')
 
     this.timeline.add(() => {
-      pj_2.scaleTo(0, 1, 0.5, () => {})
+      pj_2.scaleTo(0, 0.5, 0.2, () => {})
     }, '161')
 
     this.timeline.add(() => {
-      pj.scaleTo(0, 1, 0.5, () => {})
+      pj.scaleTo(0, 0.5, 0.2, () => {})
     }, '161.5')
 
     //this.timeline.timeScale(4)
