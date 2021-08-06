@@ -104,7 +104,7 @@ export default class Apparatus extends PIXI.Container {
 
     //this.timeline.timeScale(10);
 
-    if (process.env.DEBUG) {
+    if (process.env.DEBUG == 'true') {
       this.timeline.timeScale(10)
 
       // TweenMax.to(vv, 1, {alpha: 1, delay: 1})

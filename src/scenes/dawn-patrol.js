@@ -89,7 +89,7 @@ export default class DawnPatrol extends PIXI.Container {
       pj.fadeToJam(10)
     })
 
-    if (process.env.DEBUG) {
+    if (process.env.DEBUG == 'true') {
       // TweenMax.to(vv, 1, {alpha: 1, delay: 1,  ease: "power4.in"})
       // TweenMax.to(ks_container, 1, {alpha: 1, delay: 1})
       this.timeline.timeScale(10)

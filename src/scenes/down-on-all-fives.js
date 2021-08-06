@@ -9,6 +9,7 @@ import VidVibe from '../vibes/vidvibe.js'
 import appState from '../base/state.js'
 import config from '../config.js'
 
+// 6:25
 export default class DownOnAllFives extends PIXI.Container {
   constructor() {
     super()
@@ -53,10 +54,15 @@ export default class DownOnAllFives extends PIXI.Container {
 
     this.sizeandScale()
 
+    const vv = new VidVibe(pixi_app.loader.resources.d5_vid.url)
+    vv.alpha = 0
+    this.addChild(vv)
+    //vv.blendMode = 1
+
     const pj_defaults = {
       blendMode: 3,
       moveData: [1, 5, 10, 14],
-      amplify: [1, 1.5],
+      amplify: [1, 1.2],
       size: 'cover',
       mousemove_factor: 0,
       mousemove_time: 2.2,
@@ -64,28 +70,28 @@ export default class DownOnAllFives extends PIXI.Container {
       //rotation_const: 0,
     }
 
-    const pj_1 = new PhotoJam(pixi_app.loader.resources.d5_1.texture, { ...pj_defaults, ...{ container: top_left } })
+    const pj_1 = new PhotoJam(pixi_app.loader.resources.d5_1.texture, { ...pj_defaults, ...{ rotation_const: 0.004, container: top_left } })
     this.addChild(pj_1)
     this.photos.push(pj_1)
     pj_1.currentScaleFactor = 0
     pj_1.state.canRotatePointer = false
     pj_1.transitionIn()
 
-    const pj_2 = new PhotoJam(pixi_app.loader.resources.d5_3.texture, { ...pj_defaults, ...{ container: top_right } })
+    const pj_2 = new PhotoJam(pixi_app.loader.resources.d5_3.texture, { ...pj_defaults, ...{ rotation_const: 0.002, container: top_right } })
     this.addChild(pj_2)
     this.photos.push(pj_2)
     pj_2.currentScaleFactor = 0
     pj_2.state.canRotatePointer = false
     pj_2.transitionIn()
 
-    const pj_3 = new PhotoJam(pixi_app.loader.resources.d5_2.texture, { ...pj_defaults, ...{ container: bottom_right } })
+    const pj_3 = new PhotoJam(pixi_app.loader.resources.d5_2.texture, { ...pj_defaults, ...{ rotation_const: 0.003, container: bottom_right } })
     this.addChild(pj_3)
     this.photos.push(pj_3)
     pj_3.currentScaleFactor = 0
     pj_3.state.canRotatePointer = false
     pj_3.transitionIn()
 
-    const pj_4 = new PhotoJam(pixi_app.loader.resources.d5_4.texture, { ...pj_defaults, ...{ container: bottom_left } })
+    const pj_4 = new PhotoJam(pixi_app.loader.resources.d5_4.texture, { ...pj_defaults, ...{ rotation_const: 0.004, container: bottom_left } })
     this.addChild(pj_4)
     this.photos.push(pj_4)
     pj_4.currentScaleFactor = 0
@@ -96,36 +102,31 @@ export default class DownOnAllFives extends PIXI.Container {
 
     this.timeline = new TimelineLite()
     this.timeline.add(() => {
-      pj_1.scaleTo(0.3, 10)
+      pj_1.scaleTo(0.3, 10, 1)
     })
 
     this.timeline.add(() => {
-      pj_3.scaleTo(0.26, 10)
+      pj_3.scaleTo(0.26, 10, 1)
     }, '2')
 
     this.timeline.add(() => {
-      pj_4.scaleTo(0.4, 10)
+      pj_4.scaleTo(0.4, 10, 1)
     }, '6')
 
     this.timeline.add(() => {
-      pj_2.scaleTo(0.36, 10)
+      pj_2.scaleTo(0.36, 10, 1)
     }, '10')
 
     this.timeline.add(() => {
-      pj_3.state.canRotatePointer = true
-    }, '60')
-
-    this.timeline.add(() => {
-      pj_2.state.canRotatePointer = true
-    }, '62')
-
-    this.timeline.add(() => {
       pj_1.state.canRotatePointer = true
-    }, '65')
-
-    this.timeline.add(() => {
+      pj_3.state.canRotatePointer = true
+      pj_2.state.canRotatePointer = true
       pj_4.state.canRotatePointer = true
-    }, '70')
+      pj_1.scaleTo(0.36, 0.1)
+      pj_3.scaleTo(0.36, 0.3)
+      pj_2.scaleTo(0.3, 0.2)
+      pj_4.scaleTo(0.4, 0.05)
+    }, '60')
 
     this.timeline.add(() => {
       for (let i = 0; i < this.photos.length; i++) {
@@ -135,9 +136,50 @@ export default class DownOnAllFives extends PIXI.Container {
       }
     }, '60')
 
+    this.timeline.add(() => {
+      pj_1.scaleTo(1.2, 60)
+      pj_2.scaleTo(1.2, 60)
+      pj_3.scaleTo(1.2, 60)
+      pj_4.scaleTo(1.2, 60)
+    }, '120')
+
+    this.timeline.add(() => {
+      pj_1.rotateTo(0, 0)
+      pj_2.rotateTo(0, 0)
+      pj_3.rotateTo(0, 0)
+      pj_4.rotateTo(0, 0, () => {
+        for (let i = 0; i < this.photos.length; i++) {
+          const pic = this.photos[i]
+          //pic.state.canRotatePointer = true
+        }
+      })
+    }, '220')
+
+    this.timeline.add(() => {
+      vv.transitionIn()
+      TweenMax.to(vv, 6, { alpha: 1 })
+      pj_1.scaleTo(0.2, 30)
+      pj_2.scaleTo(0.19, 30)
+      pj_3.scaleTo(0.14, 30)
+      pj_4.scaleTo(0.23, 30)
+      setTimeout(() => {
+        for (let i = 0; i < this.photos.length; i++) {
+          const pic = this.photos[i]
+          pic.state.canRotatePointer = false
+          pic.settings.mousemove_factor = 100
+        }
+      }, 1500)
+    }, '280')
+
+    this.timeline.add(() => {
+      for (let i = 0; i < this.photos.length; i++) {
+        const pic = this.photos[i]
+        pic.state.canRotatePointer = true
+      }
+    }, '330')
+
     // this.timeline.add(() => {
     //   // pj_1.rotateTo(30, 10, () => {
-    //   //   pj_1.state.canRotatePointer = true
     //   // })
     //   pj_1.scaleTo(1.2, 12)
     // }, '15')
@@ -170,8 +212,9 @@ export default class DownOnAllFives extends PIXI.Container {
       }
     }, '20')
 
-    if (process.env.DEBUG) {
-      //this.timeline.timeScale(10)
+    // this.timeline.timeScale(4)
+
+    if (process.env.DEBUG == 'true') {
     }
 
     pixi_app.ticker.add(() => {})

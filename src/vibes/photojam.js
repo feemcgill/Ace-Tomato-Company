@@ -108,10 +108,11 @@ export default class PhotoJam extends PIXI.Sprite {
     TweenMax.to(this.whitewash, time, { alpha: 0 })
   }
   rotateTo(rotate, time = 1, delay = -0.006, callback) {
+    console.log('rotate to', this.sprite_array)
     this.state.canRotatePointer = false
     TweenMax.staggerTo(this.sprite_array, time, { rotation: rotate, onComplete: callback }, delay)
   }
-  scaleTo(scale = 1, time = 1, callback = null) {
+  scaleTo(scale = 1, time = 1, delay = 0.2, callback = null) {
     this.state.canScaleDance = false
     //this.currentScaleFactor = this.sprite_size.scale * scale;
     for (let i = 0; i < this.sprite_array.length; i++) {
@@ -119,7 +120,8 @@ export default class PhotoJam extends PIXI.Sprite {
       TweenMax.to(sprite.scale, time, {
         x: this.sprite_size.scale * scale,
         y: this.sprite_size.scale * scale,
-        delay: i * 0.2,
+        delay: i * delay,
+        ease: 'power1.in',
         onComplete: () => {
           this.currentScaleFactor = scale
           if (i + 1 == this.sprite_array.length) {

@@ -109,7 +109,7 @@ export default class WolfTickles extends PIXI.Container {
 
     this.timeline.to(ks_container, 10, { alpha: 0 }, '120')
 
-    if (process.env.DEBUG) {
+    if (process.env.DEBUG == 'true') {
       this.timeline.timeScale(10)
     }
 

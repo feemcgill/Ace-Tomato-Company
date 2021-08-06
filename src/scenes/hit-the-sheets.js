@@ -73,7 +73,7 @@ export default class HitTheSheets extends PIXI.Container {
     })
     this.timeline.to(ks_container, 10, { alpha: 0, delay: 0 })
 
-    if (process.env.DEBUG) {
+    if (process.env.DEBUG == 'true') {
       this.timeline.timeScale(10)
     }
 
