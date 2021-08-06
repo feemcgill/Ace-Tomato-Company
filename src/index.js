@@ -16,6 +16,8 @@ import DownOnAllFives from './scenes/down-on-all-fives.js'
 import NewJersey from './scenes/new-jersey'
 import HideAWell from './scenes/hide-a-well'
 import HitTheSheets from './scenes/hit-the-sheets.js'
+import SleepyHead from './scenes/sleepy-head'
+
 
 import config from './config.js'
 import Vizzies from './vibes/vizziesweep.js'
@@ -83,7 +85,7 @@ function playScene(track) {
       console.log('not yet')
       break
     case 8:
-      console.log('not yet')
+      currentScene = new SleepyHead()
       break
     case 9:
       currentScene = new HitTheSheets()
