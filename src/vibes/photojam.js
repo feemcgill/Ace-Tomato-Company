@@ -121,7 +121,7 @@ export default class PhotoJam extends PIXI.Sprite {
         x: this.sprite_size.scale * scale,
         y: this.sprite_size.scale * scale,
         delay: i * delay,
-        ease: 'power1.in',
+        ease: 'power1.out',
         onComplete: () => {
           this.currentScaleFactor = scale
           if (i + 1 == this.sprite_array.length) {
