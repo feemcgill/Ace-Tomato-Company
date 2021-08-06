@@ -1,0 +1,43 @@
+import * as PIXI from 'pixi.js'
+import { TweenMax, TimelineLite } from 'gsap/TweenMax'
+import pixi_app from '../base/pixi/app'
+import { getWindowSize, backgroundSize, debounce } from '../base/utils/helpers'
+
+import Kaleidoscope from '../vibes/kscope.js'
+import PhotoJam from '../vibes/photojam.js'
+import VidVibe from '../vibes/vidvibe.js'
+import appState from '../base/state.js'
+import config from '../config.js'
+
+export default class SCENE_NAME extends PIXI.Container {
+  constructor() {
+    super()
+    this.timeline = null
+  }
+  load() {
+    pixi_app.loader
+      .add('ASSET_1', config.asset_url + 'ASSET PATH.jpg')
+      .load((loader, resources) => {
+        this.run()
+      })
+  }
+  run() {
+
+    pixi_app.ticker.add(() => {})
+
+    this.timeline = new TimelineLite()
+
+
+
+    if (process.env.DEBUG == 'true') {
+      this.timeline.timeScale(10)
+    }
+
+    pixi_app.ticker.add(() => {})
+
+    window.addEventListener(
+      'resize',
+      debounce(function (e) {}, 500)
+    )
+  }
+}
