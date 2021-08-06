@@ -11,10 +11,11 @@ import appState from './base/state.js'
 import ShootinSkip from './scenes/shootin-skip.js'
 import DawnPatrol from './scenes/dawn-patrol.js'
 import Apparatus from './scenes/apparatus'
-import DownOnAllFives from './scenes/down-on-all-fives.js'
-import HitTheSheets from './scenes/hit-the-sheets.js'
-import NewJersey from './scenes/new-jersey'
 import WolfTickles from './scenes/wolf-tickles'
+import DownOnAllFives from './scenes/down-on-all-fives.js'
+import NewJersey from './scenes/new-jersey'
+import HideAWell from './scenes/hide-a-well'
+import HitTheSheets from './scenes/hit-the-sheets.js'
 
 import config from './config.js'
 import Vizzies from './vibes/vizziesweep.js'
@@ -76,7 +77,7 @@ function playScene(track) {
       currentScene = new NewJersey()
       break
     case 6:
-      console.log('not yet')
+      currentScene = new HideAWell()
       break
     case 7:
       console.log('not yet')
