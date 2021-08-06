@@ -8,6 +8,7 @@ import { initAudio, audioContext, analyser, dataArray } from './base/audio/audio
 import { trackSource, playTrack } from './base/audio/playTrack.js'
 import appState from './base/state.js'
 
+import ShootinSkip from './scenes/shootin-skip.js'
 import DawnPatrol from './scenes/dawn-patrol.js'
 import Apparatus from './scenes/apparatus'
 import DownOnAllFives from './scenes/down-on-all-fives.js'
@@ -57,7 +58,7 @@ function playScene(track) {
   // Find the scene
   switch (track) {
     case 0:
-      console.log('not yet')
+      currentScene = new ShootinSkip()
       break
     case 1:
       currentScene = new DawnPatrol()
