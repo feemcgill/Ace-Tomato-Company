@@ -294,7 +294,31 @@ export default class HideAWell extends PIXI.Container {
 
     window.addEventListener(
       'resize',
-      debounce(function (e) {}, 500)
+      debounce(function (e) {
+        
+        black_bg.width = window.innerWidth
+        black_bg.height = window.innerHeight
+
+        pj_mask.clear()
+        pj_mask.beginFill(0x000000)
+        pj_mask.lineStyle(0)
+        pj_mask.drawCircle(window.innerWidth/2, window.innerHeight/2, window.innerWidth/4)
+        pj_mask.endFill()
+
+        pj2_mask.clear()
+        pj2_mask.beginFill(0x000000);
+        pj2_mask.lineStyle(0);
+        pj2_mask.drawCircle(window.innerWidth/2, window.innerHeight/2, window.innerWidth/6);
+        pj2_mask.endFill();
+        
+        pj3_mask.clear()
+        pj3_mask.beginFill(0x000000);
+        pj3_mask.lineStyle(0);
+        pj3_mask.drawCircle(window.innerWidth/2, window.innerHeight/2, window.innerWidth/5);
+        pj3_mask.endFill();
+
+
+      }, 500)
     )
   }
 }
