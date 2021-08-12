@@ -15,6 +15,7 @@ import WolfTickles from './scenes/wolf-tickles'
 import DownOnAllFives from './scenes/down-on-all-fives.js'
 import NewJersey from './scenes/new-jersey'
 import HideAWell from './scenes/hide-a-well'
+import Tacit from './scenes/tacit'
 import HitTheSheets from './scenes/hit-the-sheets.js'
 import SleepyHead from './scenes/sleepy-head'
 
@@ -82,7 +83,7 @@ function playScene(track) {
       currentScene = new HideAWell()
       break
     case 7:
-      console.log('not yet')
+      currentScene = new Tacit()
       break
     case 8:
       currentScene = new SleepyHead()
