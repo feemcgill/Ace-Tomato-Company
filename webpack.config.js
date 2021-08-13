@@ -57,7 +57,7 @@ module.exports = (env, options) => {
 
       new CleanWebpackPlugin(pathsToClean, cleanOptions),
       new HtmlWebpackPlugin({
-        title: '',
+        title: 'The Square Community',
         description: '',
         site_url: '',
         template: './templates/index.html',

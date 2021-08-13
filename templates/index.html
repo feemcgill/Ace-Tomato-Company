@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-
+  <title>The Square Community</title>
   <meta charset="UTF-8">
   <!-- <meta name="viewport" content="width=900, user-scalable=no"> -->
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -11,6 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <base href="/" />
   <!-- ICONS / WEBAPP -->
+    <link rel="icon" href="assets/smokin_dead_dude.gif">
 
 
 
@@ -196,13 +197,24 @@
       height: auto;
     }
 
-    #the-box {
+    #title-screen {
       position: fixed;
       top: 0;
       bottom: 0;
       left: 0;
       right: 0;
       z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.5s ease-in-out;
+      pointer-events: none;
+    }
+    #title-screen h1 {
+      font-size: 20vw;
+      line-height: 0.7;
+      mix-blend-mode: overlay;
+      color: #000;
     }
 
     #interface {
@@ -212,14 +224,15 @@
       left: 10px;
       padding: 20px;
       border: 2px solid black;
-      /* background: url(/assets/bg.png); */
+      background: url(/assets/bg.png);
       background: white;
       opacity: 1;
-      transition: all 0.5s ease-in;
+      transition: all 0.2s ease-in;
     }
 
     #interface.hide {
       opacity: 0;
+      pointer-events: none;
     }
 
     #tracklist a {
@@ -249,11 +262,34 @@
 
     #button {
       position: fixed;
-      width: 60px;
+      /* width: 60px; */
       bottom: 20px;
-      right: 20px;
+      left: 20px;
       cursor: pointer;
-      transition: all 0.5s ease-in;
+      transition: all 0.2s ease-in;
+      z-index: 1000;
+      display: flex;
+      padding: 10px;
+      align-items: center;      
+    }
+
+    #button img {
+      width: 60px;
+    }
+
+    #button .txt {
+      font-size: 40px;
+      display: none;
+    }
+
+    #button.start {
+      background-color: #aaa;
+      border: 3px solid #ddd;
+      border-bottom-color: #444;
+      border-right-color: #444;
+    }
+    #button.start .txt {
+      display: block;
     }
 
     #button:hover {
@@ -262,19 +298,21 @@
   </style>
 
 <body>
-  <canvas id="canvas"
-    style="position:fixed; top: 0; left: 0; bottom: 0; right: 0; opacity: 1; background: transparent!important;"></canvas>
-  <!-- <div id="root"></div>
-    <div id="the-box"></div> -->
-  <div id="button">
-    <img src="assets/smokin_dead_dude.gif" alt="">
+  <div id="canvas-root">
+    <div id="title-screen"><h1>The Square Community</h1></div>
   </div>
-  <div id="interface">
+  <div id="button" class="start">
+    <div class="img">
+      <img src="assets/smokin_dead_dude.gif" alt="">
+    </div>
+    <div class="txt">Start</div>
+  </div>
+  <div id="interface" class="hide">
     <div id="nowplaying">
       <div class="label">Now Playing:</div>
       <div id="now-playing"></div>
       <div><input type="range" min="0" max="100" value="30" oninput="changeVolume(this);"> Volume</div>
-      <div><button id="stop_track_button">Stop</button></div>
+      <!-- <div><button id="stop_track_button">Mute</button></div> -->
     </div>
     <div id="tracklist">Loading...</div>
 

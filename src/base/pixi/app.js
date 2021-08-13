@@ -1,14 +1,14 @@
 import * as PIXI from 'pixi.js'
+const canvas = document.getElementById('canvas-root')
 
-console.log('CREATE PIXI APP')
 //Create the renderer
 const pixi_app = new PIXI.Application({
   width: window.innerWidth,
   height: window.innerHeight,
-  backgroundColor : 0xFFFFFF,
-  backgroundAlpha: 0
+  backgroundColor: 0xffffff,
+  backgroundAlpha: 0,
   // forceCanvas : true
-});
-export default pixi_app;
+})
+export default pixi_app
 
-document.body.appendChild(pixi_app.view);
+canvas.appendChild(pixi_app.view)

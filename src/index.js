@@ -19,13 +19,13 @@ import Tacit from './scenes/tacit'
 import HitTheSheets from './scenes/hit-the-sheets.js'
 import SleepyHead from './scenes/sleepy-head'
 
-
 import config from './config.js'
 import Vizzies from './vibes/vizziesweep.js'
 
 var currentScene = null
 var currentTrack = null
 var interface_timeout = null
+var title_timeout = null
 
 var curtain = new PIXI.Graphics()
 curtain.beginFill(0xffffff)
@@ -50,6 +50,11 @@ function playScene(track) {
   if (interface_timeout) {
     clearTimeout(interface_timeout)
   }
+
+  if (title_timeout) {
+    clearTimeout(title_timeout)
+  }
+
   if (currentScene) {
     currentScene.parent.alpha = 0
     currentScene.destroy()
@@ -109,15 +114,29 @@ function playScene(track) {
   TweenMax.to(currentScene.parent, 2.5, { alpha: 1 })
 
   currentTrack = track
+  const title_screen = document.getElementById('title-screen')
 
-  // Update dom interface
-  document.getElementById('now-playing').innerHTML = config.tracks[track].name
-  document.getElementById('nowplaying').classList.add('show')
+  //title_screen.style.opacity = 0
+  title_screen.innerHTML = '<h1>' + config.tracks[track].name + '</h1>'
+  title_screen.style.opacity = 1
+
+  title_timeout = setTimeout(() => {
+    title_screen.style.opacity = 0
+    title_timeout = null
+  }, 3000)
+
   document.getElementById('interface').classList.remove('hide')
   interface_timeout = setTimeout(() => {
     document.getElementById('interface').classList.add('hide')
     interface_timeout = null
-  }, 5000)
+  }, 500)
+
+  setTimeout(() => {
+    document.getElementById('now-playing').innerHTML = config.tracks[track].name
+    document.getElementById('nowplaying').classList.add('show')
+  }, 1000)
+
+  document.getElementById('button').classList.remove('start')
 
   console.log('----------------------------')
   console.log('----------------------------')
@@ -151,6 +170,11 @@ function endScene() {
 var interface_button = document.getElementById('button')
 interface_button.addEventListener('click', function (event) {
   document.getElementById('interface').classList.toggle('hide')
+})
+
+var canvas = document.getElementById('canvas-root')
+canvas.addEventListener('click', function (event) {
+  document.getElementById('interface').classList.add('hide')
 })
 
 var tracklist_element = document.getElementById('tracklist')

@@ -45,11 +45,11 @@ const playTrack = function (track, callback) {
     })
 }
 
-var stop_track_button = document.getElementById('stop_track_button')
-stop_track_button.addEventListener('click', function (event) {
-  console.log(trackSource)
-  appState.userStopped = true
-  trackSource.stop()
-})
+// var stop_track_button = document.getElementById('stop_track_button')
+// stop_track_button.addEventListener('click', function (event) {
+//   console.log(trackSource)
+//   appState.userStopped = true
+//   trackSource.stop()
+// })
 
 export { trackSource, playTrack }
