@@ -94,7 +94,7 @@ export default class ShootinSkip extends PIXI.Container {
         pj_4.transitionIn()
         pj_4.scaleTo(1, 20, 5, () => {})
       })
-    }, '30')
+    }, '20')
 
     this.timeline.add(() => {
       for (let i = 0; i < this.photos.length; i++) {

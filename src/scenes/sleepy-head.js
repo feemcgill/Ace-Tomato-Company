@@ -26,7 +26,8 @@ export default class SleepyHead extends PIXI.Container {
      */
     pixi_app.loader
       .add('sh_1', config.asset_url + '/062821/alpha/Sleepy Head/000046670016.jpg')
-      .add('sh_2', config.asset_url + '/062821/alpha/Sleepy Head/000245900026.jpg')
+      .add('sh_2', config.asset_url + '/062821/alpha/Sleepy Head/000245900030.jpg')
+      .add('sh_3', config.asset_url + '/062821/alpha/Sleepy Head/000046670017.jpg')
       .add('sh_vid', config.asset_url + '/062821/vids/Sleepy 4 B.mp4')
       .load((loader, resources) => {
         this.run()
@@ -44,12 +45,26 @@ export default class SleepyHead extends PIXI.Container {
     const vv = new VidVibe(pixi_app.loader.resources.sh_vid.url)
 
     const kscope = new Kaleidoscope(pixi_app.loader.resources.sh_1.texture, {
-      blendMode: 3,
+      blendMode: 0,
       moveData: [40, 132],
     })
 
-    vv.transitionIn()
-    this.addChild(vv)
+    const kscope_2 = new Kaleidoscope(pixi_app.loader.resources.sh_3.texture, {
+      blendMode: 0,
+      moveData: [60, 10],
+    })
+
+    kscope_2.slices = 20
+
+    var half_L = new PIXI.Sprite(PIXI.Texture.WHITE)
+    half_L.width = pixi_app.renderer.width / 2
+    half_L.height = pixi_app.renderer.height / 2
+    half_L.x = pixi_app.renderer.width / 2
+    half_L.y = pixi_app.renderer.height / 2
+    half_L.anchor.set(0.5)
+
+    this.addChild(kscope_2)
+    kscope_2.draw()
 
     this.addChild(kscope)
     kscope.draw()
@@ -57,6 +72,14 @@ export default class SleepyHead extends PIXI.Container {
     this.addChild(pj)
     pj.alpha = 0.3
     pj.transitionIn()
+
+    //this.addChild(half_L)
+
+    //kscope_2.mask = half_L
+
+    vv.transitionIn()
+    this.addChild(vv)
+    vv.blendMode = 0
 
     pixi_app.ticker.add(() => {})
     this.timeline = new TimelineLite()
