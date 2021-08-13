@@ -44,4 +44,9 @@ window.changeVolume = function (el) {
   }
 }
 
+// var stop_track_button = document.getElementById('stop_track_button')
+// stop_track_button.addEventListener('click', function (event) {
+//   gainNode.gain.value = 0
+// })
+
 export { initAudio, audioContext, analyser, dataArray, gainNode }
