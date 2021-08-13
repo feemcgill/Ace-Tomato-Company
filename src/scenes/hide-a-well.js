@@ -45,7 +45,7 @@ export default class HideAWell extends PIXI.Container {
     const baseSpeed = 0.025
     let speed = 0
     let warpSpeed = { speed: 3 }
-    const starStretch = 5
+    const starStretch = 2
     const starBaseSize = 0.05
 
     // Create the stars
