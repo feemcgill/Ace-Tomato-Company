@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js'
-import { TweenMax, TimelineLite } from 'gsap/TweenMax'
+import { TweenMax, TimelineLite, Elastic } from 'gsap/TweenMax'
 import pixi_app from '../base/pixi/app'
 import { getWindowSize, backgroundSize, debounce } from '../base/utils/helpers'
 
@@ -29,49 +29,146 @@ export default class HitTheSheets extends PIXI.Container {
     const debug = false
     const duration = appState.currentTrackSource
 
-    const pj_container = new PIXI.Container()
-    this.addChild(pj_container)
+      // Video 2
+      const vv2 = new VidVibe(pixi_app.loader.resources.hts_vid.url)
+      vv2.transitionIn()
+      this.addChild(vv2)
+      vv2.blendMode = 0
+      vv2.alpha = 0
 
-    const pj = new PhotoJam(pixi_app.loader.resources.hts_4.texture, {
-      blendMode: 3,
+    // Video 1
+    const vv = new VidVibe(pixi_app.loader.resources.hts_vid.url)
+    vv.transitionIn()
+    this.addChild(vv)
+    vv.blendMode = 0
+    vv.alpha = 0.5
+
+
+
+       // Kscope 1
+       const ks1_container = new PIXI.Container()
+       this.addChild(ks1_container)
+   
+       const kscope1 = new Kaleidoscope(pixi_app.loader.resources.hts_3.texture, {
+         blendMode: 3,
+         moveData: [30, 26],
+       })
+       kscope1.draw()
+       ks1_container.addChild(kscope1)
+       ks1_container.alpha = 0
+
+
+
+    // Pic 1
+    const pj1_container = new PIXI.Container()
+    this.addChild(pj1_container)
+    const pj1 = new PhotoJam(pixi_app.loader.resources.hts_1.texture, {
+      blendMode: 0,
       moveData: [11, 12, 13, 14],
       amplify: [1, 1.5],
       moveSpeed: 10,
     })
-    pj.transitionIn()
+    pj1.currentScaleFactor = 0.5
+    pj1.transitionIn()
+    pj1.state.canRotatePointer = false
+    pj1_container.addChild(pj1)
+    pj1_container.alpha = 0
 
-    pj_container.addChild(pj)
 
-    const ks_container = new PIXI.Container()
-    this.addChild(ks_container)
-
-    const kscope = new Kaleidoscope(pixi_app.loader.resources.hts_3.texture, {
-      blendMode: 2,
-      moveData: [30, 26],
+    // Pic 2
+    const pj2_container = new PIXI.Container()
+    this.addChild(pj2_container)
+    const pj2 = new PhotoJam(pixi_app.loader.resources.hts_2.texture, {
+      blendMode: 0,
+      moveData: [11, 12, 13, 14],
+      amplify: [1, 1.5],
+      moveSpeed: 10,
     })
-    kscope.draw()
-    ks_container.addChild(kscope)
-    ks_container.alpha = 1
+    pj2.currentScaleFactor = 0.5
+    pj2.transitionIn()
+    pj2.state.canRotatePointer = false
+    pj2_container.addChild(pj2)
+    pj2_container.alpha = 0
 
-    const vv = new VidVibe(pixi_app.loader.resources.hts_vid.url)
-    vv.transitionIn()
-    this.addChild(vv)
-    vv.blendMode = 3
-    vv.alpha = 1
+    // Pic 3
+    const pj3_container = new PIXI.Container()
+    this.addChild(pj3_container)
+    const pj3 = new PhotoJam(pixi_app.loader.resources.hts_3.texture, {
+      blendMode: 0,
+      moveData: [11, 12, 13, 14],
+      amplify: [1, 1.5],
+      moveSpeed: 10,
+    })
+    pj3.currentScaleFactor = 0.5
+    pj3.transitionIn()
+    pj3.state.canRotatePointer = false
+    pj3_container.addChild(pj3)
+    pj3_container.alpha = 0
+
+    // Pic 4
+    const pj4_container = new PIXI.Container()
+    this.addChild(pj4_container)
+    const pj4 = new PhotoJam(pixi_app.loader.resources.hts_4.texture, {
+      blendMode: 0,
+      moveData: [11, 12, 13, 14],
+      amplify: [1, 1.5],
+      moveSpeed: 10,
+    })
+    pj4.currentScaleFactor = 0.5
+    pj4.transitionIn()
+    pj4.state.canRotatePointer = false
+    pj4_container.addChild(pj4)
+    pj4_container.alpha = 0
+
+
+    const pics = [pj1_container, pj2_container, pj3_container, pj4_container]
+  
+
+ 
+
+
+    
+    
 
     pixi_app.ticker.add(() => {})
 
+
+
+
     this.timeline = new TimelineLite()
-    this.timeline.to(ks_container, 60, { alpha: 0, delay: 60 })
-    this.timeline.to(vv, 30, { alpha: 0, delay: 0 })
+
+
+    function flickerBG() {
+      let randomSpeed = Math.round(Math.random() * 3)
+      TweenMax.set (vv2, { alpha: Math.random() })
+      TweenMax.to (vv2, randomSpeed, { alpha: 0.2, onComplete: () => { flickerBG() } })
+    }
+
+    flickerBG()
+
+    function flickerPic() {
+      let randomPic = pics[Math.floor(Math.random() * pics.length)]
+      let randomSpeed = Math.round(Math.random() * 2) + 1
+      TweenMax.set (randomPic, { alpha: 1 })
+
+      TweenMax.to (randomPic, randomSpeed, { alpha: 1, onComplete: () => { 
+        let randomPause = (Math.random() * 2) + 0.5
+        TweenMax.to (randomPic, randomPause/4, { alpha: 0 })
+        TweenMax.to(randomPic, randomPause, { x: 0, onComplete: () => {
+          flickerPic()
+        } })
+      } })
+    }
+
+    setTimeout(flickerPic, 5000)
+    
+
+
     this.timeline.add(() => {
-      pj.setAmplify([0.5, 3])
-    })
-    this.timeline.to(ks_container, 10, { alpha: 0.05, delay: 50 })
-    this.timeline.add(() => {
-      pj.setAmplify([0.1, 0.4])
-    })
-    this.timeline.to(ks_container, 10, { alpha: 0, delay: 0 })
+      TweenMax.to (ks1_container, 10, { alpha: 0.5, repeat: -1, yoyo: true })
+    }, '15')
+    
+    
 
     if (process.env.DEBUG == 'true') {
       this.timeline.timeScale(10)
