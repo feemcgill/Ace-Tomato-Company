@@ -45,17 +45,7 @@ export default class HitTheSheets extends PIXI.Container {
 
 
 
-       // Kscope 1
-       const ks1_container = new PIXI.Container()
-       this.addChild(ks1_container)
-   
-       const kscope1 = new Kaleidoscope(pixi_app.loader.resources.hts_3.texture, {
-         blendMode: 3,
-         moveData: [30, 26],
-       })
-       kscope1.draw()
-       ks1_container.addChild(kscope1)
-       ks1_container.alpha = 0
+       
 
 
 
@@ -121,10 +111,27 @@ export default class HitTheSheets extends PIXI.Container {
     pj4_container.alpha = 0
 
 
-    const pics = [pj1_container, pj2_container, pj3_container, pj4_container]
+
+
+
+
+    const pic_containers = [pj1_container, pj2_container, pj3_container, pj4_container]
+    const pics = [pj1, pj2, pj3, pj4]
   
 
  
+
+    // Kscope 1
+    const ks1_container = new PIXI.Container()
+    this.addChild(ks1_container)
+
+    const kscope1 = new Kaleidoscope(pixi_app.loader.resources.hts_3.texture, {
+      blendMode: 3,
+      moveData: [30, 26],
+    })
+    kscope1.draw()
+    ks1_container.addChild(kscope1)
+    ks1_container.alpha = 0
 
 
     
@@ -137,30 +144,42 @@ export default class HitTheSheets extends PIXI.Container {
 
     this.timeline = new TimelineLite()
 
-
+    let flicker_bg = true
     function flickerBG() {
-      let randomSpeed = Math.round(Math.random() * 3)
-      TweenMax.set (vv2, { alpha: Math.random() })
-      TweenMax.to (vv2, randomSpeed, { alpha: 0.2, onComplete: () => { flickerBG() } })
+      if (flicker_bg) {
+        let randomSpeed = Math.round(Math.random() * 3)
+        TweenMax.set (vv2, { alpha: Math.random() })
+        TweenMax.to (vv2, randomSpeed, { alpha: 0.75, onComplete: () => { flickerBG() } })
+      } 
     }
 
     flickerBG()
 
     function flickerPic() {
-      let randomPic = pics[Math.floor(Math.random() * pics.length)]
-      let randomSpeed = Math.round(Math.random() * 2) + 1
-      TweenMax.set (randomPic, { alpha: 1 })
+      flicker_bg = false
+      TweenMax.set (vv2, { alpha: 0 })
 
-      TweenMax.to (randomPic, randomSpeed, { alpha: 1, onComplete: () => { 
-        let randomPause = (Math.random() * 2) + 0.5
-        TweenMax.to (randomPic, randomPause/4, { alpha: 0 })
-        TweenMax.to(randomPic, randomPause, { x: 0, onComplete: () => {
+      let randomNum = Math.floor(Math.random() * pic_containers.length)
+      let randomPicContainer = pic_containers[randomNum]
+      let randomPic = pics[randomNum]
+      let randomSpeed = Math.round(Math.random() * 2) + 1
+      // randomPic.currentScaleFactor = 0
+      randomPic.scaleTo(0, 0, 0)
+      randomPic.scaleTo(1, randomSpeed, 0)
+      // TweenMax.set (randomPicContainer, { alpha: 1 })
+
+      TweenMax.to (randomPicContainer, randomSpeed, { alpha: 1, onComplete: () => { 
+        let randomPause = (Math.random() * 4) + 4
+        TweenMax.to (randomPicContainer, randomPause/4, { alpha: 0 })
+        TweenMax.to(randomPicContainer, randomPause, { x: 0, onComplete: () => {
+          randomPic.currentScaleFactor = 0
+          randomPic = null;
           flickerPic()
         } })
       } })
     }
 
-    setTimeout(flickerPic, 5000)
+    setTimeout(flickerPic, 45000)
     
 
 
