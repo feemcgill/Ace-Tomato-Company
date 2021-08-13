@@ -41,7 +41,6 @@ const vizzies = new Vizzies()
 vizzies.zIndex = 1000
 
 function playScene(track) {
-  console.log('playscene', track)
   //Clear the table
   if (!appState.audioInitiated) {
     initAudio()
@@ -125,11 +124,10 @@ function playScene(track) {
     title_timeout = null
   }, 3000)
 
-  document.getElementById('interface').classList.remove('hide')
   interface_timeout = setTimeout(() => {
     document.getElementById('interface').classList.add('hide')
     interface_timeout = null
-  }, 500)
+  }, 50)
 
   setTimeout(() => {
     document.getElementById('now-playing').innerHTML = config.tracks[track].name
@@ -186,6 +184,7 @@ for (let i = 0; i < config.tracks.length; i++) {
   a.appendChild(linkText)
   a.href = '#'
   a.addEventListener('click', function (event) {
+    event.preventDefault()
     playScene(i)
   })
   tracklist_element.appendChild(a)
