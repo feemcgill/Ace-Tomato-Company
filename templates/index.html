@@ -209,11 +209,11 @@
       align-items: center;
       transition: all 0.5s ease-in-out;
       pointer-events: none;
+      /* mix-blend-mode: overlay; */
     }
     #title-screen h1 {
       font-size: 20vw;
       line-height: 0.7;
-      mix-blend-mode: overlay;
       color: #000;
     }
 
@@ -311,7 +311,7 @@
     <div id="nowplaying">
       <div class="label">Now Playing:</div>
       <div id="now-playing"></div>
-      <div><input type="range" min="0" max="100" value="30" oninput="changeVolume(this);"> Volume</div>
+      <div><input type="range" min="0" max="100" value="100" oninput="changeVolume(this);"> Volume</div>
       <!-- <div><button id="stop_track_button">Mute</button></div> -->
     </div>
     <div id="tracklist">Loading...</div>
