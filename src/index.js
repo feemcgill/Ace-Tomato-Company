@@ -186,3 +186,5 @@ if (process.env.WORKING_ON) {
     document.getElementById('interface').classList.add('hide')
   }, 100)
 }
+
+console.log('test')
