@@ -212,7 +212,7 @@ export default class DownOnAllFives extends PIXI.Container {
       }
     }, '20')
 
-    this.timeline.timeScale(4)
+    //this.timeline.timeScale(4)
 
     if (process.env.DEBUG == 'true') {
     }
