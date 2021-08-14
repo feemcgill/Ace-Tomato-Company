@@ -51,11 +51,14 @@ export default class PhotoJam extends PIXI.Sprite {
       sprite.scale.x = this.sprite_size.scale * this.currentScaleFactor
       sprite.scale.y = this.sprite_size.scale * this.currentScaleFactor
 
+      sprite.anchor.x = 0.5
+      sprite.anchor.y = 0.5
+
       sprite.x = (this.settings.container.x || 0) + this.settings.container.width / 2
       sprite.y = (this.settings.container.y || 0) + this.settings.container.height / 2 + index * 10
 
-      sprite.anchor.x = 0.5
-      sprite.anchor.y = 0.5
+      console.log(this.settings.container.x, this.settings.container.y)
+
       sprite.alpha = 0.6
       sprite.blendMode = this.settings.blendMode
 

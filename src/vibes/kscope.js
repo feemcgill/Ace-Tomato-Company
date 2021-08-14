@@ -8,6 +8,7 @@ import appState from '../base/state.js'
 const defaults = {
   blendMode: 0,
   moveData: [5, 10],
+  moveFactor: 1,
 }
 
 export default class Kaleidoscope extends PIXI.Container {
@@ -82,11 +83,11 @@ export default class Kaleidoscope extends PIXI.Container {
     createKScope()
 
     pixi_app.ticker.add(() => {
-      this.count += this.interactiveMode ? 0.05 : 0.005
+      this.count += this.interactiveMode ? this.settings.moveFactor : 0
       for (let i = 0; i < this.spriteTiles.length; i++) {
         TweenMax.to(this.spriteTiles[i].tilePosition, 35, {
-          x: this.mouseX + this.count,
-          y: this.mouseY + this.count,
+          x: this.mouseX * this.settings.moveFactor,
+          y: this.mouseY * this.settings.moveFactor,
         })
       }
       if (appState.audioKicking) {
