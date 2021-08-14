@@ -64,22 +64,21 @@ export default class SleepyHead extends PIXI.Container {
     this.addChild(pj_mask)
 
     const pj = new PhotoJam(pixi_app.loader.resources.sh_2.texture, {
-      blendMode: 1,
+      blendMode: 3,
       moveData: [18, 20, 22, 24, 26, 28],
       amplify: [1, 1.2],
-      moveSpeed: 0.5,
+      moveSpeed: 5,
       size: 'cover',
       //container: pj_mask,
     })
 
     const vv = new VidVibe(pixi_app.loader.resources.sh_vid.url)
-    //vv.transitionIn()
 
     console.log('vv', vv.scale.x, vv.scale.y)
     const kscope = new Kaleidoscope(pixi_app.loader.resources.sh_1.texture, {
       blendMode: 0,
       moveData: [40, 132],
-      moveFactor: 0.1,
+      moveFactor: 10,
     })
 
     const kscope_2 = new Kaleidoscope(pixi_app.loader.resources.sh_3.texture, {
@@ -90,6 +89,9 @@ export default class SleepyHead extends PIXI.Container {
 
     kscope_2.slices = 20
 
+    this.addChild(scope_2_mask)
+    kscope_2.mask = scope_2_mask
+
     this.addChild(kscope)
     kscope.draw()
 
@@ -99,33 +101,31 @@ export default class SleepyHead extends PIXI.Container {
 
     pj.mask = pj_mask
 
+    const filter = new PIXI.SpriteMaskFilter(vid_mask)
+
     this.addChild(vv)
-    // vv.alpha = 1
-    //vv.transitionIn()
+    //vv.alpha = 0.2
+    vv.filters = [filter]
+
+    filter.blendMode = 3
+    vv.transitionIn()
 
     //vv.mask = vid_mask
 
-    this.addChild(scope_2_mask)
-    kscope_2.mask = scope_2_mask
-
     pixi_app.ticker.add(() => {})
     this.timeline = new TimelineLite()
-    this.timeline.to(kscope_2.settings, 60, { moveFactor: 10 }, '5')
-    this.timeline.to(kscope.settings, 60, { moveFactor: -5 }, '5')
     this.timeline.to(scope_2_mask.scale, 60, { x: 1, y: 1 }, '5')
+    this.timeline.to(kscope_2.settings, 60, { moveFactor: 10 }, '10')
+    this.timeline.to(kscope.settings, 60, { moveFactor: 0.5 }, '20')
 
-    this.timeline.add(() => {
-      vv.blendMode = 3
-      vv.scale.set(0)
-    }, '45')
-    this.timeline.to(vv.scale, 60, { x: 1, y: 1 }, '45')
+    this.timeline.to(vid_mask.scale, 60, { x: 1, y: 1 }, '30')
 
     this.timeline.add(() => {
       pj.transitionIn()
-    }, '100')
-    this.timeline.to(pj_mask.scale, 60, { x: 1, y: 1 }, '100')
+    }, '45')
+    this.timeline.to(pj_mask.scale, 60, { x: 1, y: 1 }, '45')
 
-    this.timeline.timeScale(1)
+    //this.timeline.timeScale(4)
 
     if (process.env.DEBUG == 'true') {
       this.timeline.timeScale(10)
