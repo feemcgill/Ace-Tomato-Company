@@ -124,7 +124,10 @@ export default class SleepyHead extends PIXI.Container {
       pj.transitionIn()
     }, '45')
     this.timeline.to(pj_mask.scale, 60, { x: 1, y: 1 }, '45')
-    this.timeline.to(pj, 15, { alpha: 0 }, '+15')
+    this.timeline.add(() => {
+      pj.rotateTo(0, 20, 0.5)
+    }, '110')
+    this.timeline.to(pj, 30, { alpha: 0 }, '135')
 
     //this.timeline.timeScale(4)
 
