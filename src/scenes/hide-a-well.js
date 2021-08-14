@@ -390,6 +390,12 @@ export default class HideAWell extends PIXI.Container {
         pj_mask.x = pixi_app.renderer.width / 2
         pj_mask.y = pixi_app.renderer.height / 2
 
+        pj2_mask.x = pixi_app.renderer.width / 2
+        pj2_mask.y = pixi_app.renderer.height / 2
+
+        pj3_mask.x = pixi_app.renderer.width / 2
+        pj3_mask.y = pixi_app.renderer.height / 2
+
       }, 500)
     )
   }
