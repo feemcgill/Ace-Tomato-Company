@@ -62,6 +62,21 @@ export default class VidVibe extends PIXI.Sprite {
       this.x = w / 2
       this.y = h / 2
     })
+
+    // Listen for orientation changes
+    window.addEventListener("orientationchange", () => {
+      const size = getWindowSize()
+      const w = size.width
+      const h = size.height
+
+      coke_size = backgroundSize(w, h, bg.baseTexture.width, bg.baseTexture.height)
+
+      this.scale.x = coke_size.scale
+      this.scale.y = coke_size.scale
+
+      this.x = w / 2
+      this.y = h / 2
+    }, false);
   }
 
   handleMove(e) {}
