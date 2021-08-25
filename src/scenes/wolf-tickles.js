@@ -20,7 +20,8 @@ export default class WolfTickles extends PIXI.Container {
       .add('wt_2', config.asset_url + '/062821/alpha/Wolf Tickles/000308290007.jpg')
       .add('wt_3', config.asset_url + '/062821/alpha/Wolf Tickles/000324000005.jpg')
       .add('wt_4', config.asset_url + '/062821/alpha/Wolf Tickles/000324000010.jpg')
-      .add('wt_vid', config.asset_url + '/062821/vids/Wolf Tickles 4 B.mp4')
+      // .add('wt_vid', config.asset_url + '/062821/vids/Wolf Tickles 4 B.mp4')
+      .add('wt_vid', config.asset_url + '/wolf-tickless.mp4')
       .load((loader, resources) => {
         this.run()
       })
