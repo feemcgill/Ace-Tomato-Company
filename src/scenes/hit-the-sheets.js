@@ -16,8 +16,8 @@ export default class HitTheSheets extends PIXI.Container {
   }
   load() {
     pixi_app.loader
-      .add('hts_1', config.asset_url + '/062821/alpha/Hit the Sheets/000014080020.jpg')
-      .add('hts_2', config.asset_url + '/062821/alpha/Hit the Sheets/000060930004.jpg')
+      .add('hts_1', config.asset_url + '/082521/Hit the Sheets/000241310006.jpg')
+      .add('hts_2', config.asset_url + '/082521/Hit the Sheets/000241310009.jpg')
       .add('hts_3', config.asset_url + '/062821/alpha/Hit the Sheets/000060950012.jpg')
       .add('hts_4', config.asset_url + '/062821/alpha/Hit the Sheets/000060950014.jpg')
       .add('hts_vid', config.asset_url + '/062821/vids/hit the sheets 4 B.mp4')

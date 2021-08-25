@@ -18,7 +18,7 @@ export default class Apparatus extends PIXI.Container {
     console.log('LOAD APPARATUS')
 
     pixi_app.loader
-      .add('ata_1', config.asset_url + '/062821/alpha/All the Apparatus/000053630017.jpg')
+      .add('ata_1', config.asset_url + '/082521/Apparatus/IMG_8560.jpg')
       .add('ata_2', config.asset_url + '/062821/alpha/All the Apparatus/000060940007.jpg')
       .add('ata_3', config.asset_url + '/062821/alpha/All the Apparatus/000060940008.jpg')
       .add('ata_4', config.asset_url + '/062821/alpha/All the Apparatus/000308310003.jpg')

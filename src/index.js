@@ -175,6 +175,12 @@ canvas.addEventListener('click', function (event) {
   document.getElementById('interface').classList.add('hide')
 })
 
+if ('ontouchstart' in window) {
+  canvas.addEventListener('touchstart', function (event) {
+    document.getElementById('interface').classList.add('hide')
+  })
+}
+
 var tracklist_element = document.getElementById('tracklist')
 tracklist_element.innerHTML = ''
 for (let i = 0; i < config.tracks.length; i++) {

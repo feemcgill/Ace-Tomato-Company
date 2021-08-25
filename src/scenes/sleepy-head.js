@@ -25,9 +25,9 @@ export default class SleepyHead extends PIXI.Container {
     2:45
      */
     pixi_app.loader
-      .add('sh_1', config.asset_url + '/062821/alpha/Sleepy Head/000046670016.jpg')
+      .add('sh_1', config.asset_url + '/082521/Sleepy Head/16970016.jpg')
       .add('sh_2', config.asset_url + '/062821/alpha/Sleepy Head/000245900026.jpg')
-      .add('sh_3', config.asset_url + '/062821/alpha/Sleepy Head/000046670017.jpg')
+      .add('sh_3', config.asset_url + '/082521/Sleepy Head/16970016.jpg')
       .add('sh_vid', config.asset_url + '/062821/vids/Sleepy 4 B.mp4')
       .load((loader, resources) => {
         this.run()
@@ -103,7 +103,7 @@ export default class SleepyHead extends PIXI.Container {
 
     const filter = new PIXI.SpriteMaskFilter(vid_mask)
 
-    this.addChild(vv)
+    // this.addChild(vv)
     //vv.alpha = 0.2
     vv.filters = [filter]
 

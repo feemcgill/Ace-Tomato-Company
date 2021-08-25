@@ -20,7 +20,7 @@ const initAudio = function (callback) {
   }
 
   gainNode = audioContext.createGain()
-  gainNode.gain.value = process.env.VOLUME || 1
+  gainNode.gain.value = process.env.VOLUME || 0.75
   gainNode.connect(audioContext.destination)
 
   analyser = audioContext.createAnalyser()
@@ -39,6 +39,8 @@ const initAudio = function (callback) {
 
 window.changeVolume = function (el) {
   var fraction = parseInt(el.value) / parseInt(el.max)
+  fraction = fraction * 0.75
+  console.log(fraction)
   if (appState.audioInitiated) {
     gainNode.gain.value = fraction * fraction
   }
