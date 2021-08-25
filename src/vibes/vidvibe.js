@@ -31,23 +31,14 @@ export default class VidVibe extends PIXI.Sprite {
 
   transitionIn() {
     const bg = PIXI.Texture.from(this.vid)
-    let coke_size = backgroundSize(
-      pixi_app.renderer.width,
-      pixi_app.renderer.height,
-      bg.baseTexture.width,
-      bg.baseTexture.height
-    )
+    let coke_size = backgroundSize(pixi_app.renderer.width, pixi_app.renderer.height, bg.baseTexture.width, bg.baseTexture.height)
     this.scale.x = coke_size.scale
     this.scale.y = coke_size.scale
     bg.baseTexture.resource.source.loop = true
+    bg.baseTexture.resource.source.muted = true
     //const coke = new PIXI.Sprite(bg);
     bg.baseTexture.on('loaded', () => {
-      coke_size = backgroundSize(
-        pixi_app.renderer.width,
-        pixi_app.renderer.height,
-        bg.baseTexture.width,
-        bg.baseTexture.height
-      )
+      coke_size = backgroundSize(pixi_app.renderer.width, pixi_app.renderer.height, bg.baseTexture.width, bg.baseTexture.height)
       this.scale.x = coke_size.scale
       this.scale.y = coke_size.scale
     })
@@ -63,12 +54,7 @@ export default class VidVibe extends PIXI.Sprite {
       const w = size.width
       const h = size.height
 
-      coke_size = backgroundSize(
-        w,
-        h,
-        bg.baseTexture.width,
-        bg.baseTexture.height
-      )
+      coke_size = backgroundSize(w, h, bg.baseTexture.width, bg.baseTexture.height)
 
       this.scale.x = coke_size.scale
       this.scale.y = coke_size.scale
