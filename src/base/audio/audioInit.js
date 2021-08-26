@@ -22,7 +22,6 @@ const initAudio = function (callback) {
   gainNode = audioContext.createGain()
   gainNode.gain.value = process.env.VOLUME || 0.75
   gainNode.connect(audioContext.destination)
-
   analyser = audioContext.createAnalyser()
   analyser.connect(gainNode)
   analyser.fftSize = 512

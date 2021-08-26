@@ -110,6 +110,7 @@ function playScene(track) {
 
   // Play the track
   playTrack(config.asset_url + '/' + config.tracks[track].mp3, endScene)
+  console.log(config.asset_url + '/' + config.tracks[track].mp3, 'THE TRACK')
   TweenMax.to(currentScene.parent, 2.5, { alpha: 1 })
 
   currentTrack = track
@@ -168,6 +169,9 @@ function endScene() {
 var interface_button = document.getElementById('button')
 interface_button.addEventListener('click', function (event) {
   document.getElementById('interface').classList.toggle('hide')
+  if (!appState.audioInitiated) {
+    initAudio()
+  }
 })
 
 var canvas = document.getElementById('canvas-root')

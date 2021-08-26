@@ -5,6 +5,7 @@ let trackSource
 let the_buffer
 
 const playTrack = function (track, callback) {
+  console.log('play the trax')
   // tackSource.buffer = null;
   if (appState.audioInitiated) {
     trackSource.buffer = null
@@ -17,6 +18,22 @@ const playTrack = function (track, callback) {
         arrayBuffer,
         (audioBuffer) => {
           the_buffer = audioBuffer
+          if (!appState.audioKicking) {
+            appState.userStopped = false
+            trackSource = audioContext.createBufferSource()
+            trackSource.buffer = the_buffer
+            trackSource.connect(analyser)
+            trackSource.connect(gainNode)
+            trackSource.start()
+            appState.audioInitiated = true
+            appState.audioKicking = true
+            appState.currentTrackSource = trackSource
+            trackSource.onended = function () {
+              if (callback) {
+                callback()
+              }
+            }
+          }
         },
         (error) => console.error(error)
       )
@@ -24,25 +41,7 @@ const playTrack = function (track, callback) {
     .catch((exception) => {
       console.error('Fetch exception: ', exception)
     })
-    .then(function () {
-      if (!appState.audioKicking) {
-        appState.userStopped = false
-        trackSource = audioContext.createBufferSource()
-        trackSource.buffer = the_buffer
-        trackSource.connect(analyser)
-        trackSource.start()
-        trackSource.connect(gainNode)
-
-        appState.audioInitiated = true
-        appState.audioKicking = true
-        appState.currentTrackSource = trackSource
-        trackSource.onended = function () {
-          if (callback) {
-            callback()
-          }
-        }
-      }
-    })
+    .then(function () {})
 }
 
 // var stop_track_button = document.getElementById('stop_track_button')
