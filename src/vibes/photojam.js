@@ -101,7 +101,7 @@ export default class PhotoJam extends PIXI.Sprite {
       'resize',
       debounce((e) => {
         this.resize()
-      }, 100)
+      }, 1000)
     )
   }
   fadeToWhite(time = 10) {

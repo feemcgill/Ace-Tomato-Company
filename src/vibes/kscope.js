@@ -107,7 +107,7 @@ export default class Kaleidoscope extends PIXI.Container {
           x: pixi_app.renderer.width / 2,
           y: pixi_app.renderer.height / 2,
         })
-      }, 500)
+      }, 1000)
     )
   }
 }

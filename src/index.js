@@ -21,6 +21,19 @@ import SleepyHead from './scenes/sleepy-head'
 
 import config from './config.js'
 import Vizzies from './vibes/vizziesweep.js'
+/** Dom Interface Stuff **/
+
+var title_screen = document.getElementById('title-screen')
+var interface_button = document.getElementById('start-button')
+var info_button = document.getElementById('info-button')
+var the_interface = document.getElementById('interface')
+var canvas = document.getElementById('canvas-root')
+var info = document.getElementById('info')
+var tracklist_element = document.getElementById('tracklist')
+var info_close = document.getElementById('info-close')
+var stop_track_button = document.getElementById('stop_track')
+var next_track_button = document.getElementById('next_track')
+var prev_track_button = document.getElementById('prev_track')
 
 var currentScene = null
 var currentTrack = null
@@ -40,6 +53,18 @@ const vizzies = new Vizzies()
 //fgContainer.addChild(vizzies);
 vizzies.zIndex = 1000
 
+function stopIt() {
+  console.log('stop IT')
+  if (currentScene) {
+    currentScene.parent.alpha = 0
+    currentScene.destroy()
+    stageContainer.removeChildren()
+    currentScene = null
+  }
+  stageContainer.removeChildren()
+  appState.audioKicking = false
+}
+
 function playScene(track) {
   //Clear the table
   if (!appState.audioInitiated) {
@@ -54,14 +79,7 @@ function playScene(track) {
     clearTimeout(title_timeout)
   }
 
-  if (currentScene) {
-    currentScene.parent.alpha = 0
-    currentScene.destroy()
-    stageContainer.removeChildren()
-    currentScene = null
-  }
-  stageContainer.removeChildren()
-  appState.audioKicking = false
+  stopIt()
 
   // Find the scene
   switch (track) {
@@ -114,7 +132,6 @@ function playScene(track) {
   TweenMax.to(currentScene.parent, 2.5, { alpha: 1 })
 
   currentTrack = track
-  const title_screen = document.getElementById('title-screen')
 
   //title_screen.style.opacity = 0
   title_screen.innerHTML = '<h1>' + config.tracks[track].name + '</h1>'
@@ -125,27 +142,27 @@ function playScene(track) {
     title_timeout = null
   }, 3000)
 
-  interface_timeout = setTimeout(() => {
-    document.getElementById('interface').classList.add('hide')
-    interface_timeout = null
-  }, 50)
-
   setTimeout(() => {
-    document.getElementById('now-playing').innerHTML = config.tracks[track].name
     document.getElementById('nowplaying').classList.add('show')
-  }, 1000)
+  }, 0)
 
-  document.getElementById('button').classList.remove('start')
+  interface_button.classList.remove('start')
+  info_button.classList.add('dim')
 
-  console.log('----------------------------')
-  console.log('----------------------------')
-  console.log('----------------------------')
+  var tracklist_tracks = document.querySelectorAll('.tracklist-song'),
+    i
+  for (i = 0; i < tracklist_tracks.length; ++i) {
+    console.log(config.tracks[track].name, tracklist_tracks[i].innerHTML)
+    if (tracklist_tracks[i].innerHTML == config.tracks[track].name) {
+      tracklist_tracks[i].classList.add('playing')
+    } else {
+      tracklist_tracks[i].classList.remove('playing')
+    }
+  }
+
   console.log('----------------------------')
   console.log('--------PLAYSCENE(' + track + ')--------')
   console.log(track, currentScene, pixi_app, currentTrack)
-  console.log('----------------------------')
-  console.log('----------------------------')
-  console.log('----------------------------')
   console.log('----------------------------')
 }
 
@@ -154,7 +171,7 @@ function endScene() {
     TweenMax.to(currentScene.parent, 0.5, {
       alpha: 0,
       onComplete: function () {
-        document.getElementById('now-playing').innerHTML = ''
+        //document.getElementById('now-playing').innerHTML = ''
         if (currentTrack + 1 == config.tracks.length) {
           playScene(0)
         } else {
@@ -165,37 +182,82 @@ function endScene() {
   }
 }
 
-/** Dom Interface Stuff **/
-var interface_button = document.getElementById('button')
 interface_button.addEventListener('click', function (event) {
-  document.getElementById('interface').classList.toggle('hide')
+  the_interface.classList.toggle('hide')
+  info_button.classList.remove('dim')
   if (!appState.audioInitiated) {
     initAudio()
   }
 })
 
-var canvas = document.getElementById('canvas-root')
+info_button.addEventListener('click', function (event) {
+  info.classList.toggle('hide')
+})
+
+info_close.addEventListener('click', function (event) {
+  info.classList.add('hide')
+  info_button.classList.add('dim')
+})
+
+info.addEventListener('click', function (event) {
+  console.log('info click')
+  the_interface.classList.add('hide')
+})
+
 canvas.addEventListener('click', function (event) {
-  document.getElementById('interface').classList.add('hide')
+  the_interface.classList.add('hide')
+  info.classList.add('hide')
+  info_button.classList.add('dim')
+})
+
+stop_track_button.addEventListener('click', function (event) {
+  stopIt()
+  if (title_timeout) {
+    clearTimeout(title_timeout)
+  }
+  //title_screen.innerHTML = '<h1> The Square Community </h1>'
+  //title_screen.style.opacity = 1
+})
+
+next_track_button.addEventListener('click', function (event) {
+  if (currentTrack + 1 == config.tracks.length) {
+    playScene(0)
+  } else {
+    playScene(currentTrack + 1)
+  }
+})
+
+prev_track_button.addEventListener('click', function (event) {
+  if (currentTrack == 0) {
+    playScene(config.tracks.length - 1)
+  } else {
+    playScene(currentTrack - 1)
+  }
 })
 
 if ('ontouchstart' in window) {
   canvas.addEventListener('touchstart', function (event) {
-    document.getElementById('interface').classList.add('hide')
+    the_interface.classList.add('hide')
+    info.classList.add('hide')
+    info_button.classList.add('dim')
   })
 }
 
-var tracklist_element = document.getElementById('tracklist')
 tracklist_element.innerHTML = ''
 for (let i = 0; i < config.tracks.length; i++) {
   const track = config.tracks[i]
   var a = document.createElement('a')
+  a.classList.add('tracklist-song')
   var linkText = document.createTextNode(track.name)
   a.appendChild(linkText)
   a.href = '#'
   a.addEventListener('click', function (event) {
     event.preventDefault()
     playScene(i)
+    interface_timeout = setTimeout(() => {
+      the_interface.classList.add('hide')
+      interface_timeout = null
+    }, 700)
   })
   tracklist_element.appendChild(a)
 }
@@ -216,8 +278,6 @@ if (process.env.WORKING_ON) {
   console.log(process.env.WORKING_ON, typeof process.env.WORKING_ON)
   setTimeout(() => {
     playScene(parseInt(process.env.WORKING_ON))
-    document.getElementById('interface').classList.add('hide')
+    the_interface.classList.add('hide')
   }, 100)
 }
-
-console.log('test')

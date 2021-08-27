@@ -209,12 +209,13 @@
       align-items: center;
       transition: all 0.5s ease-in-out;
       pointer-events: none;
-      /* mix-blend-mode: overlay; */
+      color: white;
+      mix-blend-mode: exclusion;
     }
     #title-screen h1 {
       font-size: 20vw;
       line-height: 0.7;
-      color: #000;
+      color: white;
     }
 
     #interface {
@@ -224,7 +225,6 @@
       left: 10px;
       padding: 20px;
       border: 2px solid black;
-      background: url(/assets/bg.png);
       background: white;
       opacity: 1;
       transition: all 0.2s ease-in;
@@ -235,12 +235,25 @@
       pointer-events: none;
     }
 
+    #interface .controls {
+      display: flex;
+      font-size: 0.8em;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    #interface .controls .fun-button{
+      margin-right: 10px;
+    }
+
     #tracklist a {
       display: block;
       color: black;
       text-shadow: 1px 1px 1px white;
     }
-
+    #tracklist a.tracklist-song.playing {
+      color: blue;
+    }
     #nowplaying {
       display: none;
     }
@@ -260,7 +273,7 @@
       text-shadow: 1px 1px 1px white;
     }
 
-    #button {
+    #start-button {
       position: fixed;
       /* width: 60px; */
       bottom: 20px;
@@ -273,27 +286,99 @@
       align-items: center;      
     }
 
-    #button img {
+    #start-button img {
       width: 60px;
     }
 
-    #button .txt {
+    #start-button .txt {
       font-size: 40px;
       display: none;
     }
 
-    #button.start {
+    #start-button.start {
       background-color: #aaa;
       border: 3px solid #ddd;
       border-bottom-color: #444;
       border-right-color: #444;
     }
-    #button.start .txt {
+    #start-button.start .txt {
       display: block;
     }
 
-    #button:hover {
+    #start-button:hover {
       transform: scale(0.87);
+    }
+    #info-button {
+      position: fixed;
+      /* width: 60px; */
+      bottom: 20px;
+      right: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease-in;
+      z-index: 1000;
+      display: flex;
+      padding: 5px;
+      font-size: 0.5em;
+      align-items: center;      
+    }  
+    
+    #info-button.dim {
+      opacity: 0.3;
+    }
+
+    #info-button:hover {
+      opacity: 1!important;
+    }
+
+    #canvas-root {
+      background-color: white;
+    }
+
+    #info {
+      position: fixed;
+      top: 0;
+      left: 0;
+      color: white;
+      z-index: 10;
+      mix-blend-mode: exclusion;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100vw;
+      pointer-events: auto;
+      transition: all 0.2s ease-in-out;
+    }
+
+    #info.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #info .inner {
+      max-width: 80%;
+      max-height: 80%;
+      overflow: auto;
+      background-color: #444;
+      padding: 20px;
+      font-size: 1.5em;
+      position: relative;
+    }
+    #info-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 0.5em;
+      padding: 3px;
+      cursor: pointer;
+      color: white;
+    }
+    .fun-button {
+      background-color: #aaa;
+      border: 3px solid #ddd;
+      border-bottom-color: #444;
+      border-right-color: #444; 
+      cursor: pointer;         
     }
   </style>
 
@@ -301,22 +386,38 @@
   <div id="canvas-root">
     <div id="title-screen"><h1>The Square Community</h1></div>
   </div>
-  <div id="button" class="start">
+  <div id="info" class="hide">
+    <div class="inner">
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam vero dolores quibusdam quis rerum exercitationem
+      accusamus qui obcaecati earum commodi? Excepturi sunt temporibus dicta error, nam dolorem harum amet earum?</p>
+      <p>Dolorem hic eveniet rem ipsam consequuntur debitis dicta aut commodi nostrum deleniti nam, autem delectus blanditiis
+      nulla accusantium. Odit fugit praesentium possimus? Tenetur vel, eaque beatae dolore officiis velit molestias!</p>
+      <div id="info-close" class="fun-button">&times;</div>
+    </div>
+</div>
+  <div id="interface" class="hide">
+    <div id="nowplaying">
+      <!-- <div class="label">Now Playing:</div>
+      <div id="now-playing"></div> -->
+      <div><input type="range" min="0" max="100" value="100" oninput="changeVolume(this);"> Volume</div>
+      <div class="controls">
+        <div id="prev_track" class="fun-button">Prev</div>
+        <div id="stop_track" class="fun-button">Stop</div>
+        <div id="next_track" class="fun-button">Next</div>
+      </div>
+    </div>
+    <div id="tracklist">Loading...</div>
+  </div>
+  <div id="start-button" class="start">
     <div class="img">
       <img src="assets/smokin_dead_dude.gif" alt="">
     </div>
     <div class="txt">Start</div>
   </div>
-  <div id="interface" class="hide">
-    <div id="nowplaying">
-      <div class="label">Now Playing:</div>
-      <div id="now-playing"></div>
-      <div><input type="range" min="0" max="100" value="100" oninput="changeVolume(this);"> Volume</div>
-      <!-- <div><button id="stop_track_button">Mute</button></div> -->
-    </div>
-    <div id="tracklist">Loading...</div>
-
+  <div id="info-button" class="fun-button">
+    <div class="txt">Info</div>
   </div>
+
 </body>
 
 </html>
