@@ -262,17 +262,19 @@ for (let i = 0; i < config.tracks.length; i++) {
   tracklist_element.appendChild(a)
 }
 
-/** RESIZE **/
-window.addEventListener('resize', function (e) {
-  const size = getWindowSize()
-  const w = size.width
-  const h = size.height
+window.addEventListener(
+  'resize',
+  debounce((e) => {
+    const size = getWindowSize()
+    const w = size.width
+    const h = size.height
 
-  // Scale renderer
-  pixi_app.renderer.view.style.width = w + 'px'
-  pixi_app.renderer.view.style.height = h + 'px'
-  pixi_app.renderer.resize(w, h)
-})
+    // Scale renderer
+    pixi_app.renderer.view.style.width = w + 'px'
+    pixi_app.renderer.view.style.height = h + 'px'
+    pixi_app.renderer.resize(w, h)
+  }, 500)
+)
 
 if (process.env.WORKING_ON) {
   console.log(process.env.WORKING_ON, typeof process.env.WORKING_ON)

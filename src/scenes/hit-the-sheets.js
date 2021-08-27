@@ -29,19 +29,14 @@ export default class HitTheSheets extends PIXI.Container {
     const debug = false
     const duration = appState.currentTrackSource
 
-      
-    
-    
-    
     // Video 2
-      const vv2 = new VidVibe(pixi_app.loader.resources.hts_vid.url)
-      vv2.transitionIn()
-      this.addChild(vv2)
-      vv2.blendMode = 0
-      vv2.alpha = 1
+    const vv2 = new VidVibe(pixi_app.loader.resources.hts_vid.url)
+    vv2.transitionIn()
+    this.addChild(vv2)
+    vv2.blendMode = 0
+    vv2.alpha = 1
 
-
-    // Video 
+    // Video
     const vv_container = new PIXI.Container()
     this.addChild(vv_container)
     const vv = new VidVibe(pixi_app.loader.resources.hts_vid.url)
@@ -49,11 +44,6 @@ export default class HitTheSheets extends PIXI.Container {
     vv_container.addChild(vv)
     vv.blendMode = 3
     vv.alpha = 1
-  
-
-       
-
-
 
     // Pic 1
     const pj1_container = new PIXI.Container()
@@ -69,7 +59,6 @@ export default class HitTheSheets extends PIXI.Container {
     // pj1.state.canRotatePointer = false
     pj1_container.addChild(pj1)
     pj1_container.alpha = 0
-
 
     // Pic 2
     const pj2_container = new PIXI.Container()
@@ -116,16 +105,6 @@ export default class HitTheSheets extends PIXI.Container {
     pj4_container.addChild(pj4)
     pj4_container.alpha = 0
 
-
-
-
-
-
-   
-  
-
- 
-
     // Kscope 1
     const ks1_container = new PIXI.Container()
     this.addChild(ks1_container)
@@ -137,7 +116,6 @@ export default class HitTheSheets extends PIXI.Container {
     kscope1.draw()
     ks1_container.addChild(kscope1)
     ks1_container.alpha = 0
-
 
     // Kscope 2
     const ks2_container = new PIXI.Container()
@@ -151,7 +129,6 @@ export default class HitTheSheets extends PIXI.Container {
     ks2_container.addChild(kscope2)
     ks2_container.alpha = 0
 
-
     // Kscope 3
     const ks3_container = new PIXI.Container()
     this.addChild(ks3_container)
@@ -163,7 +140,6 @@ export default class HitTheSheets extends PIXI.Container {
     kscope3.draw()
     ks3_container.addChild(kscope3)
     ks3_container.alpha = 0
-
 
     // Kscope 4
     const ks4_container = new PIXI.Container()
@@ -177,20 +153,14 @@ export default class HitTheSheets extends PIXI.Container {
     ks4_container.addChild(kscope4)
     ks4_container.alpha = 0
 
-
-    
-    
-
     pixi_app.ticker.add(() => {})
-
-
 
     // song is 240 seconds long
 
     this.timeline = new TimelineLite()
 
     this.timeline.to(ks1_container, 10, { alpha: 0.5 }, '15')
-    
+
     this.timeline.to(vv2, 10, { alpha: 0 }, '30')
     this.timeline.to(vv_container, 10, { x: 10 }, '30')
     this.timeline.fromTo(pj1_container, 10, { alpha: 0, rotation: -2 }, { alpha: 1, rotation: 0, ease: Power1.easeInOut }, '30')
@@ -233,12 +203,6 @@ export default class HitTheSheets extends PIXI.Container {
 
     // this.timeline.timeScale(10)
 
-
-
-    
-    
-    
-
     if (process.env.DEBUG == 'true') {
       this.timeline.timeScale(10)
     }
@@ -247,7 +211,7 @@ export default class HitTheSheets extends PIXI.Container {
 
     window.addEventListener(
       'resize',
-      debounce(function (e) {}, 500)
+      debounce(function (e) {}, 1000)
     )
   }
 }

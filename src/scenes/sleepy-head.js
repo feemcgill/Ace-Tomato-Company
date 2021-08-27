@@ -139,7 +139,7 @@ export default class SleepyHead extends PIXI.Container {
 
     window.addEventListener(
       'resize',
-      debounce(function (e) {}, 500)
+      debounce(function (e) {}, 1000)
     )
   }
 }

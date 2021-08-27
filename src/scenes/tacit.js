@@ -25,8 +25,6 @@ export default class Tacit extends PIXI.Container {
       })
   }
   run() {
-
-
     // Pic 1
     const pic_1_container = new PIXI.Container()
     this.addChild(pic_1_container)
@@ -115,30 +113,24 @@ export default class Tacit extends PIXI.Container {
     the_video.blendMode = 3
     the_video.alpha = 1
 
-
-
-
-
-
-    
-
     pixi_app.ticker.add(() => {})
 
-
-    this.timeline = new TimelineLite({onComplete:() => {
-      this.timeline.restart()
-    }})
+    this.timeline = new TimelineLite({
+      onComplete: () => {
+        this.timeline.restart()
+      },
+    })
 
     // Pic 1 IN
-    this.timeline.fromTo(pic_1_container, 10, { rotation: -2, alpha: 0}, { rotation: 0, alpha: 1, ease: Power1.easeInOut })
+    this.timeline.fromTo(pic_1_container, 10, { rotation: -2, alpha: 0 }, { rotation: 0, alpha: 1, ease: Power1.easeInOut })
     this.timeline.fromTo(ks_1_container, 10, { alpha: 0 }, { alpha: 1 }, '0')
-    
+
     // Pic 1 OUT
     this.timeline.to(pic_1_container, 10, { rotation: 2, alpha: 0, ease: Power1.easeInOut }, '20')
     this.timeline.to(ks_1_container, 5, { alpha: 0 }, '20')
 
     // Pic 2 IN
-    this.timeline.fromTo(pic_2_container, 10, { rotation: -2, alpha: 0}, { rotation: 0, alpha: 1, ease: Power1.easeInOut }, '20')
+    this.timeline.fromTo(pic_2_container, 10, { rotation: -2, alpha: 0 }, { rotation: 0, alpha: 1, ease: Power1.easeInOut }, '20')
     this.timeline.fromTo(ks_2_container, 10, { alpha: 0 }, { alpha: 1 }, '20')
 
     // Pic 2 OUT
@@ -146,15 +138,12 @@ export default class Tacit extends PIXI.Container {
     this.timeline.to(ks_2_container, 5, { alpha: 0 }, '40')
 
     // Pic 3 IN
-    this.timeline.fromTo(pic_3_container, 10, { rotation: -2, alpha: 0}, { rotation: 0, alpha: 1, ease: Power1.easeInOut }, '40')
+    this.timeline.fromTo(pic_3_container, 10, { rotation: -2, alpha: 0 }, { rotation: 0, alpha: 1, ease: Power1.easeInOut }, '40')
     this.timeline.fromTo(ks_3_container, 10, { alpha: 0 }, { alpha: 1 }, '40')
 
     // Pic 3 OUT
     this.timeline.to(pic_3_container, 10, { rotation: 2, alpha: 0, ease: Power1.easeIn }, '70')
     this.timeline.to(ks_3_container, 5, { alpha: 0 }, '70')
-
-
-
 
     if (process.env.DEBUG == 'true') {
       this.timeline.timeScale(10)
@@ -164,7 +153,7 @@ export default class Tacit extends PIXI.Container {
 
     window.addEventListener(
       'resize',
-      debounce(function (e) {}, 500)
+      debounce(function (e) {}, 1000)
     )
   }
 }

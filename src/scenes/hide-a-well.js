@@ -100,15 +100,12 @@ export default class HideAWell extends PIXI.Container {
       }
     })
 
-
     // Video 1
     const vv = new VidVibe(pixi_app.loader.resources.haw_vid.url)
     vv.transitionIn()
     this.addChild(vv)
     vv.blendMode = 0
     vv.alpha = 1
-
-
 
     // Kaleidscope
     const ks_container = new PIXI.Container()
@@ -123,9 +120,6 @@ export default class HideAWell extends PIXI.Container {
     ks_container.addChild(kscope)
     ks_container.alpha = 0
 
-
-
-    
     // White cover
     var white_cover = new PIXI.Sprite(PIXI.Texture.WHITE)
     white_cover.width = window.innerWidth
@@ -133,9 +127,6 @@ export default class HideAWell extends PIXI.Container {
     white_cover.alpha = 0
 
     this.addChild(white_cover)
-
-
-
 
     // Kaleidscope2
     const ks_container2 = new PIXI.Container()
@@ -150,8 +141,6 @@ export default class HideAWell extends PIXI.Container {
     ks_container2.addChild(kscope2)
     ks_container2.alpha = 0
 
-
-
     // PJ 1
     const pj_mask_gpx = new Graphics()
     pj_mask_gpx.beginFill(0xff0000)
@@ -160,7 +149,7 @@ export default class HideAWell extends PIXI.Container {
     pj_mask_gpx.endFill()
 
     const pj_mask_texture = pixi_app.renderer.generateTexture(pj_mask_gpx)
-    
+
     const pj_mask = new PIXI.Sprite(pj_mask_texture)
     pj_mask.anchor.set(0.5)
     pj_mask.x = pixi_app.renderer.width / 2
@@ -189,7 +178,6 @@ export default class HideAWell extends PIXI.Container {
     pj_container.addChild(pj)
     pj_container.addChild(pj_mask)
 
-
     // Kaleidscope3
     const ks_container3 = new PIXI.Container()
     this.addChild(ks_container3)
@@ -203,7 +191,6 @@ export default class HideAWell extends PIXI.Container {
     ks_container3.addChild(kscope3)
     ks_container3.alpha = 0
 
-
     // PJ 2
     const pj2_mask_gpx = new Graphics()
     pj2_mask_gpx.beginFill(0xff0000)
@@ -212,7 +199,7 @@ export default class HideAWell extends PIXI.Container {
     pj2_mask_gpx.endFill()
 
     const pj2_mask_texture = pixi_app.renderer.generateTexture(pj2_mask_gpx)
-    
+
     const pj2_mask = new PIXI.Sprite(pj2_mask_texture)
     pj2_mask.anchor.set(0.5)
     pj2_mask.x = pixi_app.renderer.width / 2
@@ -241,9 +228,6 @@ export default class HideAWell extends PIXI.Container {
     pj2_container.addChild(pj2)
     pj2_container.addChild(pj2_mask)
 
-    
-
-    
     // Kaleidscope4
     const ks_container4 = new PIXI.Container()
     this.addChild(ks_container4)
@@ -257,7 +241,6 @@ export default class HideAWell extends PIXI.Container {
     ks_container4.addChild(kscope4)
     ks_container4.alpha = 0
 
-
     // PJ 3
     const pj3_mask_gpx = new Graphics()
     pj3_mask_gpx.beginFill(0xff0000)
@@ -266,7 +249,7 @@ export default class HideAWell extends PIXI.Container {
     pj3_mask_gpx.endFill()
 
     const pj3_mask_texture = pixi_app.renderer.generateTexture(pj3_mask_gpx)
-    
+
     const pj3_mask = new PIXI.Sprite(pj3_mask_texture)
     pj3_mask.anchor.set(0.5)
     pj3_mask.x = pixi_app.renderer.width / 2
@@ -295,16 +278,12 @@ export default class HideAWell extends PIXI.Container {
     pj3_container.addChild(pj3)
     pj3_container.addChild(pj3_mask)
 
-
-
-
     // Video 2
     const vv2 = new VidVibe(pixi_app.loader.resources.haw_vid.url)
     vv2.transitionIn()
     this.addChild(vv2)
     vv2.blendMode = 3
     vv2.alpha = 0
-
 
     // Kaleidscope
     const ks_container5 = new PIXI.Container()
@@ -318,9 +297,6 @@ export default class HideAWell extends PIXI.Container {
     kscope5.draw()
     ks_container5.addChild(kscope5)
     ks_container5.alpha = 0
-    
-
-
 
     /// TIMELINE
     this.timeline = new TimelineLite()
@@ -331,10 +307,9 @@ export default class HideAWell extends PIXI.Container {
       ks_container.alpha = 0
       vv.alpha = 0
       TweenMax.to(white_cover, 5, { alpha: 0 })
-      TweenMax.to(stars_container, 5, { alpha: 1 })  
+      TweenMax.to(stars_container, 5, { alpha: 1 })
     })
 
-    
     this.timeline.to(warpSpeed, 10, { speed: 0, ease: Power4.easeOut })
     this.timeline.to(pj_mask.scale, 15, { x: 1, y: 1, ease: Power4.easeOut }, '-=10')
     this.timeline.to(ks_container2, 15, { alpha: 0.15 }, '-=15')
@@ -374,7 +349,6 @@ export default class HideAWell extends PIXI.Container {
 
     this.timeline.to(vv2, 5, { alpha: 1 })
     this.timeline.to(ks_container5, 30, { alpha: 0.5 }, '-=5')
-    
 
     // this.timeline.timeScale(10)
     if (process.env.DEBUG == 'true') {
@@ -395,8 +369,7 @@ export default class HideAWell extends PIXI.Container {
 
         pj3_mask.x = pixi_app.renderer.width / 2
         pj3_mask.y = pixi_app.renderer.height / 2
-
-      }, 500)
+      }, 1000)
     )
   }
 }

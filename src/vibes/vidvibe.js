@@ -54,7 +54,7 @@ export default class VidVibe extends PIXI.Sprite {
       'resize',
       debounce((e) => {
         this.resize()
-      }, 1000)
+      }, 1500)
     )
     // window.addEventListener('resize', (e) => {
 

@@ -111,12 +111,10 @@ export default class ShootinSkip extends PIXI.Container {
       })
     }, '20')
 
-
     this.timeline.add(() => {
       pj_3.transitionIn()
       pj_3.scaleTo(1, 20, 5, () => {})
     }, '120')
-
 
     this.timeline.add(() => {
       for (let i = 0; i < this.photos.length; i++) {
@@ -157,7 +155,7 @@ export default class ShootinSkip extends PIXI.Container {
 
     window.addEventListener(
       'resize',
-      debounce(function (e) {}, 500)
+      debounce(function (e) {}, 1000)
     )
   }
 }

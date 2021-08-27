@@ -127,7 +127,7 @@ export default class Apparatus extends PIXI.Container {
         // rsprite.x = 0;
         // rsprite.y = 0;
         //vv.mask = rsprite;
-      }, 500)
+      }, 1000)
     )
   }
 }

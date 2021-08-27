@@ -223,7 +223,7 @@ export default class DownOnAllFives extends PIXI.Container {
       'resize',
       debounce((e) => {
         this.sizeandScale()
-      }, 500)
+      }, 1000)
     )
   }
   sizeandScale() {
