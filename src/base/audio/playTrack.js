@@ -5,8 +5,6 @@ let trackSource
 let the_buffer
 
 const playTrack = function (track, callback) {
-  console.log('play the trax')
-  // tackSource.buffer = null;
   if (appState.audioInitiated) {
     trackSource.buffer = null
   }
