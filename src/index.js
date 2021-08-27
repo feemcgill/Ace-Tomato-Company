@@ -24,9 +24,11 @@ import Vizzies from './vibes/vizziesweep.js'
 /** Dom Interface Stuff **/
 
 var title_screen = document.getElementById('title-screen')
+var title_screen_title = document.getElementById('title-screen_title')
 var interface_button = document.getElementById('start-button')
 var info_button = document.getElementById('info-button')
 var the_interface = document.getElementById('interface')
+var interface_close = document.getElementById('interface-close')
 var canvas = document.getElementById('canvas-root')
 var info = document.getElementById('info')
 var tracklist_element = document.getElementById('tracklist')
@@ -63,6 +65,7 @@ function stopIt() {
   }
   stageContainer.removeChildren()
   appState.audioKicking = false
+  info.classList.remove('jam')
 }
 
 function playScene(track) {
@@ -133,8 +136,10 @@ function playScene(track) {
 
   currentTrack = track
 
+  appState.userStopped = false
   //title_screen.style.opacity = 0
-  title_screen.innerHTML = '<h1>' + config.tracks[track].name + '</h1>'
+  info.classList.add('jam')
+  title_screen_title.innerHTML = config.tracks[track].name
   title_screen.style.opacity = 1
 
   title_timeout = setTimeout(() => {
@@ -190,13 +195,19 @@ interface_button.addEventListener('click', function (event) {
   }
 })
 
+interface_close.addEventListener('click', function (event) {
+  the_interface.classList.add('hide')
+})
+
 info_button.addEventListener('click', function (event) {
-  info.classList.toggle('hide')
+  info.classList.remove('hide')
+  // title_screen_title.style.opacity = 0.2
 })
 
 info_close.addEventListener('click', function (event) {
   info.classList.add('hide')
   info_button.classList.add('dim')
+  // title_screen_title.style.opacity = 1
 })
 
 info.addEventListener('click', function (event) {
@@ -208,15 +219,18 @@ canvas.addEventListener('click', function (event) {
   the_interface.classList.add('hide')
   info.classList.add('hide')
   info_button.classList.add('dim')
+  title_screen.style.opacity = 1
 })
 
 stop_track_button.addEventListener('click', function (event) {
   stopIt()
+  trackSource.stop()
+  appState.userStopped = true
   if (title_timeout) {
     clearTimeout(title_timeout)
   }
-  //title_screen.innerHTML = '<h1> The Square Community </h1>'
-  //title_screen.style.opacity = 1
+  title_screen_title.innerHTML = 'The Square Community'
+  title_screen.style.opacity = 1
 })
 
 next_track_button.addEventListener('click', function (event) {
