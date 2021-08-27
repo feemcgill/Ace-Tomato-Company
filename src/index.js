@@ -276,6 +276,10 @@ for (let i = 0; i < config.tracks.length; i++) {
   tracklist_element.appendChild(a)
 }
 
+setTimeout(() => {
+  interface_button.classList.add('start')
+}, 1000)
+
 window.addEventListener(
   'resize',
   debounce((e) => {
