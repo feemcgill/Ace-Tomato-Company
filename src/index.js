@@ -165,10 +165,10 @@ function playScene(track) {
     }
   }
 
-  console.log('----------------------------')
+  console.log('--------------------------- ------------')
   console.log('--------PLAYSCENE(' + track + ')--------')
-  console.log(track, currentScene, pixi_app, currentTrack)
-  console.log('----------------------------')
+  console.table(track, currentScene, pixi_app, currentTrack)
+  console.log('---------------------------- -----------')
 }
 
 function endScene() {
@@ -219,7 +219,7 @@ canvas.addEventListener('click', function (event) {
   the_interface.classList.add('hide')
   info.classList.add('hide')
   info_button.classList.add('dim')
-  title_screen.style.opacity = 1
+  title_screen.style.opacity = 0
 })
 
 stop_track_button.addEventListener('click', function (event) {

@@ -37,31 +37,15 @@ export default class Apparatus extends PIXI.Container {
     const duration = appState.currentTrackSource
 
     const pj_container = new PIXI.Container()
-    this.addChild(pj_container)
 
     const pj = new PhotoJam(pixi_app.loader.resources.ata_1.texture, {
-      blendMode: 3,
+      blendMode: 0,
       moveData: [11, 12, 13, 14],
       amplify: [1, 1.5],
       moveSpeed: 10,
     })
-    pj.transitionIn()
-
-    pj_container.addChild(pj)
-
-    //pj.alpha = 0;
-
-    // let brt = new PIXI.BaseRenderTexture(pixi_app.renderer.width, pixi_app.renderer.height, PIXI.SCALE_MODES.LINEAR, 1);
-    // let rt = new PIXI.RenderTexture(brt);
-    // let rsprite = new PIXI.Sprite(rt);
-    // rsprite.x = 0;
-    // rsprite.y = 0;
-    // this.addChild(rsprite);
-
-    //vv.mask = rsprite
 
     const ks_container = new PIXI.Container()
-    this.addChild(ks_container)
 
     const kscope = new Kaleidoscope(pixi_app.loader.resources.ata_1.texture, {
       blendMode: 2,
@@ -72,11 +56,17 @@ export default class Apparatus extends PIXI.Container {
     ks_container.alpha = 1
 
     const vv = new VidVibe(pixi_app.loader.resources.ata_vid.url)
-    vv.transitionIn()
-    this.addChild(vv)
+
     vv.blendMode = 3
     vv.alpha = 1
 
+    pj_container.addChild(pj)
+    pj.transitionIn()
+    this.addChild(pj_container)
+    this.addChild(ks_container)
+    this.addChild(vv)
+
+    vv.transitionIn()
     pixi_app.ticker.add(() => {
       //pixi_app.renderer.render(pj_container, rt);
     })
@@ -102,7 +92,7 @@ export default class Apparatus extends PIXI.Container {
     // tl.seek(1.5);
     // tl.reverse();
 
-    //this.timeline.timeScale(10);
+    //this.timeline.timeScale(10)
 
     if (process.env.DEBUG == 'true') {
       this.timeline.timeScale(10)

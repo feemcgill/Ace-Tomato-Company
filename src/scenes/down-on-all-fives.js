@@ -19,10 +19,10 @@ export default class DownOnAllFives extends PIXI.Container {
   }
   load() {
     pixi_app.loader
-      .add('d5_1', config.asset_url + '/082521/Fives/ssc2007-06a_mac.jpg')
-      .add('d5_2', config.asset_url + '/082521/Fives/sig07-014_mac.jpg')
-      .add('d5_3', config.asset_url + '/082521/Fives/ssc2006-03b_mac.jpg')
-      .add('d5_4', config.asset_url + '/082521/Fives/sig06-027_mac.jpg')
+      .add('d5_1', config.asset_url + '/062821/alpha/Down on All Fives/000304090003.jpg')
+      .add('d5_2', config.asset_url + '/062821/alpha/Down on All Fives/000304090004.jpg')
+      .add('d5_3', config.asset_url + '/062821/alpha/Down on All Fives/17190002.jpg')
+      .add('d5_4', config.asset_url + '/062821/alpha/Down on All Fives/17190005.jpg')
       .add('d5_vid', config.asset_url + '/062821/vids/down on all for B.mp4')
       .load((loader, resources) => {
         this.run()
@@ -73,74 +73,66 @@ export default class DownOnAllFives extends PIXI.Container {
     const pj_1 = new PhotoJam(pixi_app.loader.resources.d5_1.texture, { ...pj_defaults, ...{ rotation_const: 0.004, container: top_left } })
     this.addChild(pj_1)
     this.photos.push(pj_1)
-    pj_1.currentScaleFactor = 0
+    // pj_1.currentScaleFactor = 2
+    pj_1.initial_rotate = 0.001
     pj_1.state.canRotatePointer = false
     pj_1.transitionIn()
 
     const pj_2 = new PhotoJam(pixi_app.loader.resources.d5_3.texture, { ...pj_defaults, ...{ rotation_const: 0.002, container: top_right } })
     this.addChild(pj_2)
     this.photos.push(pj_2)
-    pj_2.currentScaleFactor = 0
+    // pj_2.currentScaleFactor = 2
+    pj_2.initial_rotate = 0.001
+
     pj_2.state.canRotatePointer = false
     pj_2.transitionIn()
 
     const pj_3 = new PhotoJam(pixi_app.loader.resources.d5_2.texture, { ...pj_defaults, ...{ rotation_const: 0.003, container: bottom_right } })
     this.addChild(pj_3)
     this.photos.push(pj_3)
-    pj_3.currentScaleFactor = 0
+    // pj_3.currentScaleFactor = 2
+    pj_3.initial_rotate = 0.001
+
     pj_3.state.canRotatePointer = false
     pj_3.transitionIn()
 
     const pj_4 = new PhotoJam(pixi_app.loader.resources.d5_4.texture, { ...pj_defaults, ...{ rotation_const: 0.004, container: bottom_left } })
     this.addChild(pj_4)
     this.photos.push(pj_4)
-    pj_4.currentScaleFactor = 0
+    // pj_4.currentScaleFactor = 2
+    pj_4.initial_rotate = 0.001
+
     pj_4.state.canRotatePointer = false
     pj_4.transitionIn()
 
     pixi_app.ticker.add(() => {})
 
     this.timeline = new TimelineLite()
-    this.timeline.add(() => {
-      pj_1.scaleTo(0.3, 10, 1)
-    })
-
-    this.timeline.add(() => {
-      pj_3.scaleTo(0.26, 10, 1)
-    }, '2')
-
-    this.timeline.add(() => {
-      pj_4.scaleTo(0.4, 10, 1)
-    }, '6')
-
-    this.timeline.add(() => {
-      pj_2.scaleTo(0.36, 10, 1)
-    }, '10')
 
     this.timeline.add(() => {
       pj_1.state.canRotatePointer = true
       pj_3.state.canRotatePointer = true
       pj_2.state.canRotatePointer = true
       pj_4.state.canRotatePointer = true
-      pj_1.scaleTo(0.36, 0.1)
-      pj_3.scaleTo(0.36, 0.3)
-      pj_2.scaleTo(0.3, 0.2)
-      pj_4.scaleTo(0.4, 0.05)
-    }, '60')
+      pj_1.scaleTo(1.5, 0.1)
+      pj_3.scaleTo(1.5, 0.3)
+      pj_2.scaleTo(1.5, 0.2)
+      pj_4.scaleTo(1.5, 0.05)
+    }, '0')
 
     this.timeline.add(() => {
       for (let i = 0; i < this.photos.length; i++) {
         const pic = this.photos[i]
         //pic.state.canRotatePointer = true
-        //pic.settings.mousemove_factor = 100
+        pic.settings.mousemove_factor = 100
       }
     }, '60')
 
     this.timeline.add(() => {
-      pj_1.scaleTo(1.2, 60)
-      pj_2.scaleTo(1.2, 60)
-      pj_3.scaleTo(1.2, 60)
-      pj_4.scaleTo(1.2, 60)
+      pj_1.scaleTo(1.7, 60)
+      pj_2.scaleTo(1.7, 61)
+      pj_3.scaleTo(1.7, 62)
+      pj_4.scaleTo(1.7, 63)
     }, '120')
 
     this.timeline.add(() => {
@@ -150,69 +142,51 @@ export default class DownOnAllFives extends PIXI.Container {
       pj_4.rotateTo(0, 0, () => {
         for (let i = 0; i < this.photos.length; i++) {
           const pic = this.photos[i]
-          //pic.state.canRotatePointer = true
+          pic.state.canRotatePointer = false
         }
       })
-    }, '220')
+    }, '220') // 220
 
     this.timeline.add(() => {
       vv.transitionIn()
       TweenMax.to(vv, 6, { alpha: 1 })
-      pj_1.scaleTo(0.2, 30)
-      pj_2.scaleTo(0.19, 30)
-      pj_3.scaleTo(0.14, 30)
-      pj_4.scaleTo(0.23, 30)
+      pj_1.scaleTo(0.2, 30) // 30
+      pj_2.scaleTo(0.19, 30) // 30
+      pj_3.scaleTo(0.14, 30) // 30
+      pj_4.scaleTo(0.23, 30) // 30
+
       setTimeout(() => {
         for (let i = 0; i < this.photos.length; i++) {
           const pic = this.photos[i]
           pic.state.canRotatePointer = false
           pic.settings.mousemove_factor = 100
         }
-      }, 1500)
-    }, '280')
+      }, 1500) // 1500
+    }, '220') // 220
 
     this.timeline.add(() => {
       for (let i = 0; i < this.photos.length; i++) {
         const pic = this.photos[i]
         pic.state.canRotatePointer = true
+        pic.settings.mousemove_factor = 3000
       }
-    }, '330')
+    }, '320') // 320
 
-    // this.timeline.add(() => {
-    //   // pj_1.rotateTo(30, 10, () => {
-    //   // })
-    //   pj_1.scaleTo(1.2, 12)
-    // }, '15')
-
-    // this.timeline.add(() => {
-    //   // pj_3.rotateTo(20, 10, () => {
-    //   //   pj_3.state.canRotatePointer = true
-    //   // })
-    //   pj_3.scaleTo(1.2, 12)
-    // }, '16')
-
-    // this.timeline.add(() => {
-    //   // pj_4.rotateTo(40, 10, () => {
-    //   //   pj_4.state.canRotatePointer = true
-    //   // })
-    //   pj_4.scaleTo(1.2, 12)
-    // }, '17')
-
-    // this.timeline.add(() => {
-    //   // pj_2.rotateTo(40, 10, () => {
-    //   //   pj_2.state.canRotatePointer = true
-    //   // })
-    //   pj_2.scaleTo(1.2, 12)
-    // }, '18')
     this.timeline.add(() => {
       for (let i = 0; i < this.photos.length; i++) {
         const pic = this.photos[i]
-        //pic.state.canRotatePointer = true
-        //pic.settings.mousemove_factor = 100
+        pic.settings.mousemove_factor = 200
       }
-    }, '20')
+    }, '321') // 325
 
-    //this.timeline.timeScale(4)
+    this.timeline.add(() => {
+      for (let i = 0; i < this.photos.length; i++) {
+        const pic = this.photos[i]
+        pic.settings.mousemove_factor = 100
+      }
+    }, '350') // 350
+
+    this.timeline.timeScale(1)
 
     if (process.env.DEBUG == 'true') {
     }

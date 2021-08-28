@@ -30,6 +30,7 @@ export default class PhotoJam extends PIXI.Sprite {
     this.sprite_size = null
     this.currentScaleFactor = 1
     this.rotation_factor = 0.0005
+    this.initial_rotate = 0
 
     this.state = {
       canScaleDance: true,
@@ -94,6 +95,9 @@ export default class PhotoJam extends PIXI.Sprite {
           if (this.state.canRotatePointer) {
             sprite.rotation += this.rotation_factor * (i + 1)
           }
+          if (this.initial_rotate && this.initial_rotate != 0) {
+            sprite.rotation += this.initial_rotate * (i + 1)
+          }
         }
       }
     })
@@ -141,6 +145,7 @@ export default class PhotoJam extends PIXI.Sprite {
     this.settings.amplify = input
   }
   handleMove(e) {
+    this.initial_rotate = null
     var move_factor = this.settings.mousemove_factor
     var x = e.data.global.x
     var y = e.data.global.y

@@ -148,7 +148,7 @@ export default class ShootinSkip extends PIXI.Container {
     //this.timeline.timeScale(4)
 
     if (process.env.DEBUG == 'true') {
-      this.timeline.timeScale(10)
+      //this.timeline.timeScale(10)
     }
 
     pixi_app.ticker.add(() => {})
