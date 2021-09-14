@@ -55,22 +55,22 @@ export default class DawnPatrol extends PIXI.Container {
     let rsprite = new PIXI.Sprite(rt)
     rsprite.x = 30
     rsprite.y = 30
-    this.addChild(rsprite)
-
-    // let rsprite2 = new PIXI.Sprite(rt)
-    // rsprite.anchor.set(0.5)
-    // rsprite2.alpha = 1
-    // rsprite2.x = 200
-    // rsprite2.y = 200
-    // rsprite2.x = 0
-    // rsprite2.y = pixi_app.renderer.height
-    // rsprite2.blendMode = 3
-    // rsprite2.scale.x = 1
-    // rsprite2.scale.y = -1
-
-    this.addChild(rsprite2)
+    //this.addChild(rsprite);
 
     vv.mask = rsprite
+
+    let rsprite2 = new PIXI.Sprite(rt)
+    rsprite2.alpha = 1
+    rsprite2.x = 200
+    rsprite2.y = 200
+    rsprite2.x = 0
+    rsprite2.y = pixi_app.renderer.height
+    rsprite2.blendMode = 3
+    rsprite2.scale.x = 1
+    rsprite2.scale.y = -1
+    rsprite2.alpha = 0
+
+    this.addChild(rsprite2)
 
     const ks_container = new PIXI.Container()
     this.addChild(ks_container)
@@ -89,27 +89,33 @@ export default class DawnPatrol extends PIXI.Container {
 
     this.timeline = new TimelineLite()
 
-    this.timeline.to(vv, 60, { alpha: 1, delay: 60, ease: 'power4.in' })
+    this.timeline.add(() => {
+      TweenMax.to(rsprite2, 20, { alpha: 1, ease: 'power4.in' })
+    }, '10')
+
+    this.timeline.add(() => {
+      TweenMax.to(vv, 30, { alpha: 1, ease: 'power4.in' })
+    }, '30')
+
+    this.timeline.add(() => {
+      TweenMax.to(rsprite2, 10, { alpha: 0, ease: 'power4.in' })
+    }, '100')
+
     this.timeline.add(() => {
       pj.setAmplify([1, 1.3])
-      pj.fadeToWhite(10)
-    })
-    this.timeline.add(() => {
-      //TweenMax.to(rsprite2, 36, { alpha: 0 })
-    }, '60')
-    this.timeline.to(ks_container, 60, {
-      alpha: 1,
-      delay: 8,
-      ease: 'power4.in',
-    })
+      pj.fadeToWhite(40)
+      TweenMax.to(ks_container, 60, {
+        alpha: 1,
+        delay: 8,
+        ease: 'power4.in',
+      })
+    }, '120')
+
     this.timeline.add(() => {
       pj.fadeToJam(10)
-    })
-    this.timeline.timeScale(10)
+    }, '180')
 
     if (process.env.DEBUG == 'true') {
-      // TweenMax.to(vv, 1, {alpha: 1, delay: 1,  ease: "power4.in"})
-      // TweenMax.to(ks_container, 1, {alpha: 1, delay: 1})
       this.timeline.timeScale(10)
     }
 
