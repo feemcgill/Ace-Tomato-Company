@@ -52,7 +52,7 @@ pixi_app.stage.addChild(stageContainer)
 pixi_app.stage.addChild(fgContainer)
 
 const vizzies = new Vizzies()
-//fgContainer.addChild(vizzies);
+fgContainer.addChild(vizzies)
 vizzies.zIndex = 1000
 
 function stopIt() {
@@ -219,7 +219,7 @@ canvas.addEventListener('click', function (event) {
   the_interface.classList.add('hide')
   info.classList.add('hide')
   info_button.classList.add('dim')
-  title_screen.style.opacity = 0
+  //title_screen.style.opacity = 0
 })
 
 stop_track_button.addEventListener('click', function (event) {

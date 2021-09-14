@@ -21,6 +21,8 @@ export default class VidVibe extends PIXI.Sprite {
     this.parent = this.settings.parent
     this.on('mousemove', this.handleMove).on('touchmove', this.handleMove)
     this.bg = null
+    this.scale_factor = 1
+    this.offset = { x: 1, y: 1 }
   }
 
   transitionOut() {
@@ -33,23 +35,22 @@ export default class VidVibe extends PIXI.Sprite {
   transitionIn() {
     this.bg = PIXI.Texture.from(this.vid)
     let coke_size = backgroundSize(pixi_app.renderer.width, pixi_app.renderer.height, this.bg.baseTexture.width, this.bg.baseTexture.height)
-    this.scale.x = coke_size.scale
-    this.scale.y = coke_size.scale
+    this.scale.x = coke_size.scale * this.scale_factor
+    this.scale.y = coke_size.scale * this.scale_factor
     this.bg.baseTexture.resource.source.loop = true
     this.bg.baseTexture.resource.source.muted = true
     //const coke = new PIXI.Sprite(bg);
     this.bg.baseTexture.on('loaded', () => {
       coke_size = backgroundSize(pixi_app.renderer.width, pixi_app.renderer.height, this.bg.baseTexture.width, this.bg.baseTexture.height)
-      this.scale.x = coke_size.scale
-      this.scale.y = coke_size.scale
+      this.scale.x = coke_size.scale * this.scale_factor
+      this.scale.y = coke_size.scale * this.scale_factor
     })
     this.texture = this.bg
-    this.x = pixi_app.renderer.width / 2
-    this.y = pixi_app.renderer.height / 2
+    this.x = (pixi_app.renderer.width / 2) * this.offset.x
+    this.y = (pixi_app.renderer.height / 2) * this.offset.y
     this.anchor.x = 0.5
     this.anchor.y = 0.5
     this.preload = 'auto'
-
     window.addEventListener(
       'resize',
       debounce((e) => {
@@ -79,10 +80,10 @@ export default class VidVibe extends PIXI.Sprite {
 
     const coke_size = backgroundSize(w, h, this.bg.baseTexture.width, this.bg.baseTexture.height)
 
-    this.scale.x = coke_size.scale
-    this.scale.y = coke_size.scale
+    this.scale.x = coke_size.scale * this.scale_factor
+    this.scale.y = coke_size.scale * this.scale_factor
 
-    this.x = w / 2
-    this.y = h / 2
+    this.x = (w / 2) * this.offset.x
+    this.y = (h / 2) * this.offset.y
   }
 }

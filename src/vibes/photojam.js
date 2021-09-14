@@ -145,7 +145,9 @@ export default class PhotoJam extends PIXI.Sprite {
     this.settings.amplify = input
   }
   handleMove(e) {
-    this.initial_rotate = null
+    if (this.state.canRotatePointer) {
+      this.initial_rotate = null
+    }
     var move_factor = this.settings.mousemove_factor
     var x = e.data.global.x
     var y = e.data.global.y
