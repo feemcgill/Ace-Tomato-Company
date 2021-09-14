@@ -44,6 +44,7 @@ export default class VidVibe extends PIXI.Sprite {
       coke_size = backgroundSize(pixi_app.renderer.width, pixi_app.renderer.height, this.bg.baseTexture.width, this.bg.baseTexture.height)
       this.scale.x = coke_size.scale * this.scale_factor
       this.scale.y = coke_size.scale * this.scale_factor
+      console.log(this.scale.x)
     })
     this.texture = this.bg
     this.x = (pixi_app.renderer.width / 2) * this.offset.x

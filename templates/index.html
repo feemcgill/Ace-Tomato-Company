@@ -346,14 +346,14 @@
 
     #info {
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 10vh;
+      left: 10vw;
       z-index: 200;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      width: 100vw;
+      height: 80vh;
+      width: 80vw;
       pointer-events: auto;
       transition: all 0.2s ease-in-out;
     }
@@ -364,8 +364,8 @@
     }
 
     #info .inner {
-      max-width: 80%;
-      max-height: 80%;
+      width: 80vw;
+      height: 80vh;
       overflow: auto;
       padding: 20px;
       font-size: 1em;
@@ -401,7 +401,7 @@
     }
     #interface-close,
     #info-close {
-      position: absolute;
+      position: fixed;
       top: 20px;
       right: 20px;
       font-size: 0.5em;
@@ -445,10 +445,10 @@
         <div class="links">
           <p><a target="_blank" href="https://eagletracks.net"><img src="https://eagletracks.net/img/flying-eag.186650ae.gif">Eagle Tracks</a></p>
           <p><a target="_blank" href="https://nopressurerecords.bandcamp.com"><img src="https://eagletracks.net/img/moulder.f6e68e53.gif" alt=""> Get the tape</a></p>
-            <a  href="https://devgru.la" target="_blank" class="webmaster">
-                talk to the
-              <img src="https://eagletracks.net//img/webmaster.e14c0e24.gif">
-            </a>
+          <p><a  href="https://devgru.la" target="_blank" class="webmaster">
+              
+            <img src="https://eagletracks.net//img/webmaster.e14c0e24.gif">talk to the
+          </a></p>
         </div>
       <div id="info-close" class="fun-button">&times;</div>
 

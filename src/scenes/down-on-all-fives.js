@@ -112,6 +112,14 @@ export default class DownOnAllFives extends PIXI.Container {
     vv2.alpha = 0
     vv2.offset.y = 2.5
 
+    const vv3 = new VidVibe(pixi_app.loader.resources.d5_vid.url)
+    this.addChild(vv3)
+    vv3.scale_factor = 3
+    vv3.blendMode = 3
+    vv3.alpha = 0
+    vv3.offset.y = 2.5
+    vv3.transitionIn()
+
     pixi_app.ticker.add(() => {})
 
     this.timeline = new TimelineLite()
@@ -132,9 +140,11 @@ export default class DownOnAllFives extends PIXI.Container {
     }, '1')
 
     this.timeline.add(() => {
+      vv3.scale.x = vv3.scale.x * -1
       vv2.transitionIn()
-      TweenMax.to(vv2, 30, { alpha: 1 })
-    }, '70')
+      TweenMax.to(vv2, 30, { alpha: 0.7 })
+      TweenMax.to(vv3, 26, { alpha: 0.5 })
+    }, '100')
 
     this.timeline.add(() => {
       for (let i = 0; i < this.photos.length; i++) {
@@ -147,7 +157,8 @@ export default class DownOnAllFives extends PIXI.Container {
 
     this.timeline.add(() => {
       vv2.transitionIn()
-      TweenMax.to(vv2, 30, { alpha: 0 })
+      TweenMax.to(vv2, 40, { alpha: 0 })
+      TweenMax.to(vv3, 36, { alpha: 0 })
     }, '200')
 
     this.timeline.add(() => {
