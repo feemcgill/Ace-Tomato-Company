@@ -60,15 +60,23 @@ export default class DownOnAllFives extends PIXI.Container {
       moveData: [3, 4, 6, 6],
       amplify: [1, 1.5],
       size: 'cover',
-      mousemove_factor: 0,
-      mousemove_time: 2.2,
-      mousemove_delay: 0.3,
+      mousemove_factor: 140,
+      mousemove_time: 1,
+      mousemove_delay: -1.3,
+
       //rotation_const: 0,
     }
 
     const pj_1 = new PhotoJam(pixi_app.loader.resources.d5_1.texture, {
       ...pj_defaults,
-      ...{ rotation_const: 0.004, container: top_left, moveData: [143, 144, 60, 68] },
+      ...{
+        rotation_const: 0.004,
+        container: top_left,
+        moveData: [143, 144, 60, 68],
+        mousemove_factor: 100,
+        mousemove_time: 5,
+        mousemove_delay: -0.2,
+      },
     })
     this.addChild(pj_1)
     this.photos.push(pj_1)
@@ -76,7 +84,14 @@ export default class DownOnAllFives extends PIXI.Container {
 
     const pj_2 = new PhotoJam(pixi_app.loader.resources.d5_3.texture, {
       ...pj_defaults,
-      ...{ rotation_const: 0.002, container: top_right, moveData: [60, 69, 143, 144] },
+      ...{
+        rotation_const: 0.002,
+        container: top_right,
+        moveData: [60, 69, 143, 144],
+        mousemove_factor: 100,
+        mousemove_time: 5,
+        mousemove_delay: -0.3,
+      },
     })
     this.addChild(pj_2)
     this.photos.push(pj_2)
@@ -84,7 +99,14 @@ export default class DownOnAllFives extends PIXI.Container {
 
     const pj_3 = new PhotoJam(pixi_app.loader.resources.d5_2.texture, {
       ...pj_defaults,
-      ...{ rotation_const: 0.003, container: bottom_right, moveData: [60, 69, 143, 144] },
+      ...{
+        rotation_const: 0.003,
+        container: bottom_right,
+        moveData: [60, 69, 143, 144],
+        mousemove_factor: 100,
+        mousemove_time: 5,
+        mousemove_delay: -0.4,
+      },
     })
     this.addChild(pj_3)
     this.photos.push(pj_3)
@@ -92,7 +114,14 @@ export default class DownOnAllFives extends PIXI.Container {
 
     const pj_4 = new PhotoJam(pixi_app.loader.resources.d5_4.texture, {
       ...pj_defaults,
-      ...{ rotation_const: 0.004, container: bottom_left, moveData: [144, 143, 238, 191] },
+      ...{
+        rotation_const: 0.004,
+        container: bottom_left,
+        moveData: [144, 143, 238, 191],
+        mousemove_factor: 100,
+        mousemove_time: 5,
+        mousemove_delay: -0.5,
+      },
     })
     this.addChild(pj_4)
     this.photos.push(pj_4)
@@ -100,7 +129,7 @@ export default class DownOnAllFives extends PIXI.Container {
 
     for (let i = 0; i < this.photos.length; i++) {
       const pic = this.photos[i]
-      pic.state.canRotatePointer = false
+      pic.state.canRotatePointer = true
       pic.transitionIn()
       pic.alpha = 0
     }
@@ -144,7 +173,7 @@ export default class DownOnAllFives extends PIXI.Container {
       vv2.transitionIn()
       TweenMax.to(vv2, 30, { alpha: 0.7 })
       TweenMax.to(vv3, 26, { alpha: 0.5 })
-    }, '100')
+    }, '115')
 
     this.timeline.add(() => {
       for (let i = 0; i < this.photos.length; i++) {
