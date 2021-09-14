@@ -78,13 +78,13 @@ export default class SleepyHead extends PIXI.Container {
     const kscope = new Kaleidoscope(pixi_app.loader.resources.sh_1.texture, {
       blendMode: 0,
       moveData: [40, 132],
-      moveFactor: 10,
+      moveFactor: 1000,
     })
 
     const kscope_2 = new Kaleidoscope(pixi_app.loader.resources.sh_3.texture, {
       blendMode: 0,
       moveData: [60, 10],
-      moveFactor: 0,
+      moveFactor: 100,
     })
 
     kscope_2.slices = 20
@@ -115,8 +115,8 @@ export default class SleepyHead extends PIXI.Container {
     pixi_app.ticker.add(() => {})
     this.timeline = new TimelineLite()
     this.timeline.to(scope_2_mask.scale, 60, { x: 1, y: 1 }, '5')
-    this.timeline.to(kscope_2.settings, 60, { moveFactor: 10 }, '10')
-    this.timeline.to(kscope.settings, 60, { moveFactor: 0.5 }, '20')
+    this.timeline.to(kscope_2.settings, 60, { moveFactor: 3000 }, '10')
+    this.timeline.to(kscope.settings, 60, { moveFactor: 100 }, '20')
 
     this.timeline.to(vid_mask.scale, 60, { x: 1, y: 1 }, '30')
 
