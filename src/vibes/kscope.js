@@ -86,10 +86,11 @@ export default class Kaleidoscope extends PIXI.Container {
       this.count += this.interactiveMode ? this.settings.moveFactor : 0
       for (let i = 0; i < this.spriteTiles.length; i++) {
         TweenMax.to(this.spriteTiles[i].tilePosition, 35, {
-          x: this.mouseX * this.settings.moveFactor,
-          y: this.mouseY * this.settings.moveFactor,
+          x: this.mouseX + 100 * this.settings.moveFactor,
+          y: this.mouseY + 100 * this.settings.moveFactor,
         })
       }
+      console.log(this.mouseX, this.mouseY)
       if (appState.audioKicking) {
         analyser.getByteFrequencyData(dataArray)
 

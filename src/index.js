@@ -52,8 +52,8 @@ pixi_app.stage.addChild(stageContainer)
 pixi_app.stage.addChild(fgContainer)
 
 const vizzies = new Vizzies()
-fgContainer.addChild(vizzies)
-vizzies.zIndex = 1000
+// fgContainer.addChild(vizzies)
+// vizzies.zIndex = 1000
 
 function stopIt() {
   console.log('stop IT')
@@ -152,7 +152,6 @@ function playScene(track) {
   }, 0)
 
   interface_button.classList.remove('start')
-  info_button.classList.add('dim')
 
   var tracklist_tracks = document.querySelectorAll('.tracklist-song'),
     i
@@ -189,7 +188,6 @@ function endScene() {
 
 interface_button.addEventListener('click', function (event) {
   the_interface.classList.toggle('hide')
-  info_button.classList.remove('dim')
   if (!appState.audioInitiated) {
     initAudio()
   }
@@ -206,7 +204,6 @@ info_button.addEventListener('click', function (event) {
 
 info_close.addEventListener('click', function (event) {
   info.classList.add('hide')
-  info_button.classList.add('dim')
   // title_screen_title.style.opacity = 1
 })
 
@@ -218,7 +215,6 @@ info.addEventListener('click', function (event) {
 canvas.addEventListener('click', function (event) {
   the_interface.classList.add('hide')
   info.classList.add('hide')
-  info_button.classList.add('dim')
   //title_screen.style.opacity = 0
 })
 

@@ -40,15 +40,18 @@ export default class Apparatus extends PIXI.Container {
 
     const pj = new PhotoJam(pixi_app.loader.resources.ata_1.texture, {
       blendMode: 0,
-      moveData: [11, 12, 13, 14],
+      moveData: [30, 26, 30, 26, 27, 31],
       amplify: [1, 1.5],
       moveSpeed: 10,
     })
+
+    pj.initial_rotate = 0.00003
 
     const ks_container = new PIXI.Container()
 
     const kscope = new Kaleidoscope(pixi_app.loader.resources.ata_1.texture, {
       blendMode: 2,
+      moveFactor: 10,
       moveData: [30, 26],
     })
     kscope.draw()
@@ -67,57 +70,35 @@ export default class Apparatus extends PIXI.Container {
     this.addChild(vv)
 
     vv.transitionIn()
-    pixi_app.ticker.add(() => {
-      //pixi_app.renderer.render(pj_container, rt);
-    })
+    pixi_app.ticker.add(() => {})
 
-    //WITH Timelines (cleaner, more versatile)
     this.timeline = new TimelineLite()
-    this.timeline.to(ks_container, 60, { alpha: 0, delay: 60 })
-    this.timeline.to(vv, 30, { alpha: 0, delay: 0 })
     this.timeline.add(() => {
-      pj.setAmplify([0.5, 3])
-    })
-    this.timeline.to(ks_container, 10, { alpha: 0.05, delay: 50 })
+      TweenMax.to(vv, 2, {
+        alpha: 0,
+        onComplete: function () {
+          vv.blendMode = 2
+          TweenMax.to(vv, 10, { alpha: 0.3 })
+        },
+      })
+    }, '90')
+    this.timeline.to(ks_container, 60, { alpha: 0 })
+    this.timeline.to(vv, 30, { alpha: 0, delay: 0 })
+    this.timeline.to(ks_container, 10, { alpha: 0.2, delay: 50 })
     this.timeline.add(() => {
       pj.setAmplify([0.1, 0.4])
     })
     this.timeline.to(ks_container, 10, { alpha: 0, delay: 0 })
-    // this.timeline.to(ks_container, 6, {alpha: 1, delay: 6});
-    // this.timeline.to(pj, 6, {alpha: 1, delay: 6});
-
-    // // then we can control the whole thing easily...
-    // tl.pause();
-    // tl.resume();
-    // tl.seek(1.5);
-    // tl.reverse();
-
-    //this.timeline.timeScale(10)
 
     if (process.env.DEBUG == 'true') {
       this.timeline.timeScale(10)
-
-      // TweenMax.to(vv, 1, {alpha: 1, delay: 1})
-      // TweenMax.to(ks_container, 1, {alpha: 1, delay: 1})
     }
 
     pixi_app.ticker.add(() => {})
 
     window.addEventListener(
       'resize',
-      debounce(function (e) {
-        console.log('APPARATUS RESIZE')
-        // vv.mask = null;
-        // brt.destroy();
-        // rt.destroy();
-        // rsprite.destroy();
-        // brt = new PIXI.BaseRenderTexture(pixi_app.renderer.width, pixi_app.renderer.height, PIXI.SCALE_MODES.LINEAR, 1);
-        // rt = new PIXI.RenderTexture(brt);
-        // rsprite = new PIXI.Sprite(rt);
-        // rsprite.x = 0;
-        // rsprite.y = 0;
-        //vv.mask = rsprite;
-      }, 1000)
+      debounce(function (e) {}, 1000)
     )
   }
 }
