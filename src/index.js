@@ -233,7 +233,6 @@ next_track_button.addEventListener('click', function (event) {
 })
 
 prev_track_button.addEventListener('click', function (event) {
-  ga('send', 'event', 'SC Tracks', 'previous from:', config.tracks[currentTrack].name)
   gtag('event', 'SC Tracks', { event_category: 'previous from:', event_label: config.tracks[currentTrack].name })
   if (currentTrack == 0) {
     playScene(config.tracks.length - 1)
