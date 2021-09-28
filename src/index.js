@@ -131,7 +131,6 @@ function playScene(track) {
 
   // Play the track
   playTrack(config.asset_url + '/' + config.tracks[track].mp3, endScene)
-  console.log(config.asset_url + '/' + config.tracks[track].mp3, 'THE TRACK')
   TweenMax.to(currentScene.parent, 2.5, { alpha: 1 })
 
   currentTrack = track
@@ -163,7 +162,7 @@ function playScene(track) {
       tracklist_tracks[i].classList.remove('playing')
     }
   }
-  ga('send', 'event', 'SC Tracks', 'play', config.tracks[track].name)
+  gtag('event', 'SC Tracks', { event_category: 'play', event_label: config.tracks[track].name })
 }
 
 function endScene() {
@@ -171,7 +170,7 @@ function endScene() {
     TweenMax.to(currentScene.parent, 0.5, {
       alpha: 0,
       onComplete: function () {
-        ga('send', 'event', 'SC Tracks', 'completed', config.tracks[currentTrack].name)
+        gtag('event', 'SC Tracks', { event_category: 'completed', event_label: config.tracks[currentTrack].name })
 
         if (currentTrack + 1 == config.tracks.length) {
           playScene(0)
@@ -213,7 +212,7 @@ canvas.addEventListener('click', function (event) {
 })
 
 stop_track_button.addEventListener('click', function (event) {
-  ga('send', 'event', 'SC Tracks', 'stop from:', config.tracks[currentTrack].name)
+  gtag('event', 'SC Tracks', { event_category: 'stop from:', event_label: config.tracks[currentTrack].name })
   stopIt()
   trackSource.stop()
   appState.userStopped = true
@@ -225,7 +224,7 @@ stop_track_button.addEventListener('click', function (event) {
 })
 
 next_track_button.addEventListener('click', function (event) {
-  ga('send', 'event', 'SC Tracks', 'next from:', config.tracks[currentTrack].name)
+  gtag('event', 'SC Tracks', { event_category: 'next from:', event_label: config.tracks[currentTrack].name })
   if (currentTrack + 1 == config.tracks.length) {
     playScene(0)
   } else {
@@ -235,6 +234,7 @@ next_track_button.addEventListener('click', function (event) {
 
 prev_track_button.addEventListener('click', function (event) {
   ga('send', 'event', 'SC Tracks', 'previous from:', config.tracks[currentTrack].name)
+  gtag('event', 'SC Tracks', { event_category: 'previous from:', event_label: config.tracks[currentTrack].name })
   if (currentTrack == 0) {
     playScene(config.tracks.length - 1)
   } else {
