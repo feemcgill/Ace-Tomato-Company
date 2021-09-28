@@ -25,8 +25,6 @@ export default class DawnPatrol extends PIXI.Container {
       })
   }
   run() {
-    console.log('RUN DAWN PATROL')
-
     const pj_container = new PIXI.Container()
     this.addChild(pj_container)
     //(blendMode = 0), callback, moveData, amplify, moveSpeed
@@ -126,7 +124,6 @@ export default class DawnPatrol extends PIXI.Container {
     window.addEventListener(
       'resize',
       debounce(function (e) {
-        console.log('DP RESIZE')
         vv.mask = null
         brt.destroy()
         rt.destroy()

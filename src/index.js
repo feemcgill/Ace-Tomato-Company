@@ -20,7 +20,7 @@ import HitTheSheets from './scenes/hit-the-sheets.js'
 import SleepyHead from './scenes/sleepy-head'
 
 import config from './config.js'
-import Vizzies from './vibes/vizziesweep.js'
+// import Vizzies from './vibes/vizziesweep.js'
 /** Dom Interface Stuff **/
 
 var title_screen = document.getElementById('title-screen')
@@ -51,7 +51,7 @@ var fgContainer = new PIXI.Container()
 pixi_app.stage.addChild(stageContainer)
 pixi_app.stage.addChild(fgContainer)
 
-const vizzies = new Vizzies()
+// const vizzies = new Vizzies()
 // fgContainer.addChild(vizzies)
 // vizzies.zIndex = 1000
 
@@ -72,7 +72,7 @@ function playScene(track) {
   //Clear the table
   if (!appState.audioInitiated) {
     initAudio()
-    vizzies.init()
+    // vizzies.init()
   }
   if (interface_timeout) {
     clearTimeout(interface_timeout)
@@ -163,11 +163,7 @@ function playScene(track) {
       tracklist_tracks[i].classList.remove('playing')
     }
   }
-
-  console.log('--------------------------- ------------')
-  console.log('--------PLAYSCENE(' + track + ')--------')
-  console.table(track, currentScene, pixi_app, currentTrack)
-  console.log('---------------------------- -----------')
+  ga('send', 'event', 'SC Tracks', 'play', config.tracks[track].name)
 }
 
 function endScene() {
@@ -175,7 +171,8 @@ function endScene() {
     TweenMax.to(currentScene.parent, 0.5, {
       alpha: 0,
       onComplete: function () {
-        //document.getElementById('now-playing').innerHTML = ''
+        ga('send', 'event', 'SC Tracks', 'completed', config.tracks[currentTrack].name)
+
         if (currentTrack + 1 == config.tracks.length) {
           playScene(0)
         } else {
@@ -199,12 +196,10 @@ interface_close.addEventListener('click', function (event) {
 
 info_button.addEventListener('click', function (event) {
   info.classList.remove('hide')
-  // title_screen_title.style.opacity = 0.2
 })
 
 info_close.addEventListener('click', function (event) {
   info.classList.add('hide')
-  // title_screen_title.style.opacity = 1
 })
 
 info.addEventListener('click', function (event) {
@@ -215,10 +210,10 @@ info.addEventListener('click', function (event) {
 canvas.addEventListener('click', function (event) {
   the_interface.classList.add('hide')
   info.classList.add('hide')
-  //title_screen.style.opacity = 0
 })
 
 stop_track_button.addEventListener('click', function (event) {
+  ga('send', 'event', 'SC Tracks', 'stop from:', config.tracks[currentTrack].name)
   stopIt()
   trackSource.stop()
   appState.userStopped = true
@@ -230,6 +225,7 @@ stop_track_button.addEventListener('click', function (event) {
 })
 
 next_track_button.addEventListener('click', function (event) {
+  ga('send', 'event', 'SC Tracks', 'next from:', config.tracks[currentTrack].name)
   if (currentTrack + 1 == config.tracks.length) {
     playScene(0)
   } else {
@@ -238,6 +234,7 @@ next_track_button.addEventListener('click', function (event) {
 })
 
 prev_track_button.addEventListener('click', function (event) {
+  ga('send', 'event', 'SC Tracks', 'previous from:', config.tracks[currentTrack].name)
   if (currentTrack == 0) {
     playScene(config.tracks.length - 1)
   } else {

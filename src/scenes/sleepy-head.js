@@ -74,7 +74,6 @@ export default class SleepyHead extends PIXI.Container {
 
     const vv = new VidVibe(pixi_app.loader.resources.sh_vid.url)
 
-    console.log('vv', vv.scale.x, vv.scale.y)
     const kscope = new Kaleidoscope(pixi_app.loader.resources.sh_1.texture, {
       blendMode: 0,
       moveData: [40, 132],

@@ -89,10 +89,8 @@ export default class Kaleidoscope extends PIXI.Container {
           y: this.mouseY + this.settings.moveFactor,
         })
       }
-      console.log(this.mouseX, this.mouseY)
       if (appState.audioKicking) {
         analyser.getByteFrequencyData(dataArray)
-
         let r = mapRange(dataArray[this.settings.moveData[0]], 0, 255, 0.95, 1.5)
         let s = mapRange(dataArray[this.settings.moveData[1]], 0, 255, 0.95, 1.5)
         TweenMax.to(mainContainer.scale, 2, { x: r, y: s })
