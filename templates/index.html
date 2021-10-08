@@ -326,6 +326,10 @@
       border-bottom-color: #444;
       border-right-color: #444;
     }
+    #start-button.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }    
     #start-button.start .txt {
       display: block;
     }
@@ -354,7 +358,9 @@
     #info-button:hover {
       opacity: 1!important;
     }
-
+    #info-button.hidden {
+      display: none;
+    }
     #canvas-root {
       background-color: white;
     }
@@ -432,12 +438,13 @@
       border-right-color: #444; 
       cursor: pointer;         
     }
+
   </style>
 
 <body>
   <div id="square-div">
     <div id="canvas-root">
-      <div id="title-screen"><h1 id="title-screen_title">The Square Community</h1></div>
+      <div id="title-screen"><h1 id="title-screen_title">Loading...</h1></div>
     </div>
     <div id="info" class="hide">
       <div class="inner">
@@ -484,16 +491,17 @@
       <div id="interface-close" class="fun-button">&times;</div>
 
     </div>
-    <div id="start-button">
+    <div id="start-button" class="hidden">
       <div class="img">
         <img src="assets/smokin_dead_dude.gif" alt="">
       </div>
       <div class="txt">Start</div>
     </div>
-    <div id="info-button" class="fun-button">
+    <div id="info-button" class="fun-button hidden">
       <div class="txt">Info</div>
     </div>
   </div>
 </body>
 
 </html>
+<script>

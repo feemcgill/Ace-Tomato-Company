@@ -245,7 +245,7 @@ if ('ontouchstart' in window) {
   canvas.addEventListener('touchstart', function (event) {
     the_interface.classList.add('hide')
     info.classList.add('hide')
-    info_button.classList.add('dim')
+    // info_button.classList.add('dim')
   })
 }
 
@@ -269,8 +269,11 @@ for (let i = 0; i < config.tracks.length; i++) {
 }
 
 setTimeout(() => {
+  title_screen_title.innerHTML = 'The Square Community'
+  info_button.classList.remove('hidden')
+  interface_button.classList.remove('hidden')
   interface_button.classList.add('start')
-}, 1000)
+}, 500)
 
 window.addEventListener(
   'resize',
