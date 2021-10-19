@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 
 const pathsToClean = ['dist']
@@ -62,6 +63,10 @@ module.exports = (env, options) => {
         site_url: '',
         template: './templates/index.html',
       }),
+      new ScriptExtHtmlWebpackPlugin({
+        defaultAttribute: 'defer'
+      }),
+
       new CopyWebpackPlugin([{ from: './assets/**/*', to: './' }]),
     ],
   }
