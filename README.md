@@ -1,39 +1,14 @@
-# Ace Tomato Company
-
-Eagle Tracks #2
-
-test
-
-https://codepen.io/oj8kay/pen/rNWdYyE?editors=0010
-https://github.com/mouzofabricio/kaleidoscope
+# Square Community
 
 ```
-{
-    "NORMAL": 0,
-    "ADD": 1,
-    "MULTIPLY": 2,
-    "SCREEN": 3,
-    "OVERLAY": 4,
-    "DARKEN": 5,
-    "LIGHTEN": 6,
-    "COLOR_DODGE": 7,
-    "COLOR_BURN": 8,
-    "HARD_LIGHT": 9,
-    "SOFT_LIGHT": 10,
-    "DIFFERENCE": 11,
-    "EXCLUSION": 12,
-    "HUE": 13,
-    "SATURATION": 14,
-    "COLOR": 15,
-    "LUMINOSITY": 16
-}
+npm i
+npm run dev
 ```
 
-Loading screen
-Limbo Lobby screen
-Player controls
+A visual album of sorts for my buddy Johnny Gutenberger's music project.. dusty analog ambient tape-loop stuff. Most of the photography is Johnny's. He pulled together images and public domain video clips that work with each song.
 
-- play, next pause
+Coding wise we came up with a few different interactive "vibes" which were configured in different ways for each song.
 
-User selects track
-Loads assets - loading screen
+[Dig it](https://square-community.eagletracks.net/?v=github)
+
+Pixi kaledoscope adapted from: https://github.com/mouzofabricio/kaleidoscope
